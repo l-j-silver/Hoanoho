@@ -221,7 +221,7 @@ a {
 /* Centered text in the .bar-title */
 .bar-title .title {
   position: absolute;
-  top: 0;
+  top: 7px;
   left: 0;
   display: block;
   width: 100%;
@@ -329,7 +329,7 @@ a {
 .bar-title .button + [class*="button"]:last-child,
 .bar-title [class*="button"].pull-right {
   position: absolute;
-  top: 5px;
+  top: 22px;
   right: 5px;
 }
 
