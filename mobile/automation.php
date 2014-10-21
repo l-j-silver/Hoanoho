@@ -8,7 +8,7 @@
     <head>
         <meta charset="UTF-8" />
 
-        <?php include dirname(__FILE__).'/includes/getConfiguration.php'; ?>
+        <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
         <link rel="stylesheet" href="./css/ratchet.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
