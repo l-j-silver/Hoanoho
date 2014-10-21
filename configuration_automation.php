@@ -330,8 +330,8 @@
 
         function uploadFile(input)
         {
-            var storeURL = "./helper-client/storeFile.php";
-            var associateURL = "./helper-client/associateFile.php";
+            var storeURL = "helper-client/storeFile.php";
+            var associateURL = "helper-client/associateFile.php";
 
             var associate_id = document.getElementById("modal-image_associate_id").value;
 
