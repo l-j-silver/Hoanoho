@@ -55,15 +55,15 @@ $css = array(
 
     <title><? echo $__CONFIG['main_sitetitle']; ?></title>
 
-	<link href="./res/jqueryui/css/custom-theme/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
+	<link href="res/jqueryui/css/custom-theme/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
     <? if(Config::read('minify_css')): ?>
 
-        <link rel="stylesheet" type="text/css" href="./resources.php?css=<?= join('|', $css) ?>" />
+        <link rel="stylesheet" type="text/css" href="resources.php?css=<?= join('|', $css) ?>" />
     <? else: ?>
 
         <? foreach($css as $cssfile): ?>
 
-            <link rel="stylesheet" type="text/css" href="./res/css/<?= $cssfile ?>" />
+            <link rel="stylesheet" type="text/css" href="res/css/<?= $cssfile ?>" />
         <? endforeach ?>
     <? endif ?>
 
@@ -94,7 +94,7 @@ $css = array(
 
         <? foreach($javascript as $jsfile): ?>
 
-            <script type="text/javascript" src="./res/js/<?= $jsfile ?>"></script>
+            <script type="text/javascript" src="res/js/<?= $jsfile ?>"></script>
         <? endforeach ?>
 
 </head>

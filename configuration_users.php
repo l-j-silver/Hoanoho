@@ -30,9 +30,9 @@
     <head>
         <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/configuration.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/configuration.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
@@ -40,8 +40,8 @@
 
         <title><?php echo $__CONFIG['main_sitetitle'] ?> - Einstellungen - Benutzer</title>
 
-        <script type="text/javascript" src="./js/jquery.min.js"></script>
-        <script src="./js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
 
         <script language="javascript">
             function copyToClipboard(text)
@@ -133,7 +133,7 @@
         <h1><span>Benutzer</span></h1>
 
         <div id="toolbar">
-                <div id="left"><a id="adduserbutton" href="#"><img src="./img/add.png">&nbsp;&nbsp;Benutzer hinzufügen</a></div>
+                <div id="left"><a id="adduserbutton" href="#"><img src="img/add.png">&nbsp;&nbsp;Benutzer hinzufügen</a></div>
         </div>
 
         <div id="header">
@@ -154,9 +154,9 @@
                 <div id="password"><input type="password" name="password"></div>
                 <div id="group"><?php displayUserGroup($user->gid); ?></div>
                 <div id="action">
-                    <a href="javascript:copyToClipboard('<?php echo "?login=".$user->hash; ?>')" title="Quick Login"><img src="./img/quicklogin.png"></a>
-                    <a class="saveuserbutton" id="saveuserbutton-<?php echo $user->uid; ?>" href="#" title="Änderungen speichern"><img src="./img/save.png"></a>&nbsp;
-                    <a class="deleteuserbutton" id="deleteuserbutton-<?php echo $user->uid; ?>" href="#" title="Benutzer löschen"><img src="./img/delete.png"></a>
+                    <a href="javascript:copyToClipboard('<?php echo "?login=".$user->hash; ?>')" title="Quick Login"><img src="img/quicklogin.png"></a>
+                    <a class="saveuserbutton" id="saveuserbutton-<?php echo $user->uid; ?>" href="#" title="Änderungen speichern"><img src="img/save.png"></a>&nbsp;
+                    <a class="deleteuserbutton" id="deleteuserbutton-<?php echo $user->uid; ?>" href="#" title="Benutzer löschen"><img src="img/delete.png"></a>
                 </div>
             </div>
         <?php

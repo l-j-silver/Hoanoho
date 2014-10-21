@@ -217,17 +217,17 @@
     <head>
         <meta charset="utf-8">
 
-        <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
-        <link rel="stylesheet" href="./css/configuration.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/configuration.css" type="text/css" media="screen" title="no title" charset="UTF-8">
         <?php
         if(strpos($_SERVER['HTTP_USER_AGENT'], "Android"))
-            echo '<link rel="stylesheet" href="./css/configuration-android.css" type="text/css" media="screen" title="no title" charset="UTF-8">';
+            echo '<link rel="stylesheet" href="css/configuration-android.css" type="text/css" media="screen" title="no title" charset="UTF-8">';
         else if(strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") || strpos($_SERVER['HTTP_USER_AGENT'], "iPad"))
-            echo '<link rel="stylesheet" href="./css/configuration-ios.css" type="text/css" media="screen" title="no title" charset="UTF-8">';
+            echo '<link rel="stylesheet" href="css/configuration-ios.css" type="text/css" media="screen" title="no title" charset="UTF-8">';
         ?>
 
-        <link rel="stylesheet" href="./css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
@@ -243,7 +243,7 @@
 
         <div id="toolbar">
             <form method="POST" enctype="multipart/form-data" name="addPlanForm" id="addPlanForm">
-                <div id="left"><a href="#" onclick="javascript:document.addPlanForm.submit()"><img src="./img/add.png">&nbsp;&nbsp;Zeitplan hinzufügen</a></div>
+                <div id="left"><a href="#" onclick="javascript:document.addPlanForm.submit()"><img src="img/add.png">&nbsp;&nbsp;Zeitplan hinzufügen</a></div>
                 <input type="hidden" name="cmd" value="addplan">
             </form>
         </div>
@@ -291,9 +291,9 @@
                     <input type="hidden" name="cmd" value="deleteplan">
                     <input type="hidden" name="sch_id" value="<?php echo $scheduler->sch_id; ?>">
                 </form>
-                <a href="#" onclick="javascript:document.editPlanForm<?php echo $scheduler->sch_id; ?>.submit()" title="Änderungen speichern"><img src="./img/save.png"></a>
+                <a href="#" onclick="javascript:document.editPlanForm<?php echo $scheduler->sch_id; ?>.submit()" title="Änderungen speichern"><img src="img/save.png"></a>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="javascript:document.deletePlanForm<?php echo $scheduler->sch_id; ?>.submit()" title="Zeitplan löschen" onclick="javascript:return confirm('Soll der Zeitplan wirklich gelöscht werden ?');"><img src="./img/delete.png"></a>
+                <a href="javascript:document.deletePlanForm<?php echo $scheduler->sch_id; ?>.submit()" title="Zeitplan löschen" onclick="javascript:return confirm('Soll der Zeitplan wirklich gelöscht werden ?');"><img src="img/delete.png"></a>
             </div>
         </div>
         <?php

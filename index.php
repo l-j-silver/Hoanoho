@@ -41,9 +41,9 @@
 
 <html>
     <head>
-        <script type="text/javascript" src="./js/jquery.min.js"></script>
-        <script src="./js/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="./js/cookie.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/cookie.js"></script>
 
         <script language="javascript">
             window.onload = function () {
@@ -333,10 +333,10 @@
 
         <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/pinboard.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/pinboard.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
-        <link rel="stylesheet" href="./css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 

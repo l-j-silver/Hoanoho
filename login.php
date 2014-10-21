@@ -121,7 +121,7 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
     <head>
         <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="./css/login.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/login.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
@@ -132,11 +132,11 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
         <form class="loginform" action="login.php" method="post">
             <h1><span class="log-in">Anmelden</span></h1>
             <p class="float">
-                <label for="login"><img src="./img/user_small.png">Benutzername</label>
+                <label for="login"><img src="img/user_small.png">Benutzername</label>
                 <input type="text" name="login_username" placeholder="Benutzername" autofocus>
             </p>
             <p class="float">
-                <label for="password"><img src="./img/password_small.gif">Passwort</label>
+                <label for="password"><img src="img/password_small.gif">Passwort</label>
                 <input type="password" name="login_password" placeholder="Passwort">
             </p>
             <p class="clearfix">

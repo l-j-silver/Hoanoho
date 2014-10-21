@@ -8,7 +8,7 @@ if(!isset($_SESSION)){
     <head>
         <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="./style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <title>Installation</title>
     </head>

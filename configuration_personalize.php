@@ -81,12 +81,12 @@
     <head>
         <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/configuration.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/configuration.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
-        <script type="text/javascript" src="./js/jquery.min.js"></script>
-        <script src="./js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
 
         <script language="javascript">
             $(document).ready(function () {
@@ -205,10 +205,10 @@
                 <div id="listitem_container_left">
                 <br>
                    <a id="android_market_link" class="market_link" href="https://play.google.com/store/apps/details?id=net.superblock.pushover&ts=1413148670">
-			          <img alt="Get it on Google Play" height="65px" src="./img/android_market.png" width="65px">
+			          <img alt="Get it on Google Play" height="65px" src="img/android_market.png" width="65px">
 		          </a>
 		          <a id="apple_market_link" class="market_link" href="https://itunes.apple.com/de/app/pushover-notifications/id506088175?l=de&mt=8">
-			          <img alt="Available on the Apple App Store" height="65px" src="./img/apple_app_store.png" width="65px">
+			          <img alt="Available on the Apple App Store" height="65px" src="img/apple_app_store.png" width="65px">
 		          </a>
                 </div>
                 <div style="clear:both;"></div>
@@ -247,7 +247,7 @@
 
             <div id="toolbar">
                 <form method="POST" enctype="multipart/form-data" name="addLinkForm" id="addLinkForm">
-                    <div id="left"><a href="#" onclick="javascript:document.addLinkForm.submit()"><img src="./img/add.png">&nbsp;&nbsp;Link hinzufügen</a></div>
+                    <div id="left"><a href="#" onclick="javascript:document.addLinkForm.submit()"><img src="img/add.png">&nbsp;&nbsp;Link hinzufügen</a></div>
                     <input type="hidden" name="cmd" value="addlink">
                 </form>
             </div>
@@ -288,9 +288,9 @@
                         <input type="hidden" name="cmd" value="deletelink">
                         <input type="hidden" name="link_id" value="<?php echo $link->link_id; ?>">
                     </form>
-                    <a href="#" onclick="javascript:document.editlinkForm<?php echo $link->link_id; ?>.submit()" title="Änderungen speichern"><img src="./img/save.png"></a>
+                    <a href="#" onclick="javascript:document.editlinkForm<?php echo $link->link_id; ?>.submit()" title="Änderungen speichern"><img src="img/save.png"></a>
                     &nbsp;
-                    <a href="javascript:document.deletelinkForm<?php echo $link->link_id; ?>.submit()" title="Benutzer löschen" onclick="javascript:return confirm('Soll der Link \'<?php echo $link->name; ?>\' wirklich gelöscht werden ?');"><img src="./img/delete.png"></a>
+                    <a href="javascript:document.deletelinkForm<?php echo $link->link_id; ?>.submit()" title="Benutzer löschen" onclick="javascript:return confirm('Soll der Link \'<?php echo $link->name; ?>\' wirklich gelöscht werden ?');"><img src="img/delete.png"></a>
                 </div>
             </div>
             <?php

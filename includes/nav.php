@@ -101,24 +101,24 @@
 </script>
 
 <nav>
-        <p class="infoline_clockicon" id="navclockicon"></p><p class="infoline_clock" id="navclock"></p><p class="infoline_r">Angemeldet als: <b><?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } ?></b> <a href="./login.php?cmd=logout"><img alt="Abmelden" title="Abmelden" src="./img/logout.png" style="margin-top:-3px;"></a></p>
+        <p class="infoline_clockicon" id="navclockicon"></p><p class="infoline_clock" id="navclock"></p><p class="infoline_r">Angemeldet als: <b><?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } ?></b> <a href="login.php?cmd=logout"><img alt="Abmelden" title="Abmelden" src="img/logout.png" style="margin-top:-3px;"></a></p>
         <ul>
-            <li><a href="./index.php"><img src="./img/pinboard.png">Pinnwand</a></li>
+            <li><a href="index.php"><img src="img/pinboard.png">Pinnwand</a></li>
 
             <li class="drop">
-                <a href="#"><img src="./img/home.png">Haussteuerung</a>
+                <a href="#"><img src="img/home.png">Haussteuerung</a>
                 <div class="dropdownContain">
                     <div class="dropOut">
                         <div class="triangle"></div>
                         <ul>
                             <?php if (mysql_num_rows($result_automation) > 0) { ?>
-                            <a href="./automation.php"><li><img src="./img/magnifier.png">Übersicht</li></a>
+                            <a href="automation.php"><li><img src="img/magnifier.png">Übersicht</li></a>
                             <?php } ?>
-                            <!-- <a href="./scenario.php"><li><img src="./img/scenario.png">Szenarien</li></a> -->
-                            <a href="./reports.php"><li><img src="./img/chart3.png">Auswertung</li></a>
+                            <!-- <a href="scenario.php"><li><img src="img/scenario.png">Szenarien</li></a> -->
+                            <a href="reports.php"><li><img src="img/chart3.png">Auswertung</li></a>
                             <?php if (mysql_num_rows($result_webcam) > 0) { ?>
                             <li><hr></li>
-                            <a href="./webcam.php"><li><img src="./img/webcam.png">Webcams</li></a>
+                            <a href="webcam.php"><li><img src="img/webcam.png">Webcams</li></a>
                             <?php } ?>
                         </ul>
                     </div>
@@ -126,20 +126,20 @@
             </li>
 
             <?php if ($__CONFIG['fbox_address'] != "") { ?>
-            <li><a href="./phone.php"><img src="./img/phone.png">Telefon</a></li>
+            <li><a href="phone.php"><img src="img/phone.png">Telefon</a></li>
             <?php } ?>
 
             <li class="drop">
-                <a href="#"><img src="./img/weather.png">Wetter</a>
+                <a href="#"><img src="img/weather.png">Wetter</a>
 
                 <div class="dropdownContain">
                     <div class="dropOut">
                         <div class="triangle"></div>
                         <ul>
-                            <a href="./weather.php"><li><img src="./img/magnifier.png">Übersicht</li></a>
-                            <a href="./weather_rainradar.php"><li><img src="./img/radar.png">Regenradar</li></a>
+                            <a href="weather.php"><li><img src="img/magnifier.png">Übersicht</li></a>
+                            <a href="weather_rainradar.php"><li><img src="img/radar.png">Regenradar</li></a>
                             <?php if ($__CONFIG['dwd_region'] != "") { ?>
-                            <a href="./weather_warning.php"><li><img src="./img/warning.png">Warnungen</li></a>
+                            <a href="weather_warning.php"><li><img src="img/warning.png">Warnungen</li></a>
                             <?php } ?>
                         </ul>
                     </div>
@@ -148,14 +148,14 @@
 
             <?php if ($__CONFIG['sharefile_remoteaddress'] != "") { ?>
             <li class="drop">
-                <a href="#"><img src="./img/star.png">Diverses</a>
+                <a href="#"><img src="img/star.png">Diverses</a>
 
                 <div class="dropdownContain">
                     <div class="dropOut">
                         <div class="triangle"></div>
                         <ul>
                             <?php if ($__CONFIG['sharefile_remoteaddress'] != "") { ?>
-                            <a href="./sharefile.php"><li><img src="./img/upload.png">Bereitstellen</li></a>
+                            <a href="sharefile.php"><li><img src="img/upload.png">Bereitstellen</li></a>
                             <?php } ?>
                         </ul>
                     </div>
@@ -164,20 +164,20 @@
             <?php } ?>
 
             <li class="drop">
-                <a href="#"><img src="./img/tools.png">Einstellungen</a>
+                <a href="#"><img src="img/tools.png">Einstellungen</a>
                 <div class="dropdownContain">
                     <div class="dropOut">
                         <div class="triangle"></div>
                         <ul>
                             <?php if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1) { ?>
-                            <a href="configuration_users.php"><li><img src="./img/user.png">Benutzer</li></a>
-                            <a href="configuration_settings.php"><li><img src="./img/gear.png">Allgemein</li></a>
-                            <a href="configuration_automation.php"><li><img src="./img/home.png">Steuerung</li></a>
-                            <a href="configuration_pinboard.php"><li><img src="./img/pinboard.png">Pinnwand</li></a>
+                            <a href="configuration_users.php"><li><img src="img/user.png">Benutzer</li></a>
+                            <a href="configuration_settings.php"><li><img src="img/gear.png">Allgemein</li></a>
+                            <a href="configuration_automation.php"><li><img src="img/home.png">Steuerung</li></a>
+                            <a href="configuration_pinboard.php"><li><img src="img/pinboard.png">Pinnwand</li></a>
                             <li><hr></li>
                             <?php } ?>
-                            <a href="configuration_scheduler.php"><li><img src="./img/planer.png">Zeitplaner</li></a>
-                            <a href="configuration_personalize.php"><li><img src="./img/personalize.png">Persönlich</li></a>
+                            <a href="configuration_scheduler.php"><li><img src="img/planer.png">Zeitplaner</li></a>
+                            <a href="configuration_personalize.php"><li><img src="img/personalize.png">Persönlich</li></a>
                         </ul>
                     </div>
                 </div>

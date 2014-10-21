@@ -302,14 +302,14 @@
     <head>
         <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/report.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/report.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
-        <script type="text/javascript" src="./js/jquery.min.js"></script>
-        <script language="javascript" type="text/javascript" src="./js/flot/jquery.flot.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.js"></script>
 
         <script type="text/javascript">
             $(function () {
@@ -437,7 +437,7 @@
         <div id="headline"><h1><span><?php echo $reportname; ?></span></h1></div><div id="reportyear"><form method="POST" enctype="multipart/form-data" name="yearForm" id="reportYearForm"><?php displayReportYears($reportyear, $reporttype, $_GET['rid']); ?></form></div><div id="range"><form method="POST" enctype="multipart/form-data" name="rangeForm" id="rangeForm"><?php displayRange($range, $reporttype); ?></form></div>
             <br>
             <div id="toolbar">
-                <a href="reports.php"><div id="left"><img src="./img/back.png">&nbsp;&nbsp;Zurück</div></a>
+                <a href="reports.php"><div id="left"><img src="img/back.png">&nbsp;&nbsp;Zurück</div></a>
             </div>
 
             <?php
@@ -538,7 +538,7 @@
                         <input type="hidden" name="cmd" value="savedata">
                     </form>
                     <div id="action">
-                        <a href="#" onclick="javascript:document.saveDataForm.submit()" title="Wert abspeichern"><img src="./img/save.png"></a>
+                        <a href="#" onclick="javascript:document.saveDataForm.submit()" title="Wert abspeichern"><img src="img/save.png"></a>
                     </div>
                 </div>
             <?php

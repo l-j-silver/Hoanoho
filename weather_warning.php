@@ -9,9 +9,9 @@
     <head>
         <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/weather.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/weather.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
@@ -38,7 +38,7 @@
             ?>
 
             <div id="radar"><a href="http://www.wettergefahren.de/app/ws/index.jsp?view=map&land_code=<?= $dwdregion->region_id ?>&height=x&warn_type=0" target="_blank"><img src="http://www.wettergefahren.de/dyn/app/ws/maps/<?= $dwdregion->region_id ?>_x_x_0.gif"></a></div>
-            <div id="legend"><img src="./img/weather_warning_legend.gif"></div>
+            <div id="legend"><img src="img/weather_warning_legend.gif"></div>
 
             <?php
             }

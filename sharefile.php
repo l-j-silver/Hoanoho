@@ -113,13 +113,13 @@
     <head>
         <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/sharefile.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/sharefile.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
-        <script type="text/javascript" src="./js/nicEdit.js"></script>
+        <script type="text/javascript" src="js/nicEdit.js"></script>
 
         <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
@@ -140,7 +140,7 @@
             <h1><span>Zugriffsübersicht</span></h1>
 
             <div id="toolbar">
-                    <a href="sharefile.php"><div id="left"><img src="./img/back.png">&nbsp;&nbsp;Zurück</div></a>
+                    <a href="sharefile.php"><div id="left"><img src="img/back.png">&nbsp;&nbsp;Zurück</div></a>
             </div>
 
             <div id="header">
@@ -233,10 +233,10 @@
                                     <input type="hidden" name="cmd" value="deletefile">
                                     <input type="hidden" name="sid" value="<?php echo $file->SID; ?>">
                                 </form>
-                                <a href="javascript:copyToClipboard('<?php echo "http://".$__CONFIG['sharefile_remoteaddress']."/?f=".$file->Hash; ?>')" title="Link kopieren"><img src="./img/link.png"></a>&nbsp;&nbsp;&nbsp;
-                                <a href="sharefile.php?sid=<?php echo $file->SID; ?>" title="Zugriffsübersicht"><img src="./img/log.png"></a>&nbsp;&nbsp;&nbsp;
-                                <a href="sharefile.php?cmd=extendfile&sid=<?php echo $file->SID; ?>" title="Zugriff verlängern"><img src="./img/extend_file.png"></a>&nbsp;&nbsp;&nbsp;
-                                <a href="javascript:document.deleteFileForm<?php echo $file->SID; ?>.submit()" title="Bereitstellung aufheben" onclick="javascript:return confirm('Soll die Bereitstellung für die Datei \'<?php echo $file->File_Name; ?>\' wirklich aufgehoben werden ?');"><img src="./img/delete.png"></a>
+                                <a href="javascript:copyToClipboard('<?php echo "http://".$__CONFIG['sharefile_remoteaddress']."/?f=".$file->Hash; ?>')" title="Link kopieren"><img src="img/link.png"></a>&nbsp;&nbsp;&nbsp;
+                                <a href="sharefile.php?sid=<?php echo $file->SID; ?>" title="Zugriffsübersicht"><img src="img/log.png"></a>&nbsp;&nbsp;&nbsp;
+                                <a href="sharefile.php?cmd=extendfile&sid=<?php echo $file->SID; ?>" title="Zugriff verlängern"><img src="img/extend_file.png"></a>&nbsp;&nbsp;&nbsp;
+                                <a href="javascript:document.deleteFileForm<?php echo $file->SID; ?>.submit()" title="Bereitstellung aufheben" onclick="javascript:return confirm('Soll die Bereitstellung für die Datei \'<?php echo $file->File_Name; ?>\' wirklich aufgehoben werden ?');"><img src="img/delete.png"></a>
                         </div>
                     </div>
                 <?php

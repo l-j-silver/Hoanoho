@@ -72,8 +72,8 @@ function displayDeviceData($dev_id, $dev_value)
 
 <html>
 <head>
-    <script type="text/javascript" src="./js/jquery.min.js"></script>
-    <script src="./js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
 
     <script type="text/javascript">
     function encode(input)
@@ -405,9 +405,9 @@ function displayDeviceData($dev_id, $dev_value)
 
 <meta charset="UTF-8" />
 
-<link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-<link rel="stylesheet" href="./css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-<link rel="stylesheet" href="./css/configuration_pinboard.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+<link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+<link rel="stylesheet" href="css/configuration_pinboard.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
 <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
@@ -437,7 +437,7 @@ function displayDeviceData($dev_id, $dev_value)
             <div id="page" class="lined_paper">
                 <div id="pin_ul"></div><div id="pin_ur"></div>
                 <div id="toolbar">
-                    <div id="left"><a id="newBlockButton" href="#"><img src="./img/add.png"><div id="linktext">&nbsp;&nbsp;Bereich hinzufügen</div></a></div>
+                    <div id="left"><a id="newBlockButton" href="#"><img src="img/add.png"><div id="linktext">&nbsp;&nbsp;Bereich hinzufügen</div></a></div>
                 </div>
                 <div id="appendBlock" class="sortable">
                     <?php

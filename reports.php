@@ -74,13 +74,13 @@
     <head>
         <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/report.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/report.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
-        <script type="text/javascript" src="./js/jscolor/jscolor.js"></script>
+        <script type="text/javascript" src="js/jscolor/jscolor.js"></script>
 
         <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
@@ -183,7 +183,7 @@
 
             <div id="toolbar">
                 <form method="POST" enctype="multipart/form-data" name="addReportForm" id="addReportForm">
-                    <a href="#" onclick="javascript:document.addReportForm.submit()"><div id="left"><img src="./img/add.png">&nbsp;&nbsp;Auswertung hinzufügen</div></a>
+                    <a href="#" onclick="javascript:document.addReportForm.submit()"><div id="left"><img src="img/add.png">&nbsp;&nbsp;Auswertung hinzufügen</div></a>
                     <input type="hidden" name="cmd" value="newreport">
                 </form>
             </div>
@@ -199,7 +199,7 @@
             while ($report = mysql_fetch_object($result)) {
             ?>
             <div id="listitem">
-                <a href="./report_display.php?rid=<?php echo $report->rid; ?>"><div id="icon"><img src="./img/report.png"></div><div id="name"><?php echo $report->name; ?></div>
+                <a href="report_display.php?rid=<?php echo $report->rid; ?>"><div id="icon"><img src="img/report.png"></div><div id="name"><?php echo $report->name; ?></div>
                 <div id="type"><?php echo $report->type; ?></div></a>
                 <div id="action">
                         <form method="POST" enctype="multipart/form-data" name="editReportForm<?php echo $report->rid; ?>" id="editReportForm">
@@ -210,8 +210,8 @@
                             <input type="hidden" name="cmd" value="deletereport">
                             <input type="hidden" name="rid" value="<?php echo $report->rid; ?>">
                         </form>
-                        <a href="#" onclick="javascript:document.editReportForm<?php echo $report->rid; ?>.submit()" title="Report editieren"><img src="./img/edit.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="javascript:document.deleteReportForm<?php echo $report->rid; ?>.submit()" title="Report löschen" onclick="javascript:return confirm('Soll der Report \'<?php echo $report->name; ?>\' wirklich gelöscht werden ?');"><img src="./img/delete.png"></a>
+                        <a href="#" onclick="javascript:document.editReportForm<?php echo $report->rid; ?>.submit()" title="Report editieren"><img src="img/edit.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="javascript:document.deleteReportForm<?php echo $report->rid; ?>.submit()" title="Report löschen" onclick="javascript:return confirm('Soll der Report \'<?php echo $report->name; ?>\' wirklich gelöscht werden ?');"><img src="img/delete.png"></a>
                 </div>
             </div>
             <?php

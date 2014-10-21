@@ -20,17 +20,17 @@
 
         <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
-        <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/bootstrap-theme.min.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/bootstrap-custom.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/bootstrap-custom.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
-        <script src="./js/jquery.min.js"></script>
-        <script src="./js/jquery-ui.min.js"></script>
-        <script src="./js/bootstrap.min.js"></script>
-        <script src="./js/clock.js"></script>
-        <script src="./js/jquery-scrolltofixed.js"></script>
-        <script src="./js/standalone.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/clock.js"></script>
+        <script src="js/jquery-scrolltofixed.js"></script>
+        <script src="js/standalone.js"></script>
         <script>
             $(document).ready(function () {
                 $('.dropdown-toggle').dropdown();

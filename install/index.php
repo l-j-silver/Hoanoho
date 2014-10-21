@@ -50,13 +50,13 @@
     <head>
         <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="./style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <title>Installation</title>
     </head>
 <body>
     <section class="install_main">
-        <form class="install" action="./" method="post">
+        <form class="install" method="post">
             <h1><span class="log-in">Voraussetzungen</span></h1>
 			<h2>PHP Module</h2>
 			<div class="value">php5-curl:    <?php if(extension_loaded('curl'))    { ?> OK <?php } else { ?> Nicht geladen <?php } ?></div>

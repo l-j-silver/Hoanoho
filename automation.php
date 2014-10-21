@@ -6,15 +6,15 @@
 
 <html>
     <head>
-        <script type="text/javascript" src="./js/jquery.min.js"></script>
-        <script type="text/javascript" src="./js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 
-        <script type="text/javascript" src="./js/nogray_js/1.1.5/ng_all.js"></script>
-        <script type="text/javascript" src="./js/nogray_js/1.1.5/components/slider.js"></script>
-        <script type="text/javascript" src="./js/nogray_js/1.1.5/components/colorpicker.js"></script>
-		<script type="text/javascript" src="./js/cookie.js"></script>
-        <script type="text/javascript" src="./js/connectWebsocket.js"></script>
-        <script type="text/javascript" src="./js/toggleDevice.js"></script>
+        <script type="text/javascript" src="js/nogray_js/1.1.5/ng_all.js"></script>
+        <script type="text/javascript" src="js/nogray_js/1.1.5/components/slider.js"></script>
+        <script type="text/javascript" src="js/nogray_js/1.1.5/components/colorpicker.js"></script>
+		<script type="text/javascript" src="js/cookie.js"></script>
+        <script type="text/javascript" src="js/connectWebsocket.js"></script>
+        <script type="text/javascript" src="js/toggleDevice.js"></script>
 
         <script type="text/javascript">
         var architecture = "<?php echo $_SERVER['HTTP_USER_AGENT'] ?>";
@@ -340,9 +340,9 @@
 
         <meta charset="UTF-8"; />
 
-        <link rel="stylesheet" href="./css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/automation.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/automation.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <?php
             // dynamically generate base css code for device types
@@ -628,7 +628,7 @@
                             $resultArr = mysql_fetch_assoc($result2);
                             $positionslots = $resultArr['value'];
 
-                            print("<div id=\"stream".$device->dev_id."\"><img id=\"webcamstream_img".$device->dev_id."\" src='.//blank.png'></div>");
+                            print("<div id=\"stream".$device->dev_id."\"><img id=\"webcamstream_img".$device->dev_id."\" src='blank.png'></div>");
                             if ($positionslots > 0) {
                                 print("<br><div id=\"controlpad\">");
                                     print("Gehe zu: <select id=\"position".$device->dev_id."\" onchange=\"javascript:moveCameraPosition(this.value, '".$cam_ipaddress."', '".$cam_port."', '".$cam_username."', '".$cam_password."', '".$cam_vendor."', ".$device->dev_id.")\">");

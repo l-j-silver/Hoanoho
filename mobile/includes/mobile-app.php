@@ -34,7 +34,7 @@
 
 <!-- Android -->
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="manifest" href="./js/manifest.json">
+<link rel="manifest" href="js/manifest.json">
 
 
 <!-- Hinder drop out of webapp -->

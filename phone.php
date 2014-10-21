@@ -8,9 +8,9 @@
     <head>
         <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/phone.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-        <link rel="stylesheet" href="./css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/phone.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
@@ -24,10 +24,10 @@
     <section class="main_telephone">
         <h1><span>Anrufliste</span></h1>
         <div id="legend">
-            <div id="item"><img src="./img/telefon_1.png"></div><div>Eingehend geführt</div>
-            <div id="item"><img src="./img/telefon_4.png"></div><div>Abgehend geführt</div>
-            <div id="item"><img src="./img/telefon_2.png"></div><div>Anruf verpasst</div>
-            <div id="item"><img src="./img/telefon_3.png"></div><div>Anruf abgelehnt</div>
+            <div id="item"><img src="img/telefon_1.png"></div><div>Eingehend geführt</div>
+            <div id="item"><img src="img/telefon_4.png"></div><div>Abgehend geführt</div>
+            <div id="item"><img src="img/telefon_2.png"></div><div>Anruf verpasst</div>
+            <div id="item"><img src="img/telefon_3.png"></div><div>Anruf abgelehnt</div>
             <div id="clear">&nbsp;</div>
         </div>
         <div id="headline">

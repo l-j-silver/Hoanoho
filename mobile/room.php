@@ -17,10 +17,10 @@
 
         <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
-        <link rel="stylesheet" href="./css/ratchet.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+        <link rel="stylesheet" href="css/ratchet.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
-        <script src="./js/ratchet.js"></script>
-        <script src="./js/standalone.js"></script>
+        <script src="js/ratchet.js"></script>
+        <script src="js/standalone.js"></script>
 
         <title><?php echo $__CONFIG['main_sitetitle'] . " - " . $room->name; ?></title>
     </head>
