@@ -1,19 +1,14 @@
 #!/bin/bash
 # read and evaluate SML output from ISKRA MT681 device and queries the middleware
 
-#FIXME - move configuration parameter to config file
 PATH_TO_SML_SERVER='/opt/libsml/examples/sml_server'
 
-
-
-
-#FIXME - ensure correct port use
 
 # set serial device
 if [[ "$#" -eq  "0" ]]; then
 	echo "./datacollector_mt681 <device> <url_to_middleware>"
 	echo "e.g:"
-	echo "./datacollector_mt681 /dev/ttyUSB0 http://localhost/datacollector.php?"
+	echo "./datacollector_mt681 /dev/ttyUSB0 http://localhost/helper-server/datacollector.php?"
 	exit
 fi
 

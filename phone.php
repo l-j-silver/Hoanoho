@@ -2,32 +2,6 @@
     include dirname(__FILE__).'/includes/dbconnection.php';
     include dirname(__FILE__).'/includes/sessionhandler.php';
     include dirname(__FILE__).'/includes/getConfiguration.php';
-
-    //FIXME
-    function displayCallBackIcon($i,$number)
-    {
-        print("<form method=\"POST\" action=\"http://moe.springfield.lan/cgi-bin/webcm\" target=\"_self\" id=\"callBackForm".$i."\" name=\"callBackForm".$i."\">".
-                    "<input type=\"hidden\" name=\"login:command/password\" value=\"sal89te\" id=\"uiPostPassword\">".
-                    "<input type=\"hidden\" name=\"telcfg:settings/UseClickToDial\" value=\"1\" id=\"uiPostClickToDial\">".
-                    "<input type=\"hidden\" name=\"telcfg:command/Dial\" value=\"".$number."\" id=\"uiPostDial\">".
-                    "<input type=\"hidden\" name=\"telcfg:settings/DialPort\" value=\"610\" id=\"uiPostDialPort\">".
-                    "<input type=\"hidden\" name=\"getpage\" value=\"../html/de/menus/menu2.html\" id=\"uiPostGetPage\">".
-              "</form>".
-              "<a href=\"#\" onclick=\"javascript:document.callBackForm".$i.".submit()\" title=\"Rückruf\"><img src=\"./img/call2.png\"></a>");
-    }
-
-    //FIXME
-    function displayMessageIcon($i,$number)
-    {
-        print("<form method=\"POST\" action=\"http://moe.springfield.lan/cgi-bin/webcm\" target=\"_self\" id=\"messageForm".$i."\" name=\"messageForm".$i."\">".
-                    "<input type=\"hidden\" name=\"login:command/password\" value=\"sal89te\" id=\"uiPostPassword\">".
-                    "<input type=\"hidden\" name=\"telcfg:settings/UseClickToDial\" value=\"1\" id=\"uiPostClickToDial\">".
-                    "<input type=\"hidden\" name=\"telcfg:command/Dial\" value=\"".$number."\" id=\"uiPostDial\">".
-                    "<input type=\"hidden\" name=\"telcfg:settings/DialPort\" value=\"610\" id=\"uiPostDialPort\">".
-                    "<input type=\"hidden\" name=\"getpage\" value=\"../html/de/menus/menu2.html\" id=\"uiPostGetPage\">".
-              "</form>".
-              "<a href=\"#\" onclick=\"javascript:document.messageForm".$i.".submit()\" title=\"Nachricht anhören\"><img src=\"./img/tape.png\"></a>");
-    }
 ?>
 
 <html>
