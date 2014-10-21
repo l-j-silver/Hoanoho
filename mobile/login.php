@@ -69,7 +69,19 @@
             $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
             mysql_query($sql);
 
-            header('Location: ./?login='.$_GET['login']);
+            if (isset($_POST['referer']))
+              $uri = array_pop( explode("/", dirname($_POST['referer'])) );
+
+            if (
+                isset($_POST['referer']) &&
+                $_POST['referer'] != "" &&
+                $_POST['referer'] != "/" &&
+                ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
+            ) {
+                header('Location: '.$_POST['referer']);
+            } else {
+              header('Location: ./?login='.$_GET['login']);
+            }
             exit;
         }
     }
@@ -91,13 +103,20 @@
                     $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
                     mysql_query($sql);
 
-                    if(isset($_POST['referer']) && $_POST['referer'] != "") {
-                        header('Location:'.$_POST['referer']);
-                        exit;
+                    if (isset($_POST['referer']))
+                      $uri = array_pop( explode("/", dirname($_POST['referer'])) );
+
+                    if (
+                        isset($_POST['referer']) &&
+                        $_POST['referer'] != "" &&
+                        $_POST['referer'] != "/" &&
+                        ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
+                    ) {
+                        header('Location: '.$_POST['referer']);
                     } else {
-                        header('Location: ./');
-                        exit;
+                      header('Location: ./?login='.$_GET['login']);
                     }
+                    exit;
                 }
             }
         }
@@ -137,6 +156,7 @@
                 </ul>
 
                 <input type="hidden" name="cmd" value="login">
+                <input type="hidden" name="referer" value="<?php echo $referer; ?>">
 
                 <div class="content-padded">
                   <a class="button-block" href="#" onclick="javascript:document.loginform.submit();">Anmelden</a>

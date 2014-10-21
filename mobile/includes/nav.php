@@ -14,7 +14,7 @@
 <nav class="bar-tab">
     <ul class="tab-inner">
         <li class="tab-item">
-            <a href="index.php" data-ignore="push">
+            <a href="./" data-ignore="push">
                 <img class="tab-icon" src="../img/pinboard.png">
                 <div class="tab-label">Pinnwand</div>
             </a>

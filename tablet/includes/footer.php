@@ -9,8 +9,8 @@ if (!isset($_GET['floor'])) {
 } else
     $floor_id = $_GET['floor'];
 
-$relativePath = "";
-$musicPath = "includes/pupnp/index.php";
+$relativePath = "./";
+$musicPath = "includes/pupnp/";
 if ($title == "Musik") {
   $relativePath = "../../";
   $musicPath = "/";
@@ -31,7 +31,7 @@ if ($title == "Musik") {
 <div id="footer">
     <div id="left">
         <div class="btn-group" style="margin-left: 20px; margin-right: 20px">
-            <?php echo "<a href=\"".$relativePath."index.php\"><button type=\"button\" class=\"btn btn-custom\">"; ?>
+            <?php echo "<a href=\"".$relativePath."\"><button type=\"button\" class=\"btn btn-custom\">"; ?>
                 &nbsp;<span class="glyphicon glyphicon-home"></span>&nbsp;
             </button></a>
         </div>
