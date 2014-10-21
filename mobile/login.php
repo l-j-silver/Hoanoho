@@ -1,4 +1,9 @@
 <?php
+// Add CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
+header("Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
+header("X-Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
+header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
+
     $referer = "";
 
     if (!isset($_SESSION)) {

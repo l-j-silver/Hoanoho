@@ -121,3 +121,8 @@ if (isset($_GET['login'])) {
     exit;
   }
 }
+
+// Add CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
+header("Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' http://www.wettergefahren.de; media-src 'self'; frame-src 'self'; font-src 'self'; connect-src 'self' ws:");
+header("X-Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' http://www.wettergefahren.de; media-src 'self'; frame-src 'self'; font-src 'self'; connect-src 'self' ws:");
+header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' http://www.wettergefahren.de; media-src 'self'; frame-src 'self'; font-src 'self'; connect-src 'self' ws:");
