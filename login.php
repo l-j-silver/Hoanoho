@@ -79,14 +79,9 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
             $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
             mysql_query($sql);
 
-            if (isset($_POST['referer']))
-              $uri = array_pop( explode("/", dirname($_POST['referer'])) );
-
             if (
                 isset($_POST['referer']) &&
-                $_POST['referer'] != "" &&
-                $_POST['referer'] != "/" &&
-                ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
+                $_POST['referer'] != ""
             ) {
                 header('Location: '.$_POST['referer']);
             } else {
@@ -113,14 +108,9 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
                     $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
                     mysql_query($sql);
 
-                    if (isset($_POST['referer']))
-                      $uri = array_pop( explode("/", dirname($_POST['referer'])) );
-
                     if (
                         isset($_POST['referer']) &&
-                        $_POST['referer'] != "" &&
-                        $_POST['referer'] != "/" &&
-                        ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
+                        $_POST['referer'] != ""
                     ) {
                         header('Location: '.$_POST['referer']);
                     } elseif(isset($_GET['login']) && $_GET['login'] != "") {
