@@ -60,7 +60,7 @@ if (isset($__CONFIG) && isset($__CONFIG['accessable_ipranges']) && $__CONFIG['ac
       exit;
     } else {
       if ($uri == "pupnp") {
-        header('Location: ../../../login.php'$querystring);
+        header('Location: ../../../login.php'.$querystring);
       } elseif ($uri == "tablet" || $uri == "helper-client") {
           header('Location: ../login.php'.$querystring);
       } else {
