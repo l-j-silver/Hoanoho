@@ -13,7 +13,7 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
     if (ini_get("session.use_cookies")) {
         $params = session_get_cookie_params();
 
-        if (isset($_GET['login'])) {
+        if (isset($_GET['login']) && $_GET['login'] != "") {
           setcookie(
             session_name(),
             '',
@@ -58,7 +58,7 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
         $__CONFIG[$row[0]] = $row[1];
     }
 
-    if (isset($_GET['login'])) {
+    if (isset($_GET['login']) && $_GET['login'] != "") {
         $result = mysql_query("SELECT users.uid, password, username, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.hash = '" . $_GET['login'] . "' limit 1");
         while ($row = mysql_fetch_object($result)) {
 
@@ -118,8 +118,10 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
                         ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
                     ) {
                         header('Location: '.$_POST['referer']);
+                    } elseif(isset($_GET['login']) && $_GET['login'] != "") {
+                        header('Location: ./?login='.$_GET['login']);
                     } else {
-                      header('Location: ./?login='.$_GET['login']);
+                        header('Location: ./');
                     }
                     exit;
                 }

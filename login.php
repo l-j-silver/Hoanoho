@@ -13,7 +13,7 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
     if (ini_get("session.use_cookies")) {
         $params = session_get_cookie_params();
 
-        if (isset($_GET['login'])) {
+        if (isset($_GET['login']) && $_GET['login'] != "") {
           setcookie(
             session_name(),
             '',
@@ -63,11 +63,11 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
         $__CONFIG[$row[0]] = $row[1];
     }
 
-    if (isset($_GET['login'])) {
+    if (isset($_GET['login']) && $_GET['login'] != "") {
         $result = mysql_query("SELECT users.uid, password, username, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.hash = '" . $_GET['login'] . "' limit 1");
         while ($row = mysql_fetch_object($result)) {
 
-        	session_start();
+            session_start();
 
             $_SESSION['username'] = $row->username;
             $_SESSION['md5password'] = md5($row->password);
@@ -79,7 +79,15 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
             $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
             mysql_query($sql);
 
-            if(isset($_POST['referer']) && $_POST['referer'] != "") {
+            if (isset($_POST['referer']))
+              $uri = array_pop( explode("/", dirname($_POST['referer'])) );
+
+            if (
+                isset($_POST['referer']) &&
+                $_POST['referer'] != "" &&
+                $_POST['referer'] != "/" &&
+                ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
+            ) {
                 header('Location: '.$_POST['referer']);
             } else {
               header('Location: ./?login='.$_GET['login']);
@@ -93,7 +101,7 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
             $result = mysql_query("SELECT users.uid,password, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where username = '" . $_POST['login_username'] . "' limit 1");
             while ($row = mysql_fetch_object($result)) {
                 if ($row->password == md5($_POST['login_password'])) {
-                	session_start();
+                	  session_start();
 
                     $_SESSION['username'] = $_POST['login_username'];
                     $_SESSION['md5password'] = md5($_POST['login_password']);
@@ -105,8 +113,18 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
                     $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
                     mysql_query($sql);
 
-                    if(isset($_POST['referer']) && $_POST['referer'] != "") {
-                        header('Location:'.$_POST['referer']);
+                    if (isset($_POST['referer']))
+                      $uri = array_pop( explode("/", dirname($_POST['referer'])) );
+
+                    if (
+                        isset($_POST['referer']) &&
+                        $_POST['referer'] != "" &&
+                        $_POST['referer'] != "/" &&
+                        ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
+                    ) {
+                        header('Location: '.$_POST['referer']);
+                    } elseif(isset($_GET['login']) && $_GET['login'] != "") {
+                        header('Location: ./?login='.$_GET['login']);
                     } else {
                         header('Location: ./');
                     }
@@ -121,9 +139,9 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
     <head>
         <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="css/login.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-
         <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
+
+        <link rel="stylesheet" href="css/login.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
         <title><?php echo $__CONFIG['main_sitetitle'] ?> - Anmelden</title>
     </head>
