@@ -1,5 +1,5 @@
 <?php
-include dirname(__FILE__).'/password_compat/lib/password.php';
+include dirname(__FILE__).'/../includes/password_compat/lib/password.php';
 $passwd_algorithm = "PASSWORD_DEFAULT";
 $passwd_options = array("cost" => 10);
 
