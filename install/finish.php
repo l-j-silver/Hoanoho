@@ -26,3 +26,7 @@ if(!isset($_SESSION)){
     </section>
 </body>
 </html>
+
+<?php
+session_destroy();
+?>

@@ -1,5 +1,9 @@
 <?php
-// Add CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
+include dirname(__FILE__).'/password_compat/lib/password.php';
+$passwd_algorithm = "PASSWORD_DEFAULT";
+$passwd_options = array("cost" => 10);
+
+// Add strict CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
 header("Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
 header("X-Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
 header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
@@ -63,6 +67,7 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
         $__CONFIG[$row[0]] = $row[1];
     }
 
+    // quick login
     if (isset($_GET['login']) && $_GET['login'] != "") {
         $result = mysql_query("SELECT users.uid, password, username, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.hash = '" . $_GET['login'] . "' limit 1");
         while ($row = mysql_fetch_object($result)) {
@@ -70,7 +75,7 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
             session_start();
 
             $_SESSION['username'] = $row->username;
-            $_SESSION['md5password'] = md5($row->password);
+            $_SESSION['md5password'] = $row->password;
             $_SESSION['isAdmin'] = $row->isAdmin;
             $_SESSION['login'] = 1;
             $_SESSION['uid'] = $row->uid;
@@ -91,11 +96,12 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
         }
     }
 
-    if (isset($_POST['cmd']) && isset($_POST['login_username']) && isset($_POST['login_password'])) {
+    // normal login
+    elseif (isset($_POST['cmd']) && isset($_POST['login_username']) && isset($_POST['login_password'])) {
         if (strlen($_POST['login_username']) > 0 && strlen($_POST['login_password']) > 0) {
             $result = mysql_query("SELECT users.uid,password, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where username = '" . $_POST['login_username'] . "' limit 1");
             while ($row = mysql_fetch_object($result)) {
-                if ($row->password == md5($_POST['login_password'])) {
+                if (password_verify($_POST['login_password'], $row->password)) {
                 	  session_start();
 
                     $_SESSION['username'] = $_POST['login_username'];
@@ -104,6 +110,15 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
                     $_SESSION['login'] = 1;
                     $_SESSION['uid'] = $row->uid;
                     $_SESSION['logintime'] = time();
+
+                    // Update password hash if required
+                    if (password_needs_rehash($row->password, $passwd_algorithm, $passwd_options)) {
+                        $password = password_hash($_POST['login_password'], $passwd_algorithm, $passwd_options);
+                        $hash = md5($_POST['login_username'] + $password + time());
+
+                        $sql = "update users set password = '" . $password . "', hash = '".$hash."' where uid = ".$_SESSION['uid'];
+                        mysql_query($sql);
+                    }
 
                     $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
                     mysql_query($sql);

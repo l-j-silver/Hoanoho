@@ -2,6 +2,7 @@
     include dirname(__FILE__).'/includes/dbconnection.php';
     include dirname(__FILE__).'/includes/sessionhandler.php';
     include dirname(__FILE__).'/includes/getConfiguration.php';
+    include dirname(__FILE__).'/includes/password_compat/lib/password.php';
 
     function displayUserGroup($gid)
     {
@@ -16,9 +17,10 @@
     }
 
     if (isset($_POST['cmd']) && $_POST['cmd'] == "edituser") {
-        $hash = md5($_POST['username'] + $_POST['password'] + time());
+        $password = password_hash($randompw, PASSWORD_DEFAULT, array("cost" => 10));
+        $hash = md5($_POST['username'] + $password + time());
 
-        $sql = "update users set username = '" . $_POST['username'] . "', password = '" . md5($_POST['password']) . "', hash = '".$hash."' where uid = ".$_POST['uid'];
+        $sql = "update users set username = '" . $_POST['username'] . "', password = '" . $password . "', hash = '".$hash."' where uid = ".$_POST['uid'];
         mysql_query($sql);
 
         $sql = "update usergroups set gid = " . $_POST['usergroup'] . " where uid = ".$_POST['uid'];
