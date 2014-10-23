@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `configuration` (
   `hint` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL DEFAULT 'text',
   `category` varchar(255) DEFAULT NULL,
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
   UNIQUE KEY `conf_id` (`dev_id`,`configstring`),
   KEY `dev_id` (`dev_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

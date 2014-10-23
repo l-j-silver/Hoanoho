@@ -40,8 +40,8 @@
             $result = mysql_query($sql);
             while ($user = mysql_fetch_object($result)) {
                 if (password_verify($_POST['oldpassword'], $user->password)) {
-                    $password = password_hash($_POST['newpassword'], PASSWORD_DEFAULT, array("cost" => 10));
-                    $hash = md5($_POST['username'] + $password + time());
+                    $password = password_hash($_POST['newpassword'], constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true));
+                    $hash = md5($_SESSION['username'] + $password + time());
 
                     $sql = "UPDATE users SET password = '" . $password . "' where uid = " . $_SESSION['uid'];
                     mysql_query($sql);

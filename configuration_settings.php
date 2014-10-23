@@ -67,7 +67,11 @@
     <?php require(dirname(__FILE__).'/includes/nav.php'); ?>
 
     <?php
-    $sql2 = "SELECT distinct category FROM configuration where dev_id = 0 ORDER BY category ASC";
+    if (isset($_GET['showall']) && $_GET['showall'] == "true") {
+      $sql2 = "SELECT distinct category FROM configuration where dev_id = 0 ORDER BY category ASC";
+    } else {
+      $sql2 = "SELECT distinct category FROM configuration where dev_id = 0 AND visible = 1 ORDER BY category ASC";
+    }
     $result2 = mysql_query($sql2);
     while ($category = mysql_fetch_object($result2)) {
     ?>

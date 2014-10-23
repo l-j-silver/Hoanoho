@@ -21,7 +21,7 @@
     }
 
     if (isset($_POST['cmd']) && $_POST['cmd'] == "edituser") {
-        $password = password_hash($randompw, PASSWORD_DEFAULT, array("cost" => 10));
+        $password = password_hash($_POST['password'], constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true));
         $hash = md5($_POST['username'] + $password + time());
 
         $sql = "update users set username = '" . $_POST['username'] . "', password = '" . $password . "', hash = '".$hash."' where uid = ".$_POST['uid'];
