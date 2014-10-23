@@ -1,7 +1,5 @@
 <?php
 include dirname(__FILE__).'/includes/password_compat/lib/password.php';
-$passwd_algorithm = PASSWORD_DEFAULT;
-$passwd_options = array("cost" => 10);
 
 // Add strict CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
 header("Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
@@ -105,7 +103,7 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
 
                     // Update password hash if required
                     if (password_needs_rehash($row->password, constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true))) {
-                        $password = password_hash($_POST['login_password'], $passwd_algorithm, $passwd_options);
+                        $password = password_hash($_POST['login_password'], constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true));
                         $hash = md5($_POST['login_username'] + $password + time());
 
                         $sql = "update users set password = '" . $password . "', hash = '".$hash."' where uid = ".$_SESSION['uid'];
