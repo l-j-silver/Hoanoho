@@ -3,6 +3,10 @@
     include dirname(__FILE__).'/includes/sessionhandler.php';
     include dirname(__FILE__).'/includes/getConfiguration.php';
 
+    if ($_SESSION['isAdmin'] != 1) {
+      die('Insufficient access rights.');
+    }
+
     function displayBaseTypes($type_id)
     {
         $empty = 0;

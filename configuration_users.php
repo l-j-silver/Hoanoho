@@ -4,6 +4,10 @@
     include dirname(__FILE__).'/includes/getConfiguration.php';
     include dirname(__FILE__).'/includes/password_compat/lib/password.php';
 
+    if ($_SESSION['isAdmin'] != 1) {
+      die('Insufficient access rights.');
+    }
+
     function displayUserGroup($gid)
     {
         $sql = "select * from groups order by grpname asc";
