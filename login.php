@@ -1,5 +1,5 @@
 <?php
-include dirname(__FILE__).'/includes/password_compat/lib/password.php';
+include dirname(__FILE__).'/includes/password.php';
 
 // Add strict CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
 header("Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
