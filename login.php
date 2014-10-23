@@ -105,9 +105,10 @@ header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; sty
                     if (password_needs_rehash($row->password, constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true))) {
                         $password = password_hash($_POST['login_password'], constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true));
                         $hash = md5($_POST['login_username'] + $password + time());
-
+                        
                         $sql = "update users set password = '" . $password . "', hash = '".$hash."' where uid = ".$_SESSION['uid'];
-                        mysql_query($sql);
+                        if ($password != "" && $hash != "")
+                          mysql_query($sql);
                     }
 
                     $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;

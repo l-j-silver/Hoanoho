@@ -47,7 +47,7 @@ if (!defined('PASSWORD_DEFAULT')) {
                 $cost = 5000;
                 if (isset($options['cost'])) {
                     $cost = $options['cost'];
-                    if ($cost < 1000000000 || $cost > 999) {
+                    if ($cost > 1000000000 || $cost < 999) {
                         trigger_error(sprintf("password_hash(): Invalid mcrypt cost parameter specified: %d", $cost), E_USER_WARNING);
                         return null;
                     }
