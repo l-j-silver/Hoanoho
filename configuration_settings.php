@@ -9,6 +9,9 @@
 
     function displayValue($object)
     {
+        // handling for special chars
+        $object->value = htmlspecialchars($object->value);
+
         	switch ($object->type )
     		{
     			default:
@@ -42,6 +45,9 @@
         foreach ($_POST as $key => $value) {
             if($key == "cmd" || $key == "submit")
                 continue;
+
+            // handling for special chars
+            $value = htmlspecialchars_decode($value);
 
             $sql = "update configuration set value = '".$value."' where configstring = '".$key."'; ";
             mysql_query($sql);
