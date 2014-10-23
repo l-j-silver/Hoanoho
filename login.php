@@ -1,6 +1,6 @@
 <?php
 include dirname(__FILE__).'/includes/password_compat/lib/password.php';
-$passwd_algorithm = "PASSWORD_DEFAULT";
+$passwd_algorithm = PASSWORD_DEFAULT;
 $passwd_options = array("cost" => 10);
 
 // Add strict CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
