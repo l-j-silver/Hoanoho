@@ -234,6 +234,24 @@
                                 default:
                                     break;
                             }
+                        } else if(messageObj['typename'] == "Dimmer") {
+                            console.log(messageObj);
+                            switch (messageObj['reading']) {
+                                case 'state':
+                                    var value = messageObj['value'].replace('dim','');
+
+                                    if(value == "on")
+                                        value = "100%";
+                                    else if(value == "off")
+                                        value = "0%";
+
+                                    $('#value_'+messageObj['dev_id']).val(value);
+                                    $('#value_cur_'+messageObj['dev_id']).val(value);
+
+                                    break;
+                                default:
+                                    break;
+                            }
                         } else {
                             el_value.value = messageObj['value'];
                         }
@@ -326,7 +344,7 @@
             var timeout = null;
             function toggleDevice(device_id, d_identifier, type, value)
             {
-                var cmdurl = "../helper-client/fhem.php?cmd=set&device="+d_identifier+"&value=";
+                var cmdurl = "../helper-client/fhem.php?cmd=set";
 
                 var mygetrequest = new ajaxRequest();
                 mygetrequest.onreadystatechange=function () {
@@ -346,62 +364,112 @@
                     var stepsize = 0.5; // TBD: configure & take out of database
 
                     var el_soll = document.getElementById("value_" + device_id);
+                    if (el_soll.value != '---') {
+                        var setvalue = el_soll.value.split("°")[0];
 
-                    var setvalue = el_soll.value.split("°")[0];
+                        if(setvalue == "---" || setvalue == "NaN")
 
-                    if(setvalue == "---" || setvalue == "NaN")
+                            return false
 
-                        return false
+                        if(timeout) window.clearTimeout(timeout);
 
-                    if(timeout) window.clearTimeout(timeout);
-
-                    var postfix = "";
-                    if (value == "up") {
-                        postfix = " \u00B0C";
-                        if(setvalue == "off")
-                            setvalue = 4.5;
-
-                        setvalue = parseFloat(setvalue) + parseFloat(stepsize);
-
-                        if(setvalue > 30.0)
-                            setvalue = 30.0;
-
-                        setvalue = setvalue.toFixed(1);
-
-                        el_soll.value = setvalue+postfix;
-                    } else if (value == "down") {
-                        if(setvalue == "off")
-                            setvalue = 4.5;
-
-                        if(setvalue <= 5.0)
-                            setvalue = "off";
-                        else {
+                        var postfix = "";
+                        if (value == "up") {
                             postfix = " \u00B0C";
-                            setvalue = parseFloat(setvalue) - parseFloat(stepsize);
+                            if(setvalue == "off")
+                                setvalue = 4.5;
+
+                            setvalue = parseFloat(setvalue) + parseFloat(stepsize);
+
+                            if(setvalue > 30.0)
+                                setvalue = 30.0;
+
                             setvalue = setvalue.toFixed(1);
+
+                            el_soll.value = setvalue+postfix;
+                        } else if (value == "down") {
+                            if(setvalue == "off")
+                                setvalue = 4.5;
+
+                            if(setvalue <= 5.0)
+                                setvalue = "off";
+                            else {
+                                postfix = " \u00B0C";
+                                setvalue = parseFloat(setvalue) - parseFloat(stepsize);
+                                setvalue = setvalue.toFixed(1);
+                            }
+
+                            el_soll.value = setvalue+postfix;
                         }
 
-                        el_soll.value = setvalue+postfix;
+                        timeout = setTimeout(function () {
+                            mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+setvalue+"&reading="+reading, true);
+                            mygetrequest.send(null);
+                        }, 2000);
                     }
-
-                    timeout = setTimeout(function () {
-                        mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+setvalue+"&reading="+reading, true);
-                        mygetrequest.send(null);
-                    }, 2000);
                 } else if (type == "Jalousie") {
                     if(timeout) window.clearTimeout(timeout);
 
-                    console.log(value);
+                    var el_soll = document.getElementById("value_" + device_id);
+                    var el_ist = document.getElementById("value_cur_" + device_id);
 
-                    if (value != "on" && value != "off" && value != "stop") {
-                        var direction = value;
-                        var reading = "pct";
+                    if (el_soll.value != '---') {
+                        if (value != "on" && value != "off" && value != "stop") {
+                            var direction = value;
+                            var reading = "pct";
 
-                        var stepsize = 5; // TBD: configure & take out of database
+                            var stepsize = 5; // TBD: configure & take out of database
 
-                        var el_soll = document.getElementById("value_" + device_id);
-                        var el_ist = document.getElementById("value_cur_" + device_id);
+                            if (direction == "up") {
+                                if(el_soll.value.indexOf('%') > -1)
+                                    value = el_soll.value.split("%")[0];
 
+                                value = parseInt(value) + parseInt(stepsize);
+                                if(value > 100)
+                                    value = 100;
+
+                                el_soll.value = value+'%';
+                            } else if (direction == "down") {
+                                if(el_soll.value.indexOf('%') > -1)
+                                    value = el_soll.value.split("%")[0];
+
+                                value = parseInt(value) - parseInt(stepsize);
+                                if(value < 0)
+                                    value = 0;
+
+                                el_soll.value = value+'%';
+                            } else
+                                el_soll.value = value+'%';
+
+                            if(el_soll.value.indexOf('%') > -1)
+                                setvalue = el_soll.value.split("%")[0];
+                            else
+                                setvalue = el_soll.value;
+
+                            timeout = setTimeout(function () {
+                                mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+setvalue+"&reading="+reading, true);
+                                mygetrequest.send(null);
+                            }, 2000);
+                        } else {
+                            var setvalue = value;
+
+                            timeout = setTimeout(function () {
+                                mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+setvalue, true);
+                                mygetrequest.send(null);
+                            }, 2000);
+                        }
+                    }
+                } else if (type == "Dimmer") {
+                    if(timeout) window.clearTimeout(timeout);
+
+                    var direction = value;
+
+                    var stepsize = 5; // TBD: configure & take out of database
+
+                    var el_soll = document.getElementById("value_" + device_id);
+                    var el_ist = document.getElementById("value_cur_" + device_id);
+
+                    if (el_soll.value != '---') {
                         if (direction == "up") {
                             if(el_soll.value.indexOf('%') > -1)
                                 value = el_soll.value.split("%")[0];
@@ -428,29 +496,13 @@
                         else
                             setvalue = el_soll.value;
 
-                        timeout = setTimeout(function () {
-                            mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+setvalue+"&reading="+reading, true);
-                            mygetrequest.send(null);
-                        }, 2000);
-                    } else {
-                        var setvalue = value;
+                        setvalue = "dim"+setvalue+"%";
 
                         timeout = setTimeout(function () {
                             mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+setvalue, true);
                             mygetrequest.send(null);
                         }, 2000);
                     }
-                } else if (type == "Dimmer") {
-                    var el_soll = document.getElementById("slider_value" + device_id);
-
-                    el_soll.value = value;
-
-                    if(timeout) window.clearTimeout(timeout);
-
-                    timeout = setTimeout(function () {
-                        mygetrequest.open("GET", cmdurl+value, true);
-                        mygetrequest.send(null);
-                    }, 2000);
                 } else if (type == "Raspberry Pi GPIO") {
                     var el_raspi_address = document.getElementById("gpio_raspi_address" + device_id);
                     var el_outputpin = document.getElementById("gpio_outputpin" + device_id);
@@ -553,6 +605,25 @@
                                     </div>
                                     <?php
                                     } elseif ($basetype == "jalousie") {
+                                    ?>
+                                    <div id="buttons">
+                                        <div class="btn-group" style="margin-top: 10px;">
+                                            <button type="button" class="btn btn-warning" onclick="javascript:toggleDevice('<?php echo $device->dev_id; ?>','<?php echo $device->identifier; ?>','<?php echo $device->basetype; ?>', 'up');">
+                                                &nbsp;<span class="glyphicon glyphicon-chevron-up"></span>&nbsp;
+                                            </button>
+                                        </div><br><br>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-warning" onclick="javascript:toggleDevice('<?php echo $device->dev_id; ?>','<?php echo $device->identifier; ?>','<?php echo $device->basetype; ?>', 'down');">
+                                                &nbsp;<span class="glyphicon glyphicon-chevron-down"></span>&nbsp;
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="value">
+                                        <input id="value_cur_<?php echo $device->dev_id; ?>" hidden>
+                                        <input id="value_<?php echo $device->dev_id; ?>" readonly value="---">
+                                    </div>
+                                    <?php
+                                    } elseif ($basetype == "dimmer") {
                                     ?>
                                     <div id="buttons">
                                         <div class="btn-group" style="margin-top: 10px;">

@@ -20,10 +20,10 @@ function connectWebSocket(port) {
 	var host = window.location.hostname;
 
 	if (port == "80" || port == "443") {
-	  var address = connectWebSocket.connectProt + "://" + host + "/ws";
-  } else {
-  	var address = connectWebSocket.connectProt + "://" + host +  ":" + port + "/ws";
-  }
+        var address = connectWebSocket.connectProt + "://" + host + "/ws";
+    } else {
+        var address = connectWebSocket.connectProt + "://" + host +  ":" + port + "/ws";
+    }
 
 	// Connect to Socketserver
 	var socket = new WebSocket(address);
@@ -138,8 +138,6 @@ function connectWebSocket(port) {
     	}
     	else if(messageObj['typename'] == "Dimmer")
     	{
-            console.warn(messageObj);
-
             switch (messageObj['reading']) {
                 case 'state':
                     var value = messageObj['value'].replace('dim','').replace('%','');

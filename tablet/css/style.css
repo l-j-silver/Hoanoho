@@ -427,12 +427,44 @@ a:hover {
     margin-top: 30px;
     margin-left: 90px;
 }
-#boxarea #boxitem.licht #icon, #boxitem.dimmer #icon, #boxitem.philipshue #icon {
+#boxarea #boxitem.licht #icon, #boxitem.philipshue #icon {
     background-image: url('../img/licht.png');
     background-repeat: no-repeat;
     background-size: 150%;
     background-position: center;
     opacity: 0.1;
+}
+
+
+
+#boxarea #boxitem.dimmer #icon {
+    background-image: url('../img/licht.png');
+    background-repeat: no-repeat;
+    background-size: 150%;
+    background-position: center;
+    opacity: 0.1;
+}
+#boxarea #boxitem.dimmer #buttons {
+    float: left;
+    margin-left: 40px;
+}
+#boxarea #boxitem.dimmer #value {
+    position: absolute;
+    margin-left: 110px;
+    margin-top: 30px;
+}
+#boxarea #boxitem.dimmer #value input {
+    font: 16px Verdana, 'Lucida Grande';
+    width: 80px;
+    height: 40px;
+    border-color: #383838;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
+    text-align: center;
+    background-color: #2b2b2b;
+}
+#boxarea #boxitem.dimmer #presets {
 }
 
 
