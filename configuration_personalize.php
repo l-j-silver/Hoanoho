@@ -2,6 +2,7 @@
     include dirname(__FILE__).'/includes/dbconnection.php';
     include dirname(__FILE__).'/includes/sessionhandler.php';
     include dirname(__FILE__).'/includes/getConfiguration.php';
+    include dirname(__FILE__).'/includes/password_compat/lib/password.php';
 
     function displayNoteColors($notecolor)
     {
@@ -38,8 +39,11 @@
             $sql = "SELECT password FROM users where uid = " . $_SESSION['uid'];
             $result = mysql_query($sql);
             while ($user = mysql_fetch_object($result)) {
-                if ($user->password == md5($_POST['oldpassword'])) {
-                    $sql = "UPDATE users SET password = '" . md5($_POST['newpassword']) . "' where uid = " . $_SESSION['uid'];
+                if (password_verify($_POST['oldpassword'], $user->password)) {
+                    $password = password_hash($_POST['newpassword'], PASSWORD_DEFAULT, array("cost" => 10));
+                    $hash = md5($_POST['username'] + $password + time());
+
+                    $sql = "UPDATE users SET password = '" . $password . "' where uid = " . $_SESSION['uid'];
                     mysql_query($sql);
                     $successmsg = "Das Kennwort wurde erfolgreich geändert!";
                 } else
