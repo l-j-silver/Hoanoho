@@ -28,7 +28,6 @@ INSERT IGNORE INTO `configuration` (`dev_id`, `configstring`, `value`, `title`, 
 (0, 'position_longitude', '', 'Ortsangabe Längengrad', '13.406091199999992000', 'text', 'Wetter', '1'),
 (0, 'position_latitude', '', 'Ortsangabe Breitengrad', '52.519171000000000000', 'text', 'Wetter', '1'),
 (0, 'garbageplan_url', '', 'URL zum iCal Abfallkalender', '', 'text', 'Kalender', '1'),
-(0, 'accessable_ipranges', '', 'IP-Bereiche mit Zufriffserlaubnis', '192.168.1*, 10.0.0.*', 'text', 'Allgemein', '1'),
 (0, 'sharefile_remoteaddress', '', 'Hostname/IP für Dateibereitstellung', 'z.B. cloud.dyndns.org', 'text', 'Allgemein', '1'),
 (0, 'hash_algorithm', 'PASSWORD_DEFAULT', 'Password hashing algorithm', '', 'text', 'Extended', '0'),
 (0, 'hash_options', '{"cost":"10"}', 'Password hashing options', '', 'text', 'Extended', '0');
