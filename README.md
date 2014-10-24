@@ -43,10 +43,10 @@ Cronjobs you should be activating can be found in `install/cron.d`. Ideally you 
 
 Depending on your actual installation directory, you should add **HOANOHO_DIR="/var/www/hoanoho"** to `/etc/environment` to ensure all scripts can reliably find their home directory.
 
-FHEM needs to have DbLog module activated and configured properly. The DbLog database needs to be named **fhem**.
-Hoanoho and FHEM require to use the same MySQL server. The MySQL user for Hoanoho needs to have as least read-only access to the FHEM database as well as read+write access to it's own database.
+FHEM needs to have DbLog module activated and configured properly.
+Hoanoho and FHEM require to use the same MySQL server. The MySQL user for Hoanoho needs to have at least read-only access to the FHEM database as well as read+write access to it's own database.
 
-If you are using a reverse proxy in your setup, you might want to ensure the URI **/helper-server** can only be access via localhost.
+If you are using a reverse proxy in your setup, you might want to ensure the URI **/helper-server** can only be accessed via localhost.
 
 ## Compatibility List
 

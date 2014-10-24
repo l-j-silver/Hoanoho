@@ -3,8 +3,8 @@ include dirname(__FILE__).'/dbconnection.php';
 include dirname(__FILE__).'/getConfiguration.php';
 
 // include our own variant with SHA512 support if required
-// this is needed together with HAproxy basic authentican in case the base system
-// does not support correct blowfish $2y$
+// this is needed together with HAproxy basic authentication in case the base system
+// does not support correct blowfish $2y$ (e.g. on Debian Wheezy)
 if (!defined('PASSWORD_DEFAULT') && $__CONFIG['hash_algorithm'] == "PASSWORD_SHA512") {
 	include dirname(__FILE__)."/password_compat/lib/password_sha512.php";
 
