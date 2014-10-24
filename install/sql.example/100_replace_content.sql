@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `configuration` WRITE;
 /*!40000 ALTER TABLE `configuration` DISABLE KEYS */;
-REPLACE INTO `configuration` VALUES (0,'dwd_region','BXX','Region f√ºr Warnungen','','dwd_region','Wetter'),(0,'position_latitude','52.519171000000000000','Ortsangabe Breitengrad','52.519171000000000000','text','Wetter'),(0,'position_longitude','13.406091199999992000','Ortsangabe L√§ngengrad','13.406091199999992000','text','Wetter'),(6,'isStructure','on','','','text',NULL);
+REPLACE INTO `configuration` VALUES (0,'dwd_region','BXX','Region für Warnungen','','dwd_region','Wetter',1),(0,'position_latitude','52.519171000000000000','Ortsangabe Breitengrad','52.519171000000000000','text','Wetter',1),(0,'position_longitude','13.406091199999992000','Ortsangabe Längengrad','13.406091199999992000','text','Wetter',1),(6,'isStructure','on','','','text',NULL,1);
 /*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
 UNLOCK TABLES;
 
