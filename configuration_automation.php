@@ -4,7 +4,8 @@
     include dirname(__FILE__).'/includes/getConfiguration.php';
 
     if ($_SESSION['isAdmin'] != 1) {
-      die('Insufficient access rights.');
+      header('Location: ./');
+      exit;
     }
 
     function displayBaseTypes($type_id)

@@ -5,7 +5,8 @@
     include dirname(__FILE__).'/includes/password.php';
 
     if ($_SESSION['isAdmin'] != 1) {
-      die('Insufficient access rights.');
+      header('Location: ./');
+      exit;
     }
 
     function displayUserGroup($gid)
