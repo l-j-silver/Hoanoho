@@ -562,11 +562,11 @@
                     <div id="headline_hyperlink"></div><div id="headline">Links</div>
                     <?php
                     if (isset($_SESSION['uid'])) {
-                      $sql = "SELECT name, url from pinboard_links where (uid = 0 or uid = " . $_SESSION['uid'] . ") order by name asc";
+                      $sql = "SELECT name, url from pinboard_links where (uid = 0 or uid = " . $_SESSION['uid'] . ") and ( type = 0 or type = 1 ) order by uid desc, name asc";
                       $result = mysql_query($sql);
                       while ($link = mysql_fetch_object($result)) {
                     ?>
-                      <div id="text"><a href="<?php echo $link->url; ?>" target="_blank"><?php echo $link->name; ?></a></div>
+                      <div id="text"><a href="<?php echo $link->url; ?>"><?php echo $link->name; ?></a></div>
                     <?php
                       }
                     }

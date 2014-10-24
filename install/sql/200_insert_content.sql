@@ -29,7 +29,7 @@ INSERT IGNORE INTO `configuration` (`dev_id`, `configstring`, `value`, `title`, 
 (0, 'position_latitude', '', 'Ortsangabe Breitengrad', '52.519171000000000000', 'text', 'Wetter', '1'),
 (0, 'garbageplan_url', '', 'URL zum iCal Abfallkalender', '', 'text', 'Kalender', '1'),
 (0, 'sharefile_remoteaddress', '', 'Hostname/IP für Dateibereitstellung', 'z.B. cloud.dyndns.org', 'text', 'Allgemein', '1'),
-(0, 'hash_algorithm', 'PASSWORD_DEFAULT', 'Password hashing algorithm', '', 'text', 'Extended', '0'),
-(0, 'hash_options', '{"cost":"10"}', 'Password hashing options', '', 'text', 'Extended', '0');
+(0, 'hash_algorithm', 'PASSWORD_DEFAULT', 'Password hashing algorithm', '', 'text', 'Extended Settings', '0'),
+(0, 'hash_options', '{"cost":"10"}', 'Password hashing options', '', 'text', 'Extended Settings', '0');
 
 INSERT IGNORE INTO `groups` (`gid`, `isAdmin`, `grpname`) VALUES (1, 0, 'Benutzer'), (2, 1, 'Administrator');

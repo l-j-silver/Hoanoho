@@ -338,6 +338,20 @@
                 }
                 ?>
 
+                <li class="list-divider">Links</li>
+
+                <?php
+                if (isset($_SESSION['uid'])) {
+                  $sql = "SELECT name, url from pinboard_links where (uid = 0 or uid = " . $_SESSION['uid'] . ") and ( type = 0 or type = 2 ) order by uid desc, name asc";
+                  $result = mysql_query($sql);
+                  while ($link = mysql_fetch_object($result)) {
+                ?>
+                  <li><div class="full-length"><a href="<?php echo $link->url; ?>"><?php echo $link->name; ?></a></div></li>
+                <?php
+                  }
+                }
+                ?>
+
                 <li class="list-divider">Suchen ...</li>
                 <li class="login"><form action="http://www.google.com/search" name="searchForm1"><input type="text" name="q" placeholder="bei Google"></input></form></li>
             </ul>

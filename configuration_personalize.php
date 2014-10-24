@@ -65,18 +65,18 @@
         $sql = "UPDATE usersettings set mailserver_type = '" . $_POST['mailserver_type'] . "', mailserver_port = " . $_POST['mailserver_port'] . ", mailserver_host = '" . $_POST['mailserver_host'] . "', mailserver_encryption = '" . $_POST['mailserver_encryption'] . "', mailserver_login = '" . $_POST['mailserver_login'] . "', mailserver_password = '" . $_POST['mailserver_password'] . "' where uid = " . $_SESSION['uid'];
         mysql_query($sql);
     } elseif (isset($_POST['cmd']) && $_POST['cmd'] == "addlink") {
-        $sql = "INSERT INTO pinboard_links (uid) values (0)";
+        $sql = "INSERT INTO pinboard_links (uid) values (".$_SESSION['uid'].")";
         mysql_query($sql);
     } elseif (isset($_POST['cmd']) && $_POST['cmd'] == "deletelink") {
-        $sql = "delete from pinboard_links where link_id = " . $_POST['link_id'];
+        $sql = "delete from pinboard_links where link_id = " . $_POST['link_id'] . " AND uid = " . $_SESSION['uid'];
         mysql_query($sql);
     } elseif (isset($_POST['cmd']) && $_POST['cmd'] == "editlink") {
-        $uid = 0;
-        if (isset($_POST['linkprivate'])) {
-            $uid = $_SESSION['uid'];
+        $uid = $_SESSION['uid'];
+        if (isset($_POST['linkglobal']) && $_SESSION['isAdmin'] == 1) {
+            $uid = 0;
         }
 
-        $sql = "update pinboard_links set name = '" . $_POST['linkname'] . "', url = '" . $_POST['linkurl'] . "', uid = " . $uid . " where link_id = " . $_POST['link_id'];
+        $sql = "update pinboard_links set name = '" . $_POST['linkname'] . "', url = '" . $_POST['linkurl'] . "', uid = " . $uid . ", type = " . $_POST['linktype'] . " where link_id = " . $_POST['link_id'];
         mysql_query($sql);
     }
 ?>
@@ -259,14 +259,15 @@
             <div id="header">
                 <div id="linkname">Linkname</div>
                 <div id="linkurl">URL</div>
+                <div id="linktype">Anzeige</div>
                 <?php if ($_SESSION['isAdmin'] == 1) { ?>
-                <div id="linkprivate">Privat</div>
+                <div id="linkglobal">Global</div>
                 <?php } ?>
                 <div id="action">&nbsp;</div>
             </div>
 
             <?php
-            $sql = "SELECT * FROM pinboard_links";
+            $sql = "SELECT * FROM pinboard_links ORDER BY uid desc, name asc";
             if($_SESSION['isAdmin'] == 1)
                 $sql .= " where (uid = " . $_SESSION['uid'] . " or uid = 0)";
             else
@@ -279,10 +280,13 @@
                 <form method="POST" enctype="multipart/form-data" name="editlinkForm<?php echo $link->link_id; ?>" id="editForm">
                     <div id="linkname"><input type="text" name="linkname" value="<?php echo $link->name; ?>"></div>
                     <div id="linkurl"><input type="text" name="linkurl" value="<?php echo $link->url; ?>"></div>
+                    <div id="linktype"><select id="linktype" name="linktype">
+                      <option name="linktype" value="0"<?php echo ($link->type == "0" ? " selected" : "") ?>>Immer</option>
+                      <option name="linktype" value="1"<?php echo ($link->type == "1" ? " selected" : "") ?>>Web</option>
+                      <option name="linktype" value="2"<?php echo ($link->type == "2" ? " selected" : "") ?>>Mobil</option>
+                    </select></div>
                     <?php if ($_SESSION['isAdmin'] == 1) { ?>
-                    <div id="linkprivate"><input type="checkbox" name="linkprivate" <?php if ($link->uid > 0) echo "checked"; ?> ></div>
-                    <?php } else { ?>
-                    <div id="linkprivate"><input type="hidden" name="linkprivate" value="1"></div>
+                    <div id="linkglobal"><input type="checkbox" name="linkglobal" <?php if ($link->uid == 0) echo "checked"; ?> ></div>
                     <?php } ?>
                     <input type="hidden" name="cmd" value="editlink">
                     <input type="hidden" name="link_id" value="<?php echo $link->link_id; ?>">
