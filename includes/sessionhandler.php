@@ -16,7 +16,7 @@ if (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != "") {
 
 // quick login
 if (isset($_GET['login']) && $_GET['login'] != "") {
-  $result = mysql_query("SELECT users.uid, password, username, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.hash = '" . $_GET['login'] . "' limit 1");
+  $result = mysql_query("SELECT users.uid, password, username, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.hash = '" . mysql_real_escape_string($_GET['login']) . "' limit 1");
   while ($row = mysql_fetch_object($result)) {
     $_SESSION['username'] = $row->username;
     $_SESSION['md5password'] = $row->password;
@@ -25,14 +25,14 @@ if (isset($_GET['login']) && $_GET['login'] != "") {
     $_SESSION['uid'] = $row->uid;
     if (!isset($_SESSION['logintime'])) {
       $_SESSION['logintime'] = time();
-      $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
+      $sql = "UPDATE users set lastlogin = now() where uid = " . mysql_real_escape_string($row->uid);
       mysql_query($sql);
     }
   }
 
 // verify valid session
 } elseif (isset($_SESSION['username']) && isset($_SESSION['md5password'])) {
-  $result = mysql_query("SELECT users.uid, password, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where username = '" . $_SESSION['username'] . "' limit 1");
+  $result = mysql_query("SELECT users.uid, password, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where uid = '" . $_SESSION['uid'] . "' limit 1");
   while ($row = mysql_fetch_object($result)) {
     if ($row->password == $_SESSION['md5password']) {
       $_SESSION['login'] = 1;
@@ -40,7 +40,7 @@ if (isset($_GET['login']) && $_GET['login'] != "") {
       $_SESSION['uid'] = $row->uid;
       if (!isset($_SESSION['logintime'])) {
         $_SESSION['logintime'] = time();
-        $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
+        $sql = "UPDATE users set lastlogin = now() where uid = " . mysql_real_escape_string($row->uid);
         mysql_query($sql);
       }
     }
