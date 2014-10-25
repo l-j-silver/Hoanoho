@@ -17,4 +17,18 @@ if (!defined('PASSWORD_DEFAULT') && $__CONFIG['hash_algorithm'] == "PASSWORD_SHA
 if (!defined(constant($__CONFIG['hash_algorithm']))) {
   $__CONFIG['hash_algorithm'] = "PASSWORD_BCRYPT";
   $__CONFIG['hash_options'] = '{"cost":"10"}';
+} elseif (
+  $__CONFIG['hash_algorithm'] == "PASSWORD_DEFAULT" &&
+  (
+      !isset(json_decode($__CONFIG['hash_options'], true)['cost']) ||
+      json_decode($__CONFIG['hash_options'], true)['cost'] == "")
+  ) {
+    $__CONFIG['hash_options'] = '{"cost":"10"}';
+} elseif (
+  $__CONFIG['hash_algorithm'] == "PASSWORD_SHA512" &&
+  (
+      !isset(json_decode($__CONFIG['hash_options'], true)['cost']) ||
+      json_decode($__CONFIG['hash_options'], true)['cost'] == "")
+  ) {
+    $__CONFIG['hash_options'] = '{"cost":"5000"}';
 }
