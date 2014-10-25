@@ -22,54 +22,35 @@ session_name('HOANOHOSESSID');
 if (!isset($_SESSION))
   session_start();
 
-if (isset($_GET['cmd']) && $_GET['cmd'] == "logout" && isset($_SERVER['HTTP_REFERER']))
-    $_SESSION['REAL_REFERER'] = $_SERVER['HTTP_REFERER'];
+if (isset($_GET['cmd']) && $_GET['cmd'] == "logout" && isset($_SERVER['HTTP_REFERER'])) {
+  $_SESSION['REAL_REFERER'] = $_SERVER['HTTP_REFERER'];
+  $path = array_pop( explode("/", dirname( parse_url($_SERVER['HTTP_REFERER'])['path'] )) );
+  $uri = array_pop( explode("/", parse_url($_SERVER['HTTP_REFERER'])['path'] ) );
+}
 
-if (isset($_SESSION['REAL_REFERER']))
+if (
+    isset($_SESSION['REAL_REFERER']) &&
+    $_SESSION['REAL_REFERER'] != "" &&
+    $_SESSION['REAL_REFERER'] != "/" &&
+    $_SESSION['REAL_REFERER'] != "/index.php" &&
+    (
+      !isset($path) ||
+        (
+         ($path == "mobile" || $path == "tablet") ||
+         ($path == "" && $uri != "index.php" && $uri != "")
+        )
+    )
+  )
   $referer = $_SESSION['REAL_REFERER'];
-elseif (isset($_POST['referer']))
+elseif (isset($_POST['referer']) && $_POST['referer'] != "")
   $referer = $_POST['referer'];
+else
+  $referer = "./";
 
 session_destroy();
 
-// quick login
-if (isset($_GET['login']) && $_GET['login'] != "") {
-    $result = mysql_query("SELECT users.uid, password, users.hash, username, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.hash = '" . mysql_real_escape_string($_GET['login']) . "' limit 1");
-    while ($row = mysql_fetch_object($result)) {
-
-        session_start();
-
-        $_SESSION['username'] = $row->username;
-        $_SESSION['isAdmin'] = $row->isAdmin;
-        $_SESSION['login'] = 1;
-        $_SESSION['uid'] = $row->uid;
-        $_SESSION['logintime'] = time();
-        $_SESSION['quicklogin'] = $_GET['login'];
-
-        $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
-        mysql_query($sql);
-        $sql = "UPDATE users set lastactivity = now() where uid = " . $row->uid;
-        mysql_query($sql);
-
-        if (isset($_POST['referer']))
-          $uri = array_pop( explode("/", dirname($_POST['referer'])) );
-
-        if (
-            isset($_POST['referer']) &&
-            $_POST['referer'] != "" &&
-            $_POST['referer'] != "/" &&
-            ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
-        ) {
-            header('Location: '.$_POST['referer']);
-        } else {
-          header('Location: ./?login='.$_GET['login']);
-        }
-        exit;
-    }
-}
-
 // normal login
-elseif (isset($_POST['cmd']) && isset($_POST['login_username']) && isset($_POST['login_password'])) {
+if (isset($_POST['cmd']) && isset($_POST['login_username']) && isset($_POST['login_password'])) {
     if (strlen($_POST['login_username']) > 0 && strlen($_POST['login_password']) > 0) {
         $result = mysql_query("SELECT users.uid, password, users.hash, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where username = '" . mysql_real_escape_string($_POST['login_username']) . "' limit 1");
         while ($row = mysql_fetch_object($result)) {
@@ -97,24 +78,38 @@ elseif (isset($_POST['cmd']) && isset($_POST['login_username']) && isset($_POST[
                 $sql = "UPDATE users set lastactivity = now() where uid = " . $row->uid;
                 mysql_query($sql);
 
-                if (isset($_POST['referer']))
-                  $uri = array_pop( explode("/", dirname($_POST['referer'])) );
-
-                if (
-                    isset($_POST['referer']) &&
-                    $_POST['referer'] != "" &&
-                    $_POST['referer'] != "/" &&
-                    ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
-                ) {
-                    header('Location: '.$_POST['referer']);
-                } elseif(isset($_GET['login']) && $_GET['login'] != "") {
-                    header('Location: ./?login='.$_GET['login']);
-                } else {
-                    header('Location: ./');
-                }
+                header('Location: ' . $referer );
                 exit;
             }
         }
+    }
+}
+
+// quick login
+elseif (isset($_GET['login']) && $_GET['login'] != "") {
+    $result = mysql_query("SELECT users.uid, password, users.hash, username, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.hash = '" . mysql_real_escape_string($_GET['login']) . "' limit 1");
+    while ($row = mysql_fetch_object($result)) {
+
+        session_start();
+
+        $_SESSION['username'] = $row->username;
+        $_SESSION['isAdmin'] = $row->isAdmin;
+        $_SESSION['login'] = 1;
+        $_SESSION['uid'] = $row->uid;
+        $_SESSION['logintime'] = time();
+        $_SESSION['quicklogin'] = $_GET['login'];
+        $_SESSION['quicklogin_newsession'] = true;
+
+        $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
+        mysql_query($sql);
+        $sql = "UPDATE users set lastactivity = now() where uid = " . $row->uid;
+        mysql_query($sql);
+
+        if ($referer == "./")
+          header('Location: ' . "./?login=" . $_GET['login'] );
+        else
+          header('Location: ' . $referer );
+        exit;
     }
 }
 ?>
