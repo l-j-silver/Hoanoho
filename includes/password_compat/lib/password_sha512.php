@@ -197,7 +197,7 @@ if (!defined('PASSWORD_DEFAULT')) {
         if (PasswordCompat\binary\_substr($hash, 0, 3) == '$6$' && PasswordCompat\binary\_strlen($hash) == 60) {
             $return['algo'] = PASSWORD_SHA512;
             $return['algoName'] = 'sha512';
-            list($cost) = sscanf($hash, "$6$%d$");
+            list($cost) = sscanf($hash, "$6$rounds=%d$");
             $return['options']['cost'] = $cost;
         }
         if (PasswordCompat\binary\_substr($hash, 0, 4) == '$2y$' && PasswordCompat\binary\_strlen($hash) == 60) {
@@ -227,14 +227,14 @@ if (!defined('PASSWORD_DEFAULT')) {
         }
         switch ($algo) {
             case PASSWORD_SHA512:
-                $cost = isset($options['cost']) ? $options['cost'] : 10;
-                if ($cost != $info['options']['cost']) {
+                $cost = isset($options['cost']) ? $options['cost'] : 5000;
+                if (isset($info['options']['cost']) && $cost != $info['options']['cost']) {
                     return true;
                 }
                 break;
             case PASSWORD_BCRYPT:
                 $cost = isset($options['cost']) ? $options['cost'] : 10;
-                if ($cost != $info['options']['cost']) {
+                if (isset($info['options']['cost']) && $cost != $info['options']['cost']) {
                     return true;
                 }
                 break;
