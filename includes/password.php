@@ -14,7 +14,7 @@ if (!defined('PASSWORD_DEFAULT') && $__CONFIG['hash_algorithm'] == "PASSWORD_SHA
 }
 
 // default hash settings in case it might not be existing
-if (!defined(constant($__CONFIG['hash_algorithm']))) {
+if (constant($__CONFIG['hash_algorithm']) === null ) {
   $__CONFIG['hash_algorithm'] = "PASSWORD_BCRYPT";
   $__CONFIG['hash_options'] = '{"cost":"10"}';
 } elseif (
