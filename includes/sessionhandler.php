@@ -1,12 +1,20 @@
 <?php
 // Add CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
-header("Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data http://www.wettergefahren.de; media-src 'self'; frame-src 'self'; font-src 'self'; connect-src 'self' wss: ws:");
-header("X-Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data http://www.wettergefahren.de; media-src 'self'; frame-src 'self'; font-src 'self'; connect-src 'self' wss: ws:");
-header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data http://www.wettergefahren.de; media-src 'self'; frame-src 'self'; font-src 'self'; connect-src 'self' ws:");
-
-if (!isset($_SESSION)) {
-    session_start();
+foreach (array("Content-Security-Policy", "X-Content-Security-Policy", "X-WebKit-CSP") as $headername) {
+  header($headername.": default-src 'none'; script-src 'self' 'unsafe-inline'; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data http://www.wettergefahren.de; media-src 'self'; frame-src 'self'; font-src 'self'; connect-src 'self' wss: ws:");
 }
+
+session_set_cookie_params(
+    0,
+    "/",
+    $_SERVER["HTTP_HOST"],
+    true,
+    true
+);
+session_name('HOANOHOSESSID');
+
+if (!isset($_SESSION))
+  session_start();
 
 if (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != "") {
   $querystring = "?".$_SERVER['QUERY_STRING'];
@@ -14,40 +22,29 @@ if (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != "") {
   $querystring = "";
 }
 
-// quick login
-if (isset($_GET['login']) && $_GET['login'] != "") {
-  $result = mysql_query("SELECT users.uid, password, username, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.hash = '" . mysql_real_escape_string($_GET['login']) . "' limit 1");
+include dirname(__FILE__).'/dbconnection.php';
+
+// verify and update session
+$loggedin = false;
+if (isset($_SESSION['username']) && $_SESSION['username'] != "") {
+  $result = mysql_query("SELECT users.uid, password, users.hash, grpname, isAdmin, lastactivity from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.username = '" . mysql_real_escape_string($_SESSION['username']) . "' limit 1");
   while ($row = mysql_fetch_object($result)) {
-    $_SESSION['username'] = $row->username;
-    $_SESSION['md5password'] = $row->password;
-    $_SESSION['isAdmin'] = $row->isAdmin;
-    $_SESSION['login'] = 1;
-    $_SESSION['uid'] = $row->uid;
-    if (!isset($_SESSION['logintime'])) {
-      $_SESSION['logintime'] = time();
-      $sql = "UPDATE users set lastlogin = now() where uid = " . mysql_real_escape_string($row->uid);
+    if (
+          (isset($_SESSION['quicklogin']) && $_SESSION['quicklogin'] == $row->hash && strtotime($row->lastactivity) + (60 * 60 * 24 * 7 * 6) > time()) ||
+          strtotime($row->lastactivity) + 900 > time()
+      ) {
+      $loggedin = true;
+      $_SESSION['isAdmin'] = $row->isAdmin;
+      $_SESSION['uid'] = $row->uid;
+      $sql = "UPDATE users set lastactivity = now() where uid = " . $row->uid;
       mysql_query($sql);
     }
   }
-
-// verify valid session
-} elseif (isset($_SESSION['username']) && isset($_SESSION['md5password'])) {
-  $result = mysql_query("SELECT users.uid, password, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where uid = '" . $_SESSION['uid'] . "' limit 1");
-  while ($row = mysql_fetch_object($result)) {
-    if ($row->password == $_SESSION['md5password']) {
-      $_SESSION['login'] = 1;
-      $_SESSION['isAdmin'] = $row->isAdmin;
-      $_SESSION['uid'] = $row->uid;
-      if (!isset($_SESSION['logintime'])) {
-        $_SESSION['logintime'] = time();
-        $sql = "UPDATE users set lastlogin = now() where uid = " . mysql_real_escape_string($row->uid);
-        mysql_query($sql);
-      }
-    }
-  }
+}
 
 // kill any existing session data and redirect to login page
-} else {
+// in case user could not be verified
+if(!$loggedin) {
   if (isset($_SESSION)) {
     foreach($_SESSION as $key => $value) {
       unset($_SESSION[$key]);
@@ -84,3 +81,5 @@ if (isset($_GET['login']) && $_GET['login'] != "") {
     exit;
   }
 }
+
+include dirname(__FILE__).'/getConfiguration.php';

@@ -1,139 +1,122 @@
 <?php
+include dirname(__FILE__).'/../includes/dbconnection.php';
+include dirname(__FILE__).'/../includes/getConfiguration.php';
 include dirname(__FILE__).'/../includes/password.php';
 
 // Add strict CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
-header("Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
-header("X-Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
-header("X-WebKit-CSP: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
+foreach (array("Content-Security-Policy", "X-Content-Security-Policy", "X-WebKit-CSP") as $headername) {
+  header($headername.": default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
+}
 
-    $referer = "";
+$referer = "";
 
-    if (!isset($_SESSION)) {
-      session_start();
-    }
+session_set_cookie_params(
+    0,
+    "/",
+    $_SERVER["HTTP_HOST"],
+    true,
+    true
+);
+session_name('HOANOHOSESSID');
 
-    if (ini_get("session.use_cookies")) {
-        $params = session_get_cookie_params();
+if (!isset($_SESSION))
+  session_start();
 
-        if (isset($_GET['login']) && $_GET['login'] != "") {
-          setcookie(
-            session_name(),
-            '',
-            time() + (10 * 365 * 24 * 60 * 60),
-            $params["path"],
-            $params["domain"],
-            $params["secure"],
-            $params["httponly"]
-          );
+if (isset($_GET['cmd']) && $_GET['cmd'] == "logout" && isset($_SERVER['HTTP_REFERER']))
+    $_SESSION['REAL_REFERER'] = $_SERVER['HTTP_REFERER'];
+
+if (isset($_SESSION['REAL_REFERER']))
+  $referer = $_SESSION['REAL_REFERER'];
+elseif (isset($_POST['referer']))
+  $referer = $_POST['referer'];
+
+session_destroy();
+
+// quick login
+if (isset($_GET['login']) && $_GET['login'] != "") {
+    $result = mysql_query("SELECT users.uid, password, users.hash, username, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.hash = '" . mysql_real_escape_string($_GET['login']) . "' limit 1");
+    while ($row = mysql_fetch_object($result)) {
+
+        session_start();
+
+        $_SESSION['username'] = $row->username;
+        $_SESSION['isAdmin'] = $row->isAdmin;
+        $_SESSION['login'] = 1;
+        $_SESSION['uid'] = $row->uid;
+        $_SESSION['logintime'] = time();
+        $_SESSION['quicklogin'] = $_GET['login'];
+
+        $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
+        mysql_query($sql);
+        $sql = "UPDATE users set lastactivity = now() where uid = " . $row->uid;
+        mysql_query($sql);
+
+        if (isset($_POST['referer']))
+          $uri = array_pop( explode("/", dirname($_POST['referer'])) );
+
+        if (
+            isset($_POST['referer']) &&
+            $_POST['referer'] != "" &&
+            $_POST['referer'] != "/" &&
+            ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
+        ) {
+            header('Location: '.$_POST['referer']);
         } else {
-          setcookie(
-            session_name(),
-            '',
-            time() - 42000,
-            $params["path"],
-            $params["domain"],
-            $params["secure"],
-            $params["httponly"]
-          );
+          header('Location: ./?login='.$_GET['login']);
         }
+        exit;
     }
+}
 
-    if(isset($_GET['cmd']) && $_GET['cmd'] == "logout" && isset($_SERVER['HTTP_REFERER']))
-        $_SESSION['REAL_REFERER'] = $_SERVER['HTTP_REFERER'];
-
-    if(isset($_SESSION['REAL_REFERER'])) {
-      $referer = $_SESSION['REAL_REFERER'];
-    } elseif(isset($_POST['referer'])) {
-      $referer = $_POST['referer'];
-    }
-
-    session_destroy();
-
-    include dirname(__FILE__).'/../includes/dbconnection.php';
-    include dirname(__FILE__).'/../includes/getConfiguration.php';
-
-    // quick login
-    if (isset($_GET['login']) && $_GET['login'] != "") {
-        $result = mysql_query("SELECT users.uid, password, username, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.hash = '" . $_GET['login'] . "' limit 1");
+// normal login
+elseif (isset($_POST['cmd']) && isset($_POST['login_username']) && isset($_POST['login_password'])) {
+    if (strlen($_POST['login_username']) > 0 && strlen($_POST['login_password']) > 0) {
+        $result = mysql_query("SELECT users.uid, password, users.hash, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where username = '" . mysql_real_escape_string($_POST['login_username']) . "' limit 1");
         while ($row = mysql_fetch_object($result)) {
+            if (password_verify($_POST['login_password'], $row->password)) {
+                session_start();
 
-            session_start();
+                $_SESSION['username'] = $_POST['login_username'];
+                $_SESSION['isAdmin'] = $row->isAdmin;
+                $_SESSION['login'] = 1;
+                $_SESSION['uid'] = $row->uid;
+                $_SESSION['logintime'] = time();
 
-            $_SESSION['username'] = $row->username;
-            $_SESSION['md5password'] = $row->password;
-            $_SESSION['isAdmin'] = $row->isAdmin;
-            $_SESSION['login'] = 1;
-            $_SESSION['uid'] = $row->uid;
-            $_SESSION['logintime'] = time();
+                // Update password hash if required
+                if (password_needs_rehash($row->password, constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true))) {
+                    $password = password_hash(mysql_real_escape_string($_POST['login_password']), constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true));
+                    $hash = md5(mysql_real_escape_string($_POST['login_username']) + $password + time());
 
-            $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
-            mysql_query($sql);
-
-            if (isset($_POST['referer']))
-              $uri = array_pop( explode("/", dirname($_POST['referer'])) );
-
-            if (
-                isset($_POST['referer']) &&
-                $_POST['referer'] != "" &&
-                $_POST['referer'] != "/" &&
-                ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
-            ) {
-                header('Location: '.$_POST['referer']);
-            } else {
-              header('Location: ./?login='.$_GET['login']);
-            }
-            exit;
-        }
-    }
-
-    // normal login
-    elseif (isset($_POST['cmd']) && isset($_POST['login_username']) && isset($_POST['login_password'])) {
-        if (strlen($_POST['login_username']) > 0 && strlen($_POST['login_password']) > 0) {
-            $result = mysql_query("SELECT users.uid,password, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where username = '" . $_POST['login_username'] . "' limit 1");
-            while ($row = mysql_fetch_object($result)) {
-                if (password_verify($_POST['login_password'], $row->password)) {
-                    session_start();
-
-                    $_SESSION['username'] = $_POST['login_username'];
-                    $_SESSION['md5password'] = md5($_POST['login_password']);
-                    $_SESSION['isAdmin'] = $row->isAdmin;
-                    $_SESSION['login'] = 1;
-                    $_SESSION['uid'] = $row->uid;
-                    $_SESSION['logintime'] = time();
-
-                    // Update password hash if required
-                    if (password_needs_rehash($row->password, constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true))) {
-                        $password = password_hash($_POST['login_password'], constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true));
-                        $hash = md5($_POST['login_username'] + $password + time());
-
-                        $sql = "update users set password = '" . $password . "', hash = '".$hash."' where uid = ".$_SESSION['uid'];
-                        if ($password != "" && $hash != "")
-                          mysql_query($sql);
-                    }
-
-                    $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
-                    mysql_query($sql);
-
-                    if (isset($_POST['referer']))
-                      $uri = array_pop( explode("/", dirname($_POST['referer'])) );
-
-                    if (
-                        isset($_POST['referer']) &&
-                        $_POST['referer'] != "" &&
-                        $_POST['referer'] != "/" &&
-                        ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
-                    ) {
-                        header('Location: '.$_POST['referer']);
-                    } elseif(isset($_GET['login']) && $_GET['login'] != "") {
-                        header('Location: ./?login='.$_GET['login']);
-                    } else {
-                        header('Location: ./');
-                    }
-                    exit;
+                    $sql = "update users set password = '" . $password . "', hash = '".$hash."' where uid = ". $row->uid;
+                    if ($password != "" && $hash != "")
+                      mysql_query($sql);
                 }
+
+                $sql = "UPDATE users set lastlogin = now() where uid = " . $row->uid;
+                mysql_query($sql);
+                $sql = "UPDATE users set lastactivity = now() where uid = " . $row->uid;
+                mysql_query($sql);
+
+                if (isset($_POST['referer']))
+                  $uri = array_pop( explode("/", dirname($_POST['referer'])) );
+
+                if (
+                    isset($_POST['referer']) &&
+                    $_POST['referer'] != "" &&
+                    $_POST['referer'] != "/" &&
+                    ($uri == "mobile" || $uri == "tablet" || $uri == "pupnp")
+                ) {
+                    header('Location: '.$_POST['referer']);
+                } elseif(isset($_GET['login']) && $_GET['login'] != "") {
+                    header('Location: ./?login='.$_GET['login']);
+                } else {
+                    header('Location: ./');
+                }
+                exit;
             }
         }
     }
+}
 ?>
 
 <html>

@@ -255,6 +255,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) DEFAULT NULL,
   `hash` varchar(255) DEFAULT NULL,
   `lastlogin` datetime DEFAULT NULL,
+  `lastactivity` datetime DEFAULT NULL,
   PRIMARY KEY (`uid`),
   KEY `username` (`username`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
