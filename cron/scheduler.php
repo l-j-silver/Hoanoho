@@ -65,23 +65,24 @@ while ($task = mysql_fetch_object($result)) {
                     break;
             }
 
-            if($reading != "")
-                $url = "http://localhost/helper-server/fhem.php?cmd=set&device=".$task->identifier."&value=".$task->dev_state."&reading=".$reading;
+        if($reading != "") {
+            $url = "http://localhost/helper-server/fhem.php?cmd=set&device=".$task->identifier."&value=".$task->dev_state."&reading=".$reading;
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
             curl_exec($curl);
             curl_close($curl);
-            else
-                $url = "http://localhost/helper-server/fhem.php?cmd=set&device=".$task->identifier."&value=".$task->dev_state;
+        } else {
+            $url = "http://localhost/helper-server/fhem.php?cmd=set&device=".$task->identifier."&value=".$task->dev_state;
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
             curl_exec($curl);
             curl_close($curl);
         }
+      }
     }
 }
 ?>
