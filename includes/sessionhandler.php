@@ -24,7 +24,7 @@ foreach (array("Content-Security-Policy", "X-Content-Security-Policy", "X-WebKit
       $imgsrc_exceptions .= " http://".$cam_ipaddress.":".$cam_port;
       $scriptsrc_exceptions .= " http://".$cam_ipaddress.":".$cam_port;
   }  
-  header($headername.": default-src 'none'; script-src 'self' 'unsafe-inline' data: ".$scriptsrc_exceptions."; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: ".$imgsrc_exceptions." ; media-src 'self'; frame-src 'self'; font-src 'self'; connect-src 'self' wss: ws:");
+  header($headername.": default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' data: ".$scriptsrc_exceptions."; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: ".$imgsrc_exceptions." ; media-src 'self'; frame-src 'self'; font-src 'self'; connect-src 'self' wss: ws:");
 }
 
 session_set_cookie_params(
