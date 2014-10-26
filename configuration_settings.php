@@ -1,7 +1,5 @@
  <?php
-    include dirname(__FILE__).'/includes/dbconnection.php';
-    include dirname(__FILE__).'/includes/sessionhandler.php';
-    include dirname(__FILE__).'/includes/getConfiguration.php';
+    require_once dirname(__FILE__).'/includes/sessionhandler.php';
 
     if ($_SESSION['isAdmin'] != 1) {
       header('Location: ./');
@@ -64,14 +62,14 @@
         <link rel="stylesheet" href="css/configuration.css" type="text/css" media="screen" title="no title" charset="UTF-8">
         <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
-        <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
-        <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
         <title><?php echo $__CONFIG['main_sitetitle'] ?> - Einstellungen - Parameter</title>
     </head>
 <body>
-    <?php require(dirname(__FILE__).'/includes/nav.php'); ?>
+    <?php require_once dirname(__FILE__).'/includes/nav.php'; ?>
 
     <?php
     if (isset($_GET['showall']) && $_GET['showall'] == "true") {

@@ -1,7 +1,5 @@
 <?php
-  include dirname(__FILE__).'/includes/dbconnection.php';
-  include dirname(__FILE__).'/includes/sessionhandler.php';
-  include dirname(__FILE__).'/includes/getConfiguration.php';
+  require_once dirname(__FILE__).'/includes/sessionhandler.php';
 ?>
 <script language="javascript">
     function displayDeviceStates(device, sch_id, value)
@@ -229,14 +227,14 @@
 
         <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
-        <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
-        <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
         <title><?php echo $__CONFIG['main_sitetitle'] ?> - Einstellungen - Zeitplaner</title>
     </head>
 <body>
-    <?php require(dirname(__FILE__).'/includes/nav.php'); ?>
+    <?php require_once dirname(__FILE__).'/includes/nav.php'; ?>
 
     <section class="main_configuration_scheduler">
         <h1><span>Zeitpläne</span></h1>

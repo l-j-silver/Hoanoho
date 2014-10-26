@@ -1,5 +1,5 @@
 <?php
-include dirname(__FILE__).'/../includes/dbconnection.php';
+require_once dirname(__FILE__)."/../includes/dbconnection.inc.php";
 
 if (isset($_GET['cmd'])) {
     if ($_GET['cmd'] == "set" && isset($_GET['pin']) && isset($_GET['value'])) {

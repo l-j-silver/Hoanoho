@@ -1,7 +1,5 @@
 <?php
-    include dirname(__FILE__).'/includes/dbconnection.php';
-    include dirname(__FILE__).'/includes/sessionhandler.php';
-    include dirname(__FILE__).'/includes/getConfiguration.php';
+    require_once dirname(__FILE__).'/includes/sessionhandler.php';
 
     function rotateImage($content, $type, $orientation)
     {
@@ -117,11 +115,11 @@
         <link rel="stylesheet" href="css/sharefile.css" type="text/css" media="screen" title="no title" charset="UTF-8">
         <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
-        <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
         <script type="text/javascript" src="js/nicEdit.js"></script>
 
-        <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
         <title><?php echo $__CONFIG['main_sitetitle'] ?> - Netzwerk - Übersicht</title>
 
@@ -133,7 +131,7 @@
         </script>
     </head>
 <body>
-    <?php require(dirname(__FILE__).'/includes/nav.php'); ?>
+    <?php require_once dirname(__FILE__).'/includes/nav.php'; ?>
 
     <?php if (isset($_GET['sid']) && !isset($_GET['cmd'])) { ?>
         <section class="main">

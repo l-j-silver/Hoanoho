@@ -1,6 +1,6 @@
 <?php
-    include dirname(__FILE__).'/../includes/dbconnection.php';
-    include dirname(__FILE__).'/../includes/getConfiguration.php';
+    require_once dirname(__FILE__).'/../includes/dbconnection.php';
+    require_once dirname(__FILE__).'/../includes/getConfiguration.php';
 ?>
 
 <html>

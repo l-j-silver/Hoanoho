@@ -1,4 +1,5 @@
 <?php
+require_once dirname(__FILE__).'/../includes/sessionhandler.php';
 
 if ( isset($_POST['usertoken']) && $_POST['usertoken'] != "" && isset($_POST['apptoken']) && $_POST['apptoken'] != "" ) {
     curl_setopt_array($ch = curl_init(), array(

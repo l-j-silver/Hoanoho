@@ -1,6 +1,4 @@
 <?php
-    include dirname(__FILE__).'/../includes/getConfiguration.php';
-
     // check automation configuration
     $sql_automation = "select * from device_floors where position > 0 order by position asc";
     $result_automation = mysql_query($sql_automation);

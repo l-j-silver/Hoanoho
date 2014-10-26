@@ -1,7 +1,5 @@
 <?php
-    include dirname(__FILE__).'/includes/dbconnection.php';
-    include dirname(__FILE__).'/includes/sessionhandler.php';
-    include dirname(__FILE__).'/includes/getConfiguration.php';
+    require_once dirname(__FILE__).'/includes/sessionhandler.php';
 ?>
 
 <html>
@@ -504,9 +502,9 @@
             }
         ?>
 
-        <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
-        <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/mobile-app.php'; ?>
         
         <title><?php echo $__CONFIG['main_sitetitle'] ?> - Haussteuerung</title>
     </head>
@@ -708,7 +706,7 @@
         }
     ?>
 
-    <?php require(dirname(__FILE__).'/includes/nav.php'); ?>
+    <?php require_once dirname(__FILE__).'/includes/nav.php'; ?>
 
     <?php
     $sql = "select * from device_floors where position > 0 order by position asc";

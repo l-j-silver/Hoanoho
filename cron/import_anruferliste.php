@@ -1,8 +1,8 @@
 <?php
 $HOANOHO_DIR = exec('. /etc/environment; echo $HOANOHO_DIR');
-require			$HOANOHO_DIR."/config/dbconfig.inc.php";
-require_once 	$HOANOHO_DIR.'/includes/fritzbox_api/fritzbox_api.class.php';
-include 		$HOANOHO_DIR."/includes/pushover.php";
+require_once $HOANOHO_DIR."/config/dbconfig.inc.php";
+require_once $HOANOHO_DIR.'/includes/fritzbox_api/fritzbox_api.class.php';
+require_once $HOANOHO_DIR."/includes/pushover.php";
 
 	## functions ##
 function pushMessageToUsers($title, $message, $priority)

@@ -1,22 +1,6 @@
 <?php
-
-require(dirname(__FILE__)."/../../config/dbconfig.inc.php");
-
-$dbh = mysql_connect($dbhostname,$dbusername,$dbpassword) or die("Could not connect to database server, please check servername and credentials.");
-$dbs = mysql_select_db($dbname, $dbh) or die("There was a problem selecting the database, please check database name.");
-
-$sql = "select configstring, value from configuration where dev_id = 0 order by configstring asc";
-$result = mysql_query($sql);
-
-$__CONFIG = array();
-
-while ($row = mysql_fetch_array($result)) {
-    $__CONFIG[$row[0]] = $row[1];
-}
-
-if ( !isset($this->config) ) {
-  die(__FILE__ . ' must not be called directly');
-}
+require_once dirname(__FILE__)."/../dbconnection.inc.php";
+require_once dirname(__FILE__)."/../getConfiguration.php";
 
 ####################### central API config ########################
 # notice: you only have to set values differing from the defaults #

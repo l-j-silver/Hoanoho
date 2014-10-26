@@ -1,22 +1,6 @@
 <?php
 $HOANOHO_DIR = exec('. /etc/environment; echo $HOANOHO_DIR');
-require($HOANOHO_DIR."/config/dbconfig.inc.php");
-
-$sql = "select configstring, value from configuration where dev_id = 0 order by configstring asc";
-
-// Connect to the database
-// replace "user_name" and "password" with your real login info
-
-$dbh = mysql_connect($dbhostname,$dbusername,$dbpassword) or die("Could not connect to database server, please check servername and credentials.");
-$dbs = mysql_select_db($dbname, $dbh) or die("There was a problem selecting the database, please check database name.");
-
-$result = mysql_query($sql);
-
-$__CONFIG = array();
-
-while ($row = mysql_fetch_array($result)) {
-  $__CONFIG[$row[0]] = $row[1];
-}
+require_once $HOANOHO_DIR."/includes/dbconnection.php";
 
 $sql = "select devices.dev_id, devices.identifier from devices join device_types on device_types.dtype_id = devices.dtype_id join types on types.type_id = device_types.type_id where types.name = 'PVServer'";
 $result = mysql_query($sql);

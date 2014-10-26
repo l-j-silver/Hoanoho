@@ -1,6 +1,5 @@
 <?php
-    include dirname(__FILE__).'/../includes/dbconnection.php';
-    include dirname(__FILE__).'/../includes/sessionhandler.php';
+    require_once dirname(__FILE__).'/../includes/sessionhandler.php';
 
     if (isset($_POST['table_name']) && isset($_POST['constraint_column']) && isset($_POST['target_column']) && isset($_POST['target_id']) && isset($_POST['file_id'])) {
         // delete current file from datastore

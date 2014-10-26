@@ -1,7 +1,6 @@
 <?php
-    include dirname(__FILE__).'/../../includes/simple_html_dom.php';
-    include dirname(__FILE__).'/../../includes/dbconnection.php';
-    include dirname(__FILE__).'/../../includes/getConfiguration.php';
+    require_once dirname(__FILE__).'/../../includes/sessionhandler.php';
+    require_once dirname(__FILE__).'/../../includes/simple_html_dom.php';
 
     function getCurrentOpenWeatherMapData($in_arr)
     {

@@ -1,8 +1,6 @@
 <?php
-    include dirname(__FILE__).'/includes/dbconnection.php';
-    include dirname(__FILE__).'/includes/sessionhandler.php';
-    include dirname(__FILE__).'/includes/getConfiguration.php';
-    include dirname(__FILE__).'/includes/password.php';
+    require_once dirname(__FILE__).'/includes/sessionhandler.php';
+    require_once dirname(__FILE__).'/includes/password.php';
 
     function displayNoteColors($notecolor)
     {
@@ -165,15 +163,15 @@
             }
         </script>
 
-        <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
-        <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
         <title><?php echo $__CONFIG['main_sitetitle'] ?> - Einstellungen - Personalisierung</title>
     </head>
 
     <body>
-        <?php require(dirname(__FILE__).'/includes/nav.php'); ?>
+        <?php require_once dirname(__FILE__).'/includes/nav.php'; ?>
 
         <?php
         $current_notecolor = "";
@@ -267,12 +265,12 @@
             </div>
 
             <?php
-            $sql = "SELECT * FROM pinboard_links ORDER BY uid desc, name asc";
+            $sql = "SELECT * FROM pinboard_links";
             if($_SESSION['isAdmin'] == 1)
                 $sql .= " where (uid = " . $_SESSION['uid'] . " or uid = 0)";
             else
                 $sql .= " where uid = " . $_SESSION['uid'];
-            $sql .= " ORDER BY name ASC";
+            $sql .= " ORDER BY uid desc, name asc";
             $result = mysql_query($sql);
             while ($link = mysql_fetch_object($result)) {
             ?>

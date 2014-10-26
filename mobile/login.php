@@ -1,7 +1,7 @@
 <?php
-include dirname(__FILE__).'/../includes/dbconnection.php';
-include dirname(__FILE__).'/../includes/getConfiguration.php';
-include dirname(__FILE__).'/../includes/password.php';
+require_once dirname(__FILE__).'/../includes/dbconnection.php';
+require_once dirname(__FILE__).'/../includes/getConfiguration.php';
+require_once dirname(__FILE__).'/../includes/password.php';
 
 // Add strict CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
 foreach (array("Content-Security-Policy", "X-Content-Security-Policy", "X-WebKit-CSP") as $headername) {
@@ -118,7 +118,7 @@ elseif (isset($_GET['login']) && $_GET['login'] != "") {
     <head>
         <meta charset="UTF-8" />
 
-        <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
         <link rel="stylesheet" href="css/ratchet.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 

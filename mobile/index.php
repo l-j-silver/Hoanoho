@@ -1,15 +1,13 @@
 <?php
-    include dirname(__FILE__).'/../includes/dbconnection.php';
-    include dirname(__FILE__).'/../includes/sessionhandler.php';
-    include dirname(__FILE__).'/../includes/getConfiguration.php';
-    include dirname(__FILE__).'/../includes/dwd_parser.php';
+    require_once dirname(__FILE__).'/../includes/sessionhandler.php';
+    require_once dirname(__FILE__).'/../includes/dwd_parser.php';
 ?>
 
 <html>
     <head>
         <meta charset="UTF-8" />
 
-        <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
         <link rel="stylesheet" href="css/ratchet.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
@@ -357,6 +355,6 @@
             </ul>
             <br><br><br>
         </div>
-        <?php include "includes/nav.php"; ?>
+        <?php require_once "includes/nav.php"; ?>
     </body>
 </html>

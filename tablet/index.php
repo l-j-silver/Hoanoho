@@ -1,8 +1,6 @@
 <?php
-    include dirname(__FILE__).'/../includes/dbconnection.php';
-    include dirname(__FILE__).'/../includes/sessionhandler.php';
-    include dirname(__FILE__).'/../includes/getConfiguration.php';
-    include dirname(__FILE__).'/includes/device_optimizer.php';
+    require_once dirname(__FILE__).'/../includes/sessionhandler.php';
+    require_once dirname(__FILE__).'/includes/device_optimizer.php';
 
     header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
     header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
@@ -14,7 +12,7 @@
 
         <title><?php echo $__CONFIG['main_sitetitle']; ?></title>
 
-        <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="UTF-8">
@@ -327,7 +325,7 @@
         </script>
     </head>
     <body>
-        <?php include dirname(__FILE__)."/includes/header.php"; ?>
+        <?php require_once dirname(__FILE__)."/includes/header.php"; ?>
         <div id="boxarea">
             <div id="griditem" style="display:none"><div id="boxitem"></div></div>
             <div id="griditem">
@@ -430,6 +428,6 @@
             }
             ?>
         </div>
-        <?php include dirname(__FILE__)."/includes/footer.php"; ?>
+        <?php require_once dirname(__FILE__)."/includes/footer.php"; ?>
     </body>
 </html>

@@ -1,18 +1,7 @@
 <?php
 $HOANOHO_DIR = exec('. /etc/environment; echo $HOANOHO_DIR');
-require($HOANOHO_DIR."/config/dbconfig.inc.php");
-
-$dbh = mysql_connect($dbhostname,$dbusername,$dbpassword) or die("Could not connect to database server, please check servername and credentials.");
-$dbs = mysql_select_db($dbname, $dbh) or die("There was a problem selecting the database, please check database name.");
-
-$sql = "select configstring, value from configuration where dev_id = 0 order by configstring asc";
-$result = mysql_query($sql);
-
-$__CONFIG = array();
-
-while ($row = mysql_fetch_array($result)) {
-    $__CONFIG[$row[0]] = $row[1];
-}
+require_once $HOANOHO_DIR."/includes/dbconnection.php";
+require_once $HOANOHO_DIR."/includes/getConfiguration.php";
 
 if(strlen($__CONFIG['garbageplan_url']) == 0)
     exit;
@@ -34,7 +23,7 @@ else {
 }
 
 if ($filetype == "ics") {
-    include '/var/www/hoanoho/includes/PhpICS/ICS/index.php';
+    require_once $HOANOHO_DIR."/includes/PhpICS/ICS/index.php";
 
     if($file == "")
         $file = file_get_contents($planurl);

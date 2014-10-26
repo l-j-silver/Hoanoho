@@ -1,6 +1,4 @@
 <?php
-include dirname(__FILE__).'/../../../includes/sessionhandler.php';
-
 $template = 'index';
 
 if (isset($_GET['mode']) && file_exists(dirname(__FILE__) . '/templates/' . $_GET['mode'] . '.php')) {

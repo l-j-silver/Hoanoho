@@ -1,18 +1,7 @@
 <?php
 $HOANOHO_DIR = exec('. /etc/environment; echo $HOANOHO_DIR');
-require($HOANOHO_DIR."/config/dbconfig.inc.php");
-include($HOANOHO_DIR."/includes/pushover.php");
-
-$dbh = mysql_connect($dbhostname,$dbusername,$dbpassword) or die("Could not connect to database server, please check servername and credentials.");
-
-$sql = "select configstring, value from ".$dbname.".configuration where dev_id = 0 order by configstring asc";
-$result = mysql_query($sql);
-
-$__CONFIG = array();
-
-while ($row = mysql_fetch_array($result)) {
-    $__CONFIG[$row[0]] = $row[1];
-}
+require_once $HOANOHO_DIR."/includes/dbconnection.php";
+require_once $HOANOHO_DIR."/includes/pushover.php";
 
 /* ************************************
    Query battery state in FHEM database

@@ -19,10 +19,9 @@
 use at\mkweb\upnp\Config;
 use at\mkweb\upnp\frontend\AuthManager;
 
-require_once('src/at/mkweb/upnp/init.php');
+require_once 'src/at/mkweb/upnp/init.php';
 
-include dirname(__FILE__).'/../../../../includes/dbconnection.php';
-include dirname(__FILE__).'/../../../../includes/getConfiguration.php';
+require_once dirname(__FILE__).'/../../../../includes/sessionhandler.php';
 
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
@@ -69,7 +68,7 @@ $css = array(
 
     <title><? echo $__CONFIG['main_sitetitle']; ?></title>
 
-    <?php include dirname(__FILE__).'/mobile-app.php'; ?>
+    <?php require_once dirname(__FILE__).'/mobile-app.php'; ?>
 
     <link rel="stylesheet" href="../../css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="UTF-8">
     <link rel="stylesheet" href="../../css/bootstrap-theme.min.css" type="text/css" media="screen" title="no title" charset="UTF-8">
@@ -99,7 +98,7 @@ $css = array(
 
 </head>
 <body>
-    <? include dirname(__FILE__)."/../../header.php"; ?>
+    <? require_once dirname(__FILE__)."/../../header.php"; ?>
     <div id="boxarea">
         <? 
         print("<div id=\"boxitem\" class=\"librarybrowser\">");
@@ -144,7 +143,7 @@ $css = array(
         print("</div>");
         ?>
     </div>
-    <? include dirname(__FILE__)."/../../footer.php"; ?>
+    <? require_once dirname(__FILE__)."/../../footer.php"; ?>
 </body>
 
 

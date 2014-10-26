@@ -1,7 +1,5 @@
 <?php
-    include dirname(__FILE__).'/includes/dbconnection.php';
-    include dirname(__FILE__).'/includes/sessionhandler.php';
-    include dirname(__FILE__).'/includes/getConfiguration.php';
+    require_once dirname(__FILE__).'/includes/sessionhandler.php';
 ?>
 
 <?php
@@ -306,7 +304,7 @@
         <link rel="stylesheet" href="css/report.css" type="text/css" media="screen" title="no title" charset="UTF-8">
         <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
-        <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.js"></script>
@@ -426,12 +424,12 @@
             });
         </script>
 
-        <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
         <title><?php echo $__CONFIG['main_sitetitle'] ?> - Auswertung <?php echo $reportname." ".$reportyear; ?> (letzte <?php echo $range." ".($reporttype == "manual" ? "Einträge" : "Tage");?>)</title>
     </head>
 <body>
-    <?php require(dirname(__FILE__).'/includes/nav.php'); ?>
+    <?php require_once dirname(__FILE__).'/includes/nav.php'; ?>
 
     <section class="main_report_graph">
         <div id="headline"><h1><span><?php echo $reportname; ?></span></h1></div><div id="reportyear"><form method="POST" enctype="multipart/form-data" name="yearForm" id="reportYearForm"><?php displayReportYears($reportyear, $reporttype, $_GET['rid']); ?></form></div><div id="range"><form method="POST" enctype="multipart/form-data" name="rangeForm" id="rangeForm"><?php displayRange($range, $reporttype); ?></form></div>

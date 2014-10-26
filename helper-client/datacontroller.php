@@ -1,8 +1,6 @@
 <?php
-    include dirname(__FILE__).'/../includes/dbconnection.php';
-    include dirname(__FILE__).'/../includes/getConfiguration.php';
-    include dirname(__FILE__).'/../includes/sessionhandler.php';
-    include dirname(__FILE__).'/../includes/password.php';
+    require_once dirname(__FILE__).'/../includes/sessionhandler.php';
+    require_once dirname(__FILE__).'/../includes/password.php';
 
     function saveImage($imagedata)
     {

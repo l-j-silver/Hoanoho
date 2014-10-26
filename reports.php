@@ -1,7 +1,5 @@
 <?php
-    include dirname(__FILE__).'/includes/dbconnection.php';
-    include dirname(__FILE__).'/includes/sessionhandler.php';
-    include dirname(__FILE__).'/includes/getConfiguration.php';
+    require_once dirname(__FILE__).'/includes/sessionhandler.php';
 
     if (isset($_POST['cmd']) && $_POST['cmd'] == "deletereport" && isset($_POST['rid']) && strlen($_POST['rid']) > 0) {
         $sql = "DELETE FROM reportdata where rid = " . $_POST['rid'];
@@ -78,11 +76,11 @@
         <link rel="stylesheet" href="css/report.css" type="text/css" media="screen" title="no title" charset="UTF-8">
         <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 
-        <?php include dirname(__FILE__).'/includes/getUserSettings.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/getUserSettings.php'; ?>
 
         <script type="text/javascript" src="js/jscolor/jscolor.js"></script>
 
-        <?php include dirname(__FILE__).'/includes/mobile-app.php'; ?>
+        <?php require_once dirname(__FILE__).'/includes/mobile-app.php'; ?>
 
         <title><?php echo $__CONFIG['main_sitetitle'] ?> - Auswertungsübersicht</title>
 
@@ -130,7 +128,7 @@
         </script>
     </head>
 <body>
-    <?php require(dirname(__FILE__).'/includes/nav.php'); ?>
+    <?php require_once dirname(__FILE__).'/includes/nav.php'; ?>
 
     <?php
     // editiermodus

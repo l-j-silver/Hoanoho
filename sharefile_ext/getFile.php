@@ -1,8 +1,5 @@
 <?php
-include '../config/dbconfig.inc.php';
-
-$dbh = mysql_connect($dbhostname,$dbusername,$dbpassword) or die("Could not connect to database server, please check servername and credentials.");
-$dbs = mysql_select_db($dbname, $dbh) or die("There was a problem selecting the database, please check database name.");
+require_once dirname(__FILE__)."/../includes/dbconnection.inc.php";
 
 if (isset($_POST['f']) || isset($_GET['f'])) {
     if(isset($_POST['f']))

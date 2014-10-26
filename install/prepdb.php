@@ -1,5 +1,5 @@
 <?php
-include dirname(__FILE__)."/../includes/password_compat/lib/password.php";
+require_once dirname(__FILE__)."/../includes/password_compat/lib/password.php";
 
 if (!isset($_SESSION)) {
     session_start();

@@ -22,7 +22,7 @@ if (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != "") {
   $querystring = "";
 }
 
-include dirname(__FILE__).'/dbconnection.php';
+require_once dirname(__FILE__).'/dbconnection.php';
 
 // verify and update session
 $loggedin = false;
@@ -74,4 +74,4 @@ if(!$loggedin) {
   exit;
 }
 
-include dirname(__FILE__).'/getConfiguration.php';
+require_once dirname(__FILE__).'/getConfiguration.php';
