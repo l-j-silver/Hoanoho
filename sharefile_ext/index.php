@@ -16,7 +16,7 @@ if (isset($_POST['filePassword'])) {
     $_SESSION['filePassword'] = md5($_POST['filePassword']);
 }
 
-require_once dirname(__FILE__)."/../includes/dbconnection.inc.php";
+require_once dirname(__FILE__)."/../includes/dbconnection.php";
 
 function data_uri($content, $mime)
 {

@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__)."/../includes/dbconnection.inc.php";
+require_once dirname(__FILE__)."/../includes/dbconnection.php";
 
 if (isset($_POST['f']) || isset($_GET['f'])) {
     if(isset($_POST['f']))

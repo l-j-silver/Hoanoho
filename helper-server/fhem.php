@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__)."/../includes/dbconnection.inc.php";
+require_once dirname(__FILE__)."/../includes/dbconnection.php";
 require_once dirname(__FILE__)."/../includes/getConfiguration.php";
 
 if (isset($_GET['cmd']) && isset($_GET['device']) && isset($_GET['value'])) {
