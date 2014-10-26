@@ -22,9 +22,9 @@ if (isset($_GET['cmd']) && isset($_GET['device']) && isset($_GET['value'])) {
         // Example URL:
         // http://localhost:8083/fhem?cmd=set%20az_THERMOSTAT_Climate%20desired-temp%2010
         if(isset($_GET['reading']))
-            fopen($__CONFIG['fhem_url']."?cmd=set%20".$_GET['device']."%20".$_GET['reading']."%20".$value, "r");
+            fopen($__CONFIG['fhem_url_bk']."?cmd=set%20".$_GET['device']."%20".$_GET['reading']."%20".$value, "r");
         else
-            fopen($__CONFIG['fhem_url']."?cmd=set%20".$_GET['device']."%20".$value, "r");
+            fopen($__CONFIG['fhem_url_bk']."?cmd=set%20".$_GET['device']."%20".$value, "r");
     }
 }
 ?>
