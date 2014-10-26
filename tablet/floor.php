@@ -686,6 +686,35 @@
 
                                             print("<a href=\"webcam.php?dev_id=".$device->dev_id."\"><div id=\"image\"><img src='http://".$cam_ipaddress.":".$cam_port."/videostream.cgi?user=".$cam_username."&pwd=".$cam_password."&resolution=32&rate=0'></div></a>");
                                         }
+                                        else if($cam_vendor == "wansview")
+                                        {
+                                            $cam_ipaddress = "";
+                                            $cam_port = "80";
+                                            $cam_username = "admin";
+                                            $cam_password = "";
+
+                                            $sql = "SELECT value from configuration where configstring = 'ipaddress' and dev_id = " . $device->dev_id;
+                                            $result2 = mysql_query($sql);
+                                            $resultArr = mysql_fetch_assoc($result2);
+                                            $cam_ipaddress = $resultArr['value'];
+
+                                            $sql = "SELECT value from configuration where configstring = 'port' and dev_id = " . $device->dev_id;
+                                            $result2 = mysql_query($sql);
+                                            $resultArr = mysql_fetch_assoc($result2);
+                                            $cam_port = $resultArr['value'];
+
+                                            $sql = "SELECT value from configuration where configstring = 'username' and dev_id = " . $device->dev_id;
+                                            $result2 = mysql_query($sql);
+                                            $resultArr = mysql_fetch_assoc($result2);
+                                            $cam_username = $resultArr['value'];
+
+                                            $sql = "SELECT value from configuration where configstring = 'password' and dev_id = " . $device->dev_id;
+                                            $result2 = mysql_query($sql);
+                                            $resultArr = mysql_fetch_assoc($result2);
+                                            $cam_password = $resultArr['value'];
+                                            
+                                            print("<a href=\"webcam.php?dev_id=".$device->dev_id."\"><div id=\"image\"><img src='http://".$cam_ipaddress.":".$cam_port."/videostream.cgi?loginuse=".$cam_username."&loginpas=".$cam_password."'></div></a>");
+                                        }
                                     }
                                     ?>
                                 </div>

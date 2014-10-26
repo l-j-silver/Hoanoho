@@ -87,6 +87,35 @@
                 document.getElementsByTagName('head')[0].appendChild(script);
                 document.getElementsByTagName('head')[0].removeChild(script);
             }
+            else if(camtype == "wansview")
+            {
+                var command;
+                step = 0;
+
+                switch (direction) {
+                    case "up":
+                        command = 0;
+                        break;
+                    case "down":
+                        command = 2;
+                        break;
+                    case "left":
+                        command = 4;
+                        break;
+                    case "right":
+                        command = 6;
+                        break;
+                    default:
+                        command = 25; // home position
+                        break;
+                }
+
+                var script = document.createElement('script'); 
+                script.src = 'http://' + ipaddress + ':' + port +'/decoder_control.cgi?command=' + command + '&loginuse=' + user + '&loginpas=' + password + '&onestep=' + step; 
+                script.type = "text/javascript";
+                document.getElementsByTagName('head')[0].appendChild(script);
+                document.getElementsByTagName('head')[0].removeChild(script);
+            }
         }
 
         function moveCamera(direction, ipaddress, port, user, password, camtype)
@@ -119,6 +148,10 @@
                 document.getElementsByTagName('head')[0].appendChild(script);
                 document.getElementsByTagName('head')[0].removeChild(script);
             }
+            else if(camtype == "wansview")
+            {
+                moveCameraStep(direction, ipaddress, port, user, password, camtype);
+            }
         }
 
         function stopCamera(direction, ipaddress, port, user, password, camtype)
@@ -144,6 +177,32 @@
 
                 var script = document.createElement('script');
                 script.src = 'http://' + ipaddress + ':' + port +'/decoder_control.cgi?command=' + command + '&user=' + user + '&pwd=' + password;
+                script.type = "text/javascript";
+                document.getElementsByTagName('head')[0].appendChild(script);
+                document.getElementsByTagName('head')[0].removeChild(script);
+            }
+            else if(camtype == "wansview")
+            {
+                var command;
+                var step = 0;
+                
+                switch (direction) {
+                    case "up":
+                        command = 1;
+                        break;
+                    case "down":
+                        command = 3;
+                        break;
+                    case "left":
+                        command = 5;
+                        break;
+                    case "right":
+                        command = 7;
+                        break;
+                }
+
+                var script = document.createElement('script'); 
+                script.src = 'http://' + ipaddress + ':' + port +'/decoder_control.cgi?command=' + command + '&loginuse=' + user + '&loginpas=' + password + '&onestep=' + step; 
                 script.type = "text/javascript";
                 document.getElementsByTagName('head')[0].appendChild(script);
                 document.getElementsByTagName('head')[0].removeChild(script);
@@ -325,6 +384,168 @@
                                     print("<button type=\"button\" class=\"btn btn-custom dropdown-toggle\" data-toggle=\"dropdown\">Gehe zu Position</button>");
                                         print("<ul class=\"dropdown-menu scrollable-menu webcam\" role=\"menu\">");
                                             for ($i=1; $i <= $positionslots ; $i++) {
+                                                echo "<li><a href=\"#\" onclick=\"moveCameraPosition(".$i.", '".$cam_ipaddress."', '".$cam_port."', '".$cam_username."', '".$cam_password."', '".$cam_vendor."', ".$_GET['dev_id'].")\">Position ".$i."</a></li>";
+                                            }
+                                        print("</ul>");
+                                    print("</div>");
+                                print("</div>");
+                            }
+                        print("</div>");
+                    }
+                    else if($cam_vendor == "wansview")
+                    {
+                        $cam_ipaddress = "";
+                        $cam_port = "80";
+                        $cam_username = "admin";
+                        $cam_password = "";
+
+                        $sql = "SELECT value from configuration where configstring = 'ipaddress' and dev_id = " . $_GET['dev_id'];
+                        $result2 = mysql_query($sql);
+                        $resultArr = mysql_fetch_assoc($result2);
+                        $cam_ipaddress = $resultArr['value'];
+
+                        $sql = "SELECT value from configuration where configstring = 'port' and dev_id = " . $_GET['dev_id'];
+                        $result2 = mysql_query($sql);
+                        $resultArr = mysql_fetch_assoc($result2);
+                        $cam_port = $resultArr['value'];
+
+                        $sql = "SELECT value from configuration where configstring = 'username' and dev_id = " . $_GET['dev_id'];
+                        $result2 = mysql_query($sql);
+                        $resultArr = mysql_fetch_assoc($result2);
+                        $cam_username = $resultArr['value'];
+
+                        $sql = "SELECT value from configuration where configstring = 'password' and dev_id = " . $_GET['dev_id'];
+                        $result2 = mysql_query($sql);
+                        $resultArr = mysql_fetch_assoc($result2);
+                        $cam_password = $resultArr['value'];
+
+                        $sql = "SELECT value from configuration where configstring = 'invertcontrols' and dev_id = " . $_GET['dev_id'];
+                        $result2 = mysql_query($sql);
+                        $resultArr = mysql_fetch_assoc($result2);
+                        $invertcontrols = $resultArr['value'];
+
+                        $sql = "SELECT value from configuration where configstring = 'positionslots' and dev_id = " . $_GET['dev_id'];
+                        $result2 = mysql_query($sql);
+                        $resultArr = mysql_fetch_assoc($result2);
+                        $positionslots = $resultArr['value'];
+                        
+                        print("<div id=\"image_left\"><img src='http://".$cam_ipaddress.":".$cam_port."/videostream.cgi?loginuse=".$cam_username."&loginpas=".$cam_password."'></div>");
+                        print("<div id=\"controlpad_right\">");
+                        print("<div id=\"controls\">");
+                            if($invertcontrols == "on") {
+                                if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') && !strstr($_SERVER['HTTP_USER_AGENT'],'iPod') && !strstr($_SERVER['HTTP_USER_AGENT'],'iPad') && !strstr($_SERVER['HTTP_USER_AGENT'],'Android'))
+                                {
+                                    // left
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: -110px; margin-top: 100px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onmousedown='moveCamera(\"right\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' onmouseup='stopCamera(\"left\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera links schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-left\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                    // up
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: -50px; margin-top: 50px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onmousedown='moveCamera(\"down\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' onmouseup='stopCamera(\"up\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera oben schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-up\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                    // down
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: -50px; margin-top: 150px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onmousedown='moveCamera(\"up\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' onmouseup='stopCamera(\"down\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera unten schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-down\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                    // right
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: 10px; margin-top: 100px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onmousedown='moveCamera(\"left\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' onmouseup='stopCamera(\"right\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera rechts schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-right\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                } else {
+                                    // left
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: -110px; margin-top: 100px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onclick='moveCameraStep(\"right\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera links schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-left\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                    // up
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: -50px; margin-top: 50px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onclick='moveCameraStep(\"down\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera oben schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-up\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                    // down
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: -50px; margin-top: 150px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onclick='moveCameraStep(\"up\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera unten schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-down\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                    // right
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: 10px; margin-top: 100px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onclick='moveCameraStep(\"left\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera rechts schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-right\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                }
+                            } else {
+                                if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') && !strstr($_SERVER['HTTP_USER_AGENT'],'iPod') && !strstr($_SERVER['HTTP_USER_AGENT'],'iPad') && !strstr($_SERVER['HTTP_USER_AGENT'],'Android'))
+                                {
+                                    // left
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: -110px; margin-top: 100px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onmousedown='moveCamera(\"left\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' onmouseup='stopCamera(\"left\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera links schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-left\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                    // up
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: -50px; margin-top: 50px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onmousedown='moveCamera(\"up\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' onmouseup='stopCamera(\"up\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera oben schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-up\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                    // down
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: -50px; margin-top: 150px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onmousedown='moveCamera(\"down\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' onmouseup='stopCamera(\"down\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera unten schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-down\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                    // right
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: 10px; margin-top: 100px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onmousedown='moveCamera(\"right\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' onmouseup='stopCamera(\"right\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera rechts schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-right\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                } else {
+                                    // left
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: -110px; margin-top: 100px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onclick='moveCameraStep(\"left\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera links schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-left\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                    // up
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: -50px; margin-top: 50px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onclick='moveCameraStep(\"up\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera oben schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-up\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                    // down
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: -50px; margin-top: 150px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onclick='moveCameraStep(\"down\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera unten schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-down\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                    // right
+                                    print("<div class=\"btn-group btn-group-lg\" style=\"position: absolute; margin-left: 10px; margin-top: 100px;\">");
+                                        print("<button type=\"button\" class=\"btn btn-warning\" onclick='moveCameraStep(\"right\",\"".$cam_ipaddress."\",\"".$cam_port."\",\"".$cam_username."\",\"".$cam_password."\",\"".$cam_vendor."\")' title=\"Kamera rechts schwenken\">");
+                                            print("&nbsp;<span class=\"glyphicon glyphicon-arrow-right\"></span>&nbsp;");
+                                        print("</button>");
+                                    print("</div>");
+                                }
+                            }
+
+                            if($positionslots > 0)
+                            {
+                                print("<div class=\"btn-group btn-group-lg dropup\" style=\"position: absolute; margin-left: -100px; margin-top: 240px;\">");
+                                    print("<button type=\"button\" class=\"btn btn-custom dropdown-toggle\" data-toggle=\"dropdown\">Gehe zu Position</button>");
+                                        print("<ul class=\"dropdown-menu scrollable-menu webcam\" role=\"menu\">");
+                                            for ($i=1; $i <= $positionslots ; $i++) { 
                                                 echo "<li><a href=\"#\" onclick=\"moveCameraPosition(".$i.", '".$cam_ipaddress."', '".$cam_port."', '".$cam_username."', '".$cam_password."', '".$cam_vendor."', ".$_GET['dev_id'].")\">Position ".$i."</a></li>";
                                             }
                                         print("</ul>");

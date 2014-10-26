@@ -48,6 +48,7 @@
         print("<select id=\"vendor".$dev_id."\" name=\"vendor\" onchange=\"javascript:displayWebcamModels(this.value, ".$dev_id.");\">");
             print("<option ".($vendor == "" ? "selected" : "")." value=\"\"></option>");
             print("<option ".($vendor == "instar" ? "selected" : "")." value=\"instar\">Instar</option>");
+            print("<option ".($vendor == "wansview" ? "selected" : "")." value=\"wansview\">Wansview</option>");
         print("</select>");
     }
 
@@ -73,6 +74,8 @@
                 //print("<option ".($model == "IN-6011" ? "selected" : "")." value=\"IN-6011\">IN-6011</option>");
                 //print("<option ".($model == "IN-6012" ? "selected" : "")." value=\"IN-6012\">IN-6012</option>");
                 //print("<option ".($model == "IN-7011" ? "selected" : "")." value=\"IN-7011\">IN-7011</option>");
+            } else if($vendor == "wansview") {
+                print("<option ".($model == "NC451W-P" ? "selected" : "")." value=\"NC451W-P\">NC451W-P</option>");
             }
         print("</select>");
     }
@@ -604,6 +607,10 @@
                 //elem.options[elem.options.length] = new Option('IN-6011', 'IN-6011');
                 //elem.options[elem.options.length] = new Option('IN-6012', 'IN-6012');
                 //elem.options[elem.options.length] = new Option('IN-7011', 'IN-7011');
+            }
+            else if(model == "wansview")
+            {
+                elem.options[elem.options.length] = new Option('NC451W-P', 'INC451W-P');
             }
         }
 
