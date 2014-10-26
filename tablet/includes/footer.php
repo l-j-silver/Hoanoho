@@ -13,7 +13,7 @@ $relativePath = "";
 $musicPath = "includes/pupnp/";
 if ($title == "Musik") {
   $relativePath = "../../";
-  $musicPath = "/";
+  $musicPath = "./";
 }
 
 ?>
