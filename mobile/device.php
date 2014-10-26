@@ -129,7 +129,6 @@
 
                     // disable refresh when some value is being changed
                     if(disableValueRefreshForDeviceID != null && disableValueRefreshForDeviceID == messageObj['dev_id'])
-
                         return false;
 
                     var el_value = document.getElementById("value_" + messageObj['dev_id']);
@@ -194,6 +193,22 @@
                                 default:
                                     break;
                             }
+                        } else if(messageObj['typename'] == "Dimmer") {
+                            switch (messageObj['reading']) {
+                                case 'state':
+                                    var value = messageObj['value'].replace('dim','');
+
+                                    if(value == "on")
+                                        value = "100%";
+                                    else if(value == "off")
+                                        value = "0%";
+
+                                    $('#value_'+messageObj['dev_id']).html(value);
+
+                                    break;
+                                default:
+                                    break;
+                            }
                         } else {
                             switch (messageObj['reading']) {
                                 case 'state':
@@ -240,7 +255,6 @@
                     var current_value = el_soll.innerHTML.split("°")[0];
 
                     if(current_value == "---" || current_value == "NaN")
-
                         return false
 
                     if(current_value == "off" || setvalue == "off")
@@ -359,16 +373,48 @@
                     }
                 }*/
                 else if (type == "Dimmer") {
-                    var el_soll = document.getElementById("slider_value" + device_id);
-
-                    el_soll.value = value;
-
                     if(timeout) window.clearTimeout(timeout);
 
-                    timeout = setTimeout(function () {
-                        mygetrequest.open("GET", cmdurl+value, true);
-                        mygetrequest.send(null);
-                    }, 2000);
+                    var direction = value;
+
+                    var stepsize = 5; // TBD: configure & take out of database
+
+                    var el_soll = document.getElementById("value_" + device_id);
+
+                    if (el_soll.value != '---') {
+                        if (direction == "up") {
+                            if(el_soll.innerHTML.indexOf('%') > -1)
+                                value = el_soll.innerHTML.split("%")[0];
+
+                            value = parseInt(value) + parseInt(stepsize);
+                            if(value > 100)
+                                value = 100;
+
+                            el_soll.innerHTML = value+'%';
+                        } else if (direction == "down") {
+                            if(el_soll.innerHTML.indexOf('%') > -1)
+                                value = el_soll.innerHTML.split("%")[0];
+
+                            value = parseInt(value) - parseInt(stepsize);
+                            if(value < 0)
+                                value = 0;
+
+                            el_soll.innerHTML = value+'%';
+                        } else
+                            el_soll.innerHTML = value+'%';
+
+                        if(el_soll.innerHTML.indexOf('%') > -1)
+                            setvalue = el_soll.innerHTML.split("%")[0];
+                        else
+                            setvalue = el_soll.innerHTML;
+
+                        setvalue = "dim"+setvalue+"%";
+
+                        timeout = setTimeout(function () {
+                            mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+setvalue, true);
+                            mygetrequest.send(null);
+                        }, 2000);
+                    }
                 } else if (type == "Raspberry Pi GPIO") {
                     var el_raspi_address = document.getElementById("gpio_raspi_address" + device_id);
                     var el_outputpin = document.getElementById("gpio_outputpin" + device_id);
@@ -727,6 +773,12 @@
                         echo "<li>Batterie Status: <b id=\"value_battery_".$device->dev_id."\">---</b></li>";
                     echo "</ul>";
 
+                } elseif ($device->basetype == "Dimmer") {
+                    echo "<ul class=\"list inset\">";
+                        echo "<li>&nbsp;<a class=\"button-main\" href=\"#\" onclick=\"javascript: toggleDevice('".$device->dev_id."','".$device->identifier."','".$device->basetype."', 'up');\">+</a></li>";
+                        echo "<li>Zustand: <b id=\"value_".$device->dev_id."\">---</b></li>";
+                        echo "<li>&nbsp;<a class=\"button-main\" href=\"#\" onclick=\"javascript:toggleDevice('".$device->dev_id."','".$device->identifier."','".$device->basetype."', 'down');\">-</a></li>";
+                    echo "</ul>";
                 } else {
                     echo "<ul class=\"list inset\">";
                         echo "<li>Zustand: <b id=\"value_".$device->dev_id."\">---</b></li>";
