@@ -38,6 +38,14 @@
                 <div class="tab-label">Wetter</div>
             </a>
         </li>
+    <?php if ($__CONFIG['fhem_url_mobile'] != "") { ?>
+        <li class="tab-item">
+            <a href="fwrapper.php">
+                <img class="tab-icon" src="../img/fhem.svg">
+                <div class="tab-label">FHEM</div>
+            </a>
+        </li>
+    <?php } ?>
         <li class="tab-item">
             <a href="login.php?cmd=logout">
                 <img class="tab-icon" src="../img/logout.png">

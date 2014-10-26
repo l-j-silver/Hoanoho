@@ -1,0 +1,16 @@
+.content {
+  min-width: 990px;
+  min-height: 600px;
+  width: 990px;
+  height: auto;
+}
+
+.content iframe #fhem {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}

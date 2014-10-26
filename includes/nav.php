@@ -143,7 +143,7 @@
                 </div>
             </li>
 
-            <?php if ($__CONFIG['sharefile_remoteaddress'] != "") { ?>
+            <?php if ($__CONFIG['fhem_url_web'] != "" || $__CONFIG['fhem_url_tablet'] != "" || $__CONFIG['sharefile_remoteaddress'] != "") { ?>
             <li class="drop">
                 <a href="#"><img src="img/star.png">Diverses</a>
 
@@ -151,6 +151,12 @@
                     <div class="dropOut">
                         <div class="triangle"></div>
                         <ul>
+                            <?php if ($__CONFIG['fhem_url_web'] != "") { ?>
+                            <a href="fwrapper.php"><li><img src="img/fhem.svg">FHEM Web</li></a>
+                            <?php } ?>
+                            <?php if ($__CONFIG['fhem_url_tablet'] != "") { ?>
+                            <a href="fwrapper.php?type=tablet"><li><img src="img/fhem.svg">FHEM Tablet</li></a>
+                            <?php } ?>
                             <?php if ($__CONFIG['sharefile_remoteaddress'] != "") { ?>
                             <a href="sharefile.php"><li><img src="img/upload.png">Bereitstellen</li></a>
                             <?php } ?>
@@ -171,6 +177,9 @@
                             <a href="configuration_settings.php"><li><img src="img/gear.png">Allgemein</li></a>
                             <a href="configuration_automation.php"><li><img src="img/home.png">Steuerung</li></a>
                             <a href="configuration_pinboard.php"><li><img src="img/pinboard.png">Pinnwand</li></a>
+                            <?php if ($__CONFIG['fhem_url_admin'] != "") { ?>
+                            <a href="fwrapper.php?type=admin"><li><img src="img/fhem.svg">FHEM Admin</li></a>
+                            <?php } ?>
                             <li><hr></li>
                             <?php } ?>
                             <a href="configuration_scheduler.php"><li><img src="img/planer.png">Zeitplaner</li></a>
