@@ -1,7 +1,30 @@
 <?php
+require_once dirname(__FILE__).'/dbconnection.php';
+
 // Add CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
 foreach (array("Content-Security-Policy", "X-Content-Security-Policy", "X-WebKit-CSP") as $headername) {
-  header($headername.": default-src 'none'; script-src 'self' 'unsafe-inline'; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: http://www.wettergefahren.de; media-src 'self'; frame-src 'self'; font-src 'self'; connect-src 'self' wss: ws:");
+  // building webcam exceptions
+  $imgsrc_exceptions = "http://www.wettergefahren.de";
+  $scriptsrc_exceptions = "";
+
+  $sql = "select dev_id from devices join device_types on devices.dtype_id = device_types.dtype_id join types on types.type_id = device_types.type_id where types.name = 'Webcam'";
+  $result = mysql_query($sql);
+  while ($device = mysql_fetch_object($result)) {
+      // ip-address
+      $sql = "select value from configuration where configuration.dev_id = ".$device->dev_id." and configstring = 'ipaddress'";
+      $result2 = mysql_query($sql);
+      $resultArr = mysql_fetch_assoc($result2);
+      $cam_ipaddress = $resultArr['value'];
+      // port
+      $sql = "select value from configuration where configuration.dev_id = ".$device->dev_id." and configstring = 'port'";
+      $result2 = mysql_query($sql);
+      $resultArr = mysql_fetch_assoc($result2);
+      $cam_port = $resultArr['value'];
+
+      $imgsrc_exceptions .= " http://".$cam_ipaddress.":".$cam_port;
+      $scriptsrc_exceptions .= " http://".$cam_ipaddress.":".$cam_port;
+  }  
+  header($headername.": default-src 'none'; script-src 'self' 'unsafe-inline' data: ".$scriptsrc_exceptions."; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: ".$imgsrc_exceptions." ; media-src 'self'; frame-src 'self'; font-src 'self'; connect-src 'self' wss: ws:");
 }
 
 session_set_cookie_params(
@@ -21,8 +44,6 @@ if (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != "") {
 } else {
   $querystring = "";
 }
-
-require_once dirname(__FILE__).'/dbconnection.php';
 
 // verify and update session
 $loggedin = false;
