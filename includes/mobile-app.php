@@ -19,7 +19,7 @@
 <link rel="apple-touch-icon" sizes="152x152" href="img/favicons/apple-touch-icon-152x152.png">
 <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon-180x180.png">
 
-<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="minimum-scale=0.6, maximum-scale=1, user-scalable=yes">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Hoanoho">
@@ -58,3 +58,7 @@ if(("standalone" in window.navigator) && window.navigator.standalone){
   },false);
 }
 </script>
+
+<?php if ($_SESSION['mobile'] === true) { ?>
+<link rel="stylesheet" href="css/mobile.css" type="text/css" media="screen" title="no title" charset="UTF-8">
+<?php } ?>
