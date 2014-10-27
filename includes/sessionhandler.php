@@ -68,7 +68,7 @@ if (
       !isset($_GET['login']) ||
       (isset($_SESSION['quicklogin_newsession']) && $_SESSION['quicklogin_newsession'] === true) )
   ) {
-  $result = mysql_query("SELECT users.uid, password, users.hash, grpname, isAdmin, lastactivity from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.username = '" . mysql_real_escape_string($_SESSION['username']) . "' limit 1");
+  $result = mysql_query("SELECT users.uid, password, users.hash, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.username = '" . mysql_real_escape_string($_SESSION['username']) . "' limit 1");
   while ($row = mysql_fetch_object($result)) {
     if (
           (isset($_SESSION['quicklogin']) && $_SESSION['quicklogin'] == $row->hash && $_SESSION['lastactivity'] + (60 * 60 * 24 * 7 * 6) > time()) ||
