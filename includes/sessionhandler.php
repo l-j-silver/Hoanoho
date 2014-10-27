@@ -1,11 +1,13 @@
 <?php
 require_once dirname(__FILE__).'/dbconnection.php';
+require_once dirname(__FILE__).'/getConfiguration.php';
 
 // Add CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
-// building webcam exceptions
 $imgsrc_exceptions = "http://www.wettergefahren.de";
 $scriptsrc_exceptions = "";
+$framesrc_exceptions = "";
 
+// building webcam exceptions
 $sql = "select dev_id from devices join device_types on devices.dtype_id = device_types.dtype_id join types on types.type_id = device_types.type_id where types.name = 'Webcam'";
 $result = mysql_query($sql);
 while ($device = mysql_fetch_object($result)) {
@@ -23,10 +25,22 @@ while ($device = mysql_fetch_object($result)) {
     $imgsrc_exceptions .= " http://".$cam_ipaddress.":".$cam_port;
     $scriptsrc_exceptions .= " http://".$cam_ipaddress.":".$cam_port;
 }  
+
+// FHEM exceptions
+if (substr($__CONFIG['fhem_url_admin'], 0, 4) == "http")
+  $framesrc_exceptions .= " ".$__CONFIG['fhem_url_admin'];
+if (substr($__CONFIG['fhem_url_web'], 0, 4) == "http")
+  $framesrc_exceptions .= " ".$__CONFIG['fhem_url_web'];
+if (substr($__CONFIG['fhem_url_mobile'], 0, 4) == "http")
+  $framesrc_exceptions .= " ".$__CONFIG['fhem_url_mobile'];
+if (substr($__CONFIG['fhem_url_tablet'], 0, 4) == "http")
+  $framesrc_exceptions .= " ".$__CONFIG['fhem_url_tablet'];
+
 foreach (array("Content-Security-Policy", "X-Content-Security-Policy", "X-WebKit-CSP") as $headername) {
-  header($headername.": default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' data: ".$scriptsrc_exceptions."; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: ".$imgsrc_exceptions."; media-src 'self'; frame-src 'self'; font-src 'self'; connect-src 'self' wss: ws:");
+  header($headername.": default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' data: ".$scriptsrc_exceptions."; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: ".$imgsrc_exceptions."; media-src 'self'; frame-src 'self'".$framesrc_exceptions."; font-src 'self'; connect-src 'self' wss: ws:");
 }
 
+// session cookie settings
 session_set_cookie_params(
     0,
     "/",
@@ -94,5 +108,3 @@ if(!$loggedin) {
   }
   exit;
 }
-
-require_once dirname(__FILE__).'/getConfiguration.php';
