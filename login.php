@@ -53,7 +53,9 @@ if (isset($_POST['cmd']) && isset($_POST['login_username']) && isset($_POST['log
         $result = mysql_query("SELECT users.uid, password, users.hash, grpname, isAdmin from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where username = '" . mysql_real_escape_string($_POST['login_username']) . "' limit 1");
         while ($row = mysql_fetch_object($result)) {
             if (password_verify($_POST['login_password'], $row->password)) {
-            	  session_start();
+
+                session_start();
+                session_regenerate_id(true);
 
                 $_SESSION['username'] = $_POST['login_username'];
                 $_SESSION['isAdmin'] = $row->isAdmin;
@@ -88,6 +90,7 @@ elseif (isset($_GET['login']) && $_GET['login'] != "") {
     while ($row = mysql_fetch_object($result)) {
 
         session_start();
+        session_regenerate_id(true);
 
         $_SESSION['username'] = $row->username;
         $_SESSION['isAdmin'] = $row->isAdmin;
