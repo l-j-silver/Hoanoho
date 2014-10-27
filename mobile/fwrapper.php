@@ -1,14 +1,15 @@
 <?php
-require_once dirname(__FILE__).'/../includes/dbconnection.php';
-require_once dirname(__FILE__).'/../includes/sessionhandler.php';
-require_once dirname(__FILE__).'/../includes/getConfiguration.php';
+  require_once dirname(__FILE__).'/../includes/dbconnection.php';
+  require_once dirname(__FILE__).'/../includes/sessionhandler.php';
+  require_once dirname(__FILE__).'/../includes/getConfiguration.php';
 
-$url_type_name = 'fhem_url_'.$_GET['type'];
-if (isset($_GET['type']) && isset($__CONFIG[$url_type_name])) {
-  $url = $__CONFIG[$url_type_name];
-} else {
-  $url = $__CONFIG['fhem_url_mobile'];
-}
+  if (isset($_GET['type']))
+    $url_type_name = 'fhem_url_'.$_GET['type'];
+
+  if (isset($url_type_name) && isset($__CONFIG[$url_type_name]))
+    $url = $__CONFIG[$url_type_name];
+  else
+    $url = $__CONFIG['fhem_url_mobile'];
 ?>
 
 <html>
