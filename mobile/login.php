@@ -61,9 +61,9 @@ if (isset($_POST['cmd']) && isset($_POST['login_username']) && isset($_POST['log
 
                 $_SESSION['username'] = $_POST['login_username'];
                 $_SESSION['isAdmin'] = $row->isAdmin;
-                $_SESSION['login'] = 1;
                 $_SESSION['uid'] = $row->uid;
                 $_SESSION['logintime'] = time();
+                $_SESSION['lastactivity'] = time();
 
                 // Update password hash if required
                 if (password_needs_rehash($row->password, constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true))) {
@@ -97,9 +97,9 @@ elseif (isset($_GET['login']) && $_GET['login'] != "") {
 
         $_SESSION['username'] = $row->username;
         $_SESSION['isAdmin'] = $row->isAdmin;
-        $_SESSION['login'] = 1;
         $_SESSION['uid'] = $row->uid;
         $_SESSION['logintime'] = time();
+        $_SESSION['lastactivity'] = time();
         $_SESSION['quicklogin'] = $_GET['login'];
         $_SESSION['quicklogin_newsession'] = true;
 
