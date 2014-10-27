@@ -71,16 +71,15 @@ if (
   $result = mysql_query("SELECT users.uid, password, users.hash, grpname, isAdmin, lastactivity from users left join usergroups on users.uid = usergroups.uid left join groups on groups.gid = usergroups.gid  where users.username = '" . mysql_real_escape_string($_SESSION['username']) . "' limit 1");
   while ($row = mysql_fetch_object($result)) {
     if (
-          (isset($_SESSION['quicklogin']) && $_SESSION['quicklogin'] == $row->hash && strtotime($row->lastactivity) + (60 * 60 * 24 * 7 * 6) > time()) ||
-          strtotime($row->lastactivity) + 900 > time()
+          (isset($_SESSION['quicklogin']) && $_SESSION['quicklogin'] == $row->hash && $_SESSION['lastactivity'] + (60 * 60 * 24 * 7 * 6) > time()) ||
+          $_SESSION['lastactivity'] + 900 > time()
       ) {
       $loggedin = true;
       if (isset($_SESSION['quicklogin_newsession']))
         unset($_SESSION['quicklogin_newsession']);
       $_SESSION['isAdmin'] = $row->isAdmin;
       $_SESSION['uid'] = $row->uid;
-      $sql = "UPDATE users set lastactivity = now() where uid = " . $row->uid;
-      mysql_query($sql);
+      $_SESSION['lastactivity'] = time();
     }
   }
 }
