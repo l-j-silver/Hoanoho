@@ -143,7 +143,7 @@
                 </div>
             </li>
 
-            <?php if ($__CONFIG['fhem_url_web'] != "" || $__CONFIG['fhem_url_tablet'] != "" || $__CONFIG['sharefile_remoteaddress'] != "") { ?>
+            <?php if ($__CONFIG['fhem_url_web'] != "" || $__CONFIG['fhem_url_tablet'] != "" || $__CONFIG['sharefile_remoteaddress'] != "" || $_SESSION['mobile'] === true) { ?>
             <li class="drop">
                 <a href="#"><img src="img/star.png">Diverses</a>
 
@@ -151,6 +151,9 @@
                     <div class="dropOut">
                         <div class="triangle"></div>
                         <ul>
+                            <?php if ($_SESSION['mobile'] === true) { ?>
+                            <a href="./mobile/"><li><img src="img/favicons/favicon-192x192.png">Mobilansicht</li></a>
+                            <?php } ?>
                             <?php if ($__CONFIG['fhem_url_web'] != "") { ?>
                             <a href="fwrapper.php"><li><img src="img/fhem.svg">FHEM Web</li></a>
                             <?php } ?>

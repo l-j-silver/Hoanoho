@@ -3,6 +3,7 @@
   min-height: 600px;
   width: 990px;
   height: auto;
+  background-color: #E5E5E5;
 }
 
 .content iframe #fhem {

@@ -62,6 +62,7 @@ if (isset($_POST['cmd']) && isset($_POST['login_username']) && isset($_POST['log
                 $_SESSION['uid'] = $row->uid;
                 $_SESSION['logintime'] = time();
                 $_SESSION['lastactivity'] = time();
+                $_SESSION['mobile'] = false;
 
                 // Update password hash if required
                 if (password_needs_rehash($row->password, constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true))) {
@@ -96,6 +97,7 @@ elseif (isset($_GET['login']) && $_GET['login'] != "") {
         $_SESSION['uid'] = $row->uid;
         $_SESSION['logintime'] = time();
         $_SESSION['lastactivity'] = time();
+        $_SESSION['mobile'] = false;
         $_SESSION['quicklogin'] = $_GET['login'];
         $_SESSION['quicklogin_newsession'] = true;
 

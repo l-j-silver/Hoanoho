@@ -38,3 +38,5 @@ INSERT IGNORE INTO `configuration` (`dev_id`, `configstring`, `value`, `title`, 
 (0, 'hash_options', '{"cost":"10"}', 'Password hashing options', '', 'text', 'Extended Settings', '0');
 
 INSERT IGNORE INTO `groups` (`gid`, `isAdmin`, `grpname`) VALUES (1, 0, 'Benutzer'), (2, 1, 'Administrator');
+
+INSERT IGNORE INTO pinboard_links (link_id, name, url, uid, type) VALUES (0, 'zur Desktop Ansicht wechseln', '../', 0, 2);

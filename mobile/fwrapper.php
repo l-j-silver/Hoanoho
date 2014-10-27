@@ -27,12 +27,6 @@
         <script src="js/ratchet.js"></script>
         <script src="js/standalone.js"></script>
 
-        <script language="javascript">
-            function redirectToURL(URL)
-            {
-                window.location.href = URL;
-            }
-        </script>
         <script type="text/javascript">
           function resizeIframe(obj){
             { obj.style.height = 0; };

@@ -244,11 +244,6 @@
                     }
                 };
             }
-
-            function redirectToURL(URL)
-            {
-                window.location.href = URL;
-            }
         </script>
 
         <title><?php echo $__CONFIG['main_sitetitle'] ?> - Pinnwand</title>
@@ -256,7 +251,6 @@
     <body>
         <header class="bar-title">
             <h1 class="title">Pinnwand</h1>
-            <a class="button" href="javascript:redirectToURL('<?php echo "../"; ?>');" data-ignore="push">Desktop</a>
         </header>
 
         <div class="content">
