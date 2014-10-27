@@ -148,7 +148,7 @@ nav ul li hr {
 	z-index: 2;
 	left: 50%;
 	margin-left: -80px; /* half of width */
-	top: -400px;
+	top: -1400px;
 }
 .dropOut {
 	width: 160px;
