@@ -25,12 +25,14 @@
     overflow: hidden;
 }
 
-.board #fhemframe {
+.board div #fhem {
   min-width: 990px;
   min-height: 600px;
   width: 990px;
   height: auto;
+}
 
+.board div iframe #fhem {
   position: absolute;
   top: 0;
   bottom: 0;

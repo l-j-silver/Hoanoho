@@ -1,0 +1,4 @@
+#logo, #hdr { display: none; }
+#menu { top:0px; }
+#content, #menu, #right { height: 660px; height: -moz-calc(100vh); height: -webkit-calc(100vh); height: -o-calc(100vh); height: calc(100vh); }
+body { background-image:none; }
