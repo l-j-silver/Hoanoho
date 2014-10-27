@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__)."/../dbconnection.php";
+require dirname(__FILE__)."/../dbconnection.php";
 require_once dirname(__FILE__)."/../getConfiguration.php";
 
 ####################### central API config ########################

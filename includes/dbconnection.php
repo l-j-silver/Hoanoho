@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__)."/../config/dbconfig.inc.php";
+require dirname(__FILE__)."/../config/dbconfig.inc.php";
 
 // Connect to the database
 // replace "user_name" and "password" with your real login info
