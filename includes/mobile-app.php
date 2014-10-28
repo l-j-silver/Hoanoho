@@ -62,7 +62,7 @@ if(("standalone" in window.navigator) && window.navigator.standalone){
 /* redirect to login after session timeout */
 window.setTimeout(function() {
     window.location.href = './login.php?cmd=logout';
-}, 900);
+}, 900000);
 </script>
 <?php } ?>
 
