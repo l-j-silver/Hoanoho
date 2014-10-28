@@ -2,8 +2,9 @@
 require_once dirname(__FILE__).'/includes/sessionhandler.php';
 
 if ($_SESSION['isAdmin'] != 1) {
-  header('Location: ./');
-  exit;
+	header('HTTP/1.1 403 Forbidden');
+	header('Location: ./');
+	exit;
 }
 
 function generateNoteColors()
