@@ -61,7 +61,7 @@ if(("standalone" in window.navigator) && window.navigator.standalone){
 <?php if (!isset($_SESSION['quicklogin'])) { ?>
 /* redirect to login after session timeout */
 window.setTimeout(function() {
-    window.location.href = './login.php?cmd=logout';
+    location.reload(true);
 }, 900000);
 <?php } ?>
 </script>
