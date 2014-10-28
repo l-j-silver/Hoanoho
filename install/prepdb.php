@@ -6,7 +6,11 @@ if (!isset($_SESSION)) {
 }
 
 $filelist = scandir('./sql');
+
 if ($filelist) {
+    $previous_encoding = mb_internal_encoding();
+    mb_internal_encoding('UTF-8');
+
     for ($i=0; $i < sizeof($filelist) ; $i++) {
         if ($filelist[$i] != "." && $filelist[$i] != "..") {
             $f=fopen("./sql/".$filelist[$i],'r');
@@ -31,6 +35,8 @@ if ($filelist) {
             }
         }
     }
+
+    mb_internal_encoding($previous_encoding);
 
     // add administrator user
     $randompw = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8);
