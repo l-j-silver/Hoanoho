@@ -281,6 +281,7 @@
 
 <html>
     <head>
+        <meta charset="UTF-8"; />
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/Events.js"></script>
         <script type="text/javascript" src="js/Dragdrop.js"></script>
@@ -625,8 +626,6 @@
                 elem.value = "";
         }
         </script>
-
-        <meta charset="UTF-8" />
 
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
         <link rel="stylesheet" href="css/configuration.css" type="text/css" media="screen" title="no title" charset="UTF-8">

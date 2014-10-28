@@ -75,6 +75,7 @@ function displayDeviceData($dev_id, $dev_value)
 
 <html>
 <head>
+    <meta charset="UTF-8"; />
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
 
@@ -405,8 +406,6 @@ function displayDeviceData($dev_id, $dev_value)
                 });
             });
 </script>
-
-<meta charset="UTF-8" />
 
 <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">

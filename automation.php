@@ -4,6 +4,7 @@
 
 <html>
     <head>
+        <meta charset="UTF-8"; />
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 
@@ -426,8 +427,6 @@
             }
         }
         </script>
-
-        <meta charset="UTF-8"; />
 
         <link rel="stylesheet" href="css/nav.css" type="text/css" media="screen" title="no title" charset="UTF-8">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="UTF-8">
