@@ -45,6 +45,10 @@ elseif (isset($_POST['referer']) && $_POST['referer'] != "")
 else
   $referer = "./";
 
+// Send 401 error so browser may clear any HTTP basic authentication credentials
+header('HTTP/1.1 401 Unauthorized');
+header('WWW-Authenticate: WebForm');
+
 // Send customized headers to disallow any access to FHEM backends
 // can be used in HAproxy setups to remove access to FHEM based on Hoanoho session
 if (isset($_SESSION['fhem_auth']) && $_SESSION['fhem_auth'] === true) {
