@@ -62,6 +62,6 @@ if(("standalone" in window.navigator) && window.navigator.standalone){
 /* redirect to login after session timeout */
 window.setTimeout(function() {
     location.reload(true);
-}, 900000);
+}, 901000);
 <?php } ?>
 </script>

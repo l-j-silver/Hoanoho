@@ -293,6 +293,11 @@ a {
   margin: 0 auto;
 }
 
+/* SVG icons  */
+.tab-icon.svg path {
+	fill:#ffffff !important;
+}
+
 /* Label for tab */
 .tab-label {
   margin-top: 1px;
