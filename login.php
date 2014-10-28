@@ -32,7 +32,7 @@ if (preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|
   exit;
 }
 
-if (isset($_GET['cmd']) && $_GET['cmd'] == "logout" && isset($_SERVER['HTTP_REFERER']))
+if (isset($_POST['_logout_']) && isset($_SERVER['HTTP_REFERER']))
     $_SESSION['REAL_REFERER'] = $_SERVER['HTTP_REFERER'];
 
 if (

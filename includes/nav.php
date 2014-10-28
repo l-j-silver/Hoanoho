@@ -98,7 +98,8 @@
 </script>
 
 <nav>
-        <p class="infoline_clockicon" id="navclockicon"></p><p class="infoline_clock" id="navclock"></p><p class="infoline_r">Angemeldet als: <b><?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } ?></b> <a href="login.php?cmd=logout"><img alt="Abmelden" title="Abmelden" src="img/logout.png" style="margin-top:-3px;"></a></p>
+        <p class="infoline_clockicon" id="navclockicon"></p><p class="infoline_clock" id="navclock"></p>
+		<form action="login.php" method="POST"><p class="infoline_r">Angemeldet als: <b><?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } ?></b> <input type="image" src="img/logout.png" alt="Abmelden" title="Abmelden" style="margin-top:-3px;"/><input name="_logout_" type="hidden"/></p></form>
         <ul>
             <li><a href="index.php"><img src="img/pinboard.png">Pinnwand</a></li>
 

@@ -22,7 +22,7 @@ session_name('HOANOHOSESSID');
 if (!isset($_SESSION))
   session_start();
 
-if (isset($_GET['cmd']) && $_GET['cmd'] == "logout" && isset($_SERVER['HTTP_REFERER'])) {
+if (isset($_POST['_logout_']) && isset($_SERVER['HTTP_REFERER'])) {
   $_SESSION['REAL_REFERER'] = $_SERVER['HTTP_REFERER'];
   $path = array_pop( explode("/", dirname( parse_url($_SERVER['HTTP_REFERER'])['path'] )) );
   $uri = array_pop( explode("/", parse_url($_SERVER['HTTP_REFERER'])['path'] ) );

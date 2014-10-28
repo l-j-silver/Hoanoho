@@ -47,10 +47,11 @@
         </li>
     <?php } ?>
         <li class="tab-item">
-            <a href="login.php?cmd=logout">
-                <img class="tab-icon" src="../img/logout.png">
-                <div class="tab-label">Abmelden</div>
-            </a>
+			<form action="login.php" method="POST">
+				<input class="tab-icon" type="image" src="../img/logout.png" alt="Abmelden" title="Abmelden"/>
+				<input name="_logout_" type="hidden"/>
+				<div class="tab-label">Abmelden</div>
+			</form>
         </li>
     </ul>
 </nav>

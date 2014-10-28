@@ -57,7 +57,7 @@ nav p.infoline_r {
 	text-align: right;
 }
 
-nav p.infoline_r img {
+nav p.infoline_r input[type=image]  {
 	margin-left: 5px;
 	margin-right: 20px;
 	width: 16px;
