@@ -58,14 +58,14 @@ if(("standalone" in window.navigator) && window.navigator.standalone){
   },false);
 }
 
-<?php if ($_SESSION['mobile'] === true) { ?>
-<link rel="stylesheet" href="css/mobile.css" type="text/css" media="screen" title="no title" charset="UTF-8">
-<?php } ?>
-
 <?php if (!isset($_SESSION['quicklogin'])) { ?>
 /* redirect to login after session timeout */
 window.setTimeout(function() {
     window.location.href = './login.php?cmd=logout';
 }, 900);
 </script>
+<?php } ?>
+
+<?php if ($_SESSION['mobile'] === true) { ?>
+<link rel="stylesheet" href="css/mobile.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 <?php } ?>
