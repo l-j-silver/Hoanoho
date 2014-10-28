@@ -45,6 +45,11 @@ elseif (isset($_POST['referer']) && $_POST['referer'] != "")
 else
   $referer = "./";
 
+// Send customized headers to disallow any access to FHEM backends
+// can be used in HAproxy setups to remove access to FHEM based on Hoanoho session
+header('X-FHEM-DisallowAdmin: '.session_name().'='. session_id());
+header('X-FHEM-DisallowUser: '.session_name().'='. session_id());
+
 session_destroy();
 
 // normal login

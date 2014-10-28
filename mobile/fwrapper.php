@@ -10,6 +10,20 @@
     $url = $__CONFIG[$url_type_name];
   else
     $url = $__CONFIG['fhem_url_mobile'];
+
+  if ($url == $__CONFIG['fhem_url_admin'] && $_SESSION['isAdmin'] != 1) {
+    header('Location: ./');
+    exit;
+  }
+
+  // Send customized headers to allow any access to FHEM backends
+  // can be used in HAproxy setups to allow access to FHEM based on Hoanoho session
+  if (!isset($_SESSION['fhem_auth']) || $_SESSION['fhem_auth'] === false) {
+	  if ($_SESSION['isAdmin'] == 1)
+	    header('X-FHEM-AllowAdmin: '.session_name().'='. session_id());
+	  header('X-FHEM-AllowUser: '.session_name().'='. session_id());
+	  $_SESSION['fhem_auth'] = true;
+  }
 ?>
 
 <html>
