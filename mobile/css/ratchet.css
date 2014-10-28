@@ -294,6 +294,9 @@ a {
 }
 
 /* SVG icons  */
+.tab-icon.svg {
+	width: 18px;
+}
 .tab-icon.svg path {
 	fill:#ffffff !important;
 }
