@@ -555,20 +555,19 @@
                     <div id="headline_search"></div><div id="headline">Suchen ...</div>
                     <form action="http://www.google.com/search" target="_blank" onsubmit="javascript:setTimeout('document.searchForm1.reset()', 200);" name="searchForm1"><input type="text" name="q" placeholder="bei Google"></input></form>
                 </div>
+                <?php
+				if (isset($_SESSION['uid'])) {
+					$sql = "SELECT name, url from pinboard_links where (uid = 0 or uid = " . $_SESSION['uid'] . ") and ( type = 0 or type = 1 ) order by uid desc, name asc";
+                    $result = mysql_query($sql);
+					if (mysql_num_rows($result) > 0) {
+				?>
                 <div id="block">
-                    <div id="headline_hyperlink"></div><div id="headline">Links</div>
-                    <?php
-                    if (isset($_SESSION['uid'])) {
-                      $sql = "SELECT name, url from pinboard_links where (uid = 0 or uid = " . $_SESSION['uid'] . ") and ( type = 0 or type = 1 ) order by uid desc, name asc";
-                      $result = mysql_query($sql);
-                      while ($link = mysql_fetch_object($result)) {
-                    ?>
-                      <div id="text"><a href="<?php echo $link->url; ?>"><?php echo $link->name; ?></a></div>
-                    <?php
-                      }
-                    }
-                    ?>
+					<div id="headline_hyperlink"></div><div id="headline">Links</div>
+					<?php  while ($link = mysql_fetch_object($result)) { ?>
+                    <div id="text"><a href="<?php echo $link->url; ?>"><?php echo $link->name; ?></a></div>
+                    <?php } ?>
                 </div>
+				<?php } } ?>
                 <div id="block_last">&nbsp;</div>
             </div>
         </div>
