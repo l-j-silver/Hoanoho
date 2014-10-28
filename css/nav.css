@@ -58,6 +58,7 @@ nav p.infoline_r {
 }
 
 nav p.infoline_r input[type=image]  {
+	margin-top: -3px;
 	margin-left: 5px;
 	margin-right: 20px;
 	width: 16px;
