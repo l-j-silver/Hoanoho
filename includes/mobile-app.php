@@ -63,8 +63,8 @@ if(("standalone" in window.navigator) && window.navigator.standalone){
 window.setTimeout(function() {
     window.location.href = './login.php?cmd=logout';
 }, 900000);
-</script>
 <?php } ?>
+</script>
 
 <?php if ($_SESSION['mobile'] === true) { ?>
 <link rel="stylesheet" href="css/mobile.css" type="text/css" media="screen" title="no title" charset="UTF-8">
