@@ -343,7 +343,7 @@
                 <?php } } } ?>
 
                 <li class="list-divider">Suchen ...</li>
-                <li class="login"><form action="http://www.google.com/search" name="searchForm1"><input type="text" name="q" placeholder="bei Google"></input></form></li>
+                <li class="login"><form action="https://www.google.com/search" name="searchForm1"><input type="text" name="q" placeholder="bei Google"></input></form></li>
             </ul>
             <br><br><br>
         </div>

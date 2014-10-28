@@ -553,7 +553,7 @@
                 <div id="pin"></div>
                 <div id="block_first">
                     <div id="headline_search"></div><div id="headline">Suchen ...</div>
-                    <form action="http://www.google.com/search" target="_blank" onsubmit="javascript:setTimeout('document.searchForm1.reset()', 200);" name="searchForm1"><input type="text" name="q" placeholder="bei Google"></input></form>
+                    <form action="https://www.google.com/search" target="_blank" onsubmit="javascript:setTimeout('document.searchForm1.reset()', 200);" name="searchForm1"><input type="text" name="q" placeholder="bei Google"></input></form>
                 </div>
                 <?php
 				if (isset($_SESSION['uid'])) {
