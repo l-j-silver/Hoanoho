@@ -80,6 +80,9 @@ if (
       $_SESSION['isAdmin'] = $row->isAdmin;
       $_SESSION['uid'] = $row->uid;
       $_SESSION['lastactivity'] = time();
+	  if ($row->isAdmin == 1)
+		  header('X-FHEM-AllowAdmin: ' . session_id());
+	  header('X-FHEM-AllowUser: ' . session_id());
     }
   }
 }

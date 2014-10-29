@@ -53,10 +53,8 @@ header('WWW-Authenticate: WebForm');
 
 // Send customized headers to disallow any access to FHEM backends
 // can be used in HAproxy setups to remove access to FHEM based on Hoanoho session
-if (isset($_SESSION['fhem_auth']) && $_SESSION['fhem_auth'] === true) {
-	header('X-FHEM-DisallowAdmin: '.session_name().'='. session_id());
-	header('X-FHEM-DisallowUser: '.session_name().'='. session_id());
-}
+header('X-FHEM-DisallowAdmin: ' . session_id());
+header('X-FHEM-DisallowUser: ' . session_id());
 
 session_destroy();
 

@@ -16,13 +16,6 @@
     header('Location: ./');
     exit;
   }
-
-  // Send customized headers to allow any access to FHEM backends
-  // can be used in HAproxy setups to allow access to FHEM based on Hoanoho session
-  if ($_SESSION['isAdmin'] == 1)
-    header('X-FHEM-AllowAdmin: '.session_name().'='. session_id());
-  header('X-FHEM-AllowUser: '.session_name().'='. session_id());
-  $_SESSION['fhem_auth'] = true;
 ?>
 
 <html>
