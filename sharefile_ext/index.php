@@ -43,7 +43,12 @@ function showFile()
     $sid = $curr_file['SID'];
 
     // log access
-    $sql = "INSERT INTO sharedfiles_accesslog SET accessdate = NOW(), accessip = '" . $_SERVER['REMOTE_ADDR'] . "', useragent = '" . $_SERVER['HTTP_USER_AGENT'] . "', sid = " . $sid;
+	HTTP_X_FORWARDED_FOR
+	if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+		$clientaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	else
+		$clientaddress = $_SERVER['REMOTE_ADDR'];
+    $sql = "INSERT INTO sharedfiles_accesslog SET accessdate = NOW(), accessip = '" . $clientaddress . "', useragent = '" . $_SERVER['HTTP_USER_AGENT'] . "', sid = " . $sid;
     mysql_query($sql);
     ?>
 
