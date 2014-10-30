@@ -7,7 +7,7 @@
 
 	// Redirector for sharefile in case user does not access via dedicated vhost
 	if(isset($_GET['f'])) {
-		header("Location: ./sharefile_ext/?".$_GET['f']);
+		header("Location: ./sharefile_ext".$_SERVER['REQUEST_URI']);
 		exit;
 	}
 

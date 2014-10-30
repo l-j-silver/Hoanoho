@@ -38,7 +38,7 @@ if (isset($_POST['f']) || isset($_GET['f'])) {
     $name = $curr_file['File_Name'];
     $content = $curr_file['File_Content'];
     $extension = $curr_file['File_Extension'];
-    $counter = $curr_file['Counter'];
+    $counter = $curr_file['File_AccessCounter'];
     $sid = $curr_file['SID'];
 
     header("Content-length: ".$size."");
