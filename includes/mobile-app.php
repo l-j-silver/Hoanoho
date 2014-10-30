@@ -66,6 +66,6 @@ window.setTimeout(function() {
 <?php } ?>
 </script>
 
-<?php if ($_SESSION['mobile'] === true) { ?>
+<?php if (isset($_SESSION['mobile']) && $_SESSION['mobile'] === true) { ?>
 <link rel="stylesheet" href="css/mobile.css" type="text/css" media="screen" title="no title" charset="UTF-8">
 <?php } ?>
