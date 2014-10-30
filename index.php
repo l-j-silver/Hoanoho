@@ -5,6 +5,13 @@
 		header("Location: ./install/");
 	}
 
+	// Redirector for sharefile in case user does not access via dedicated vhost
+	if(isset($_GET['f'])) {
+		header("Location: ./sharefile_ext/?".$_GET['f']);
+		exit;
+	}
+
+
     require_once dirname(__FILE__).'/includes/sessionhandler.php';
     require_once dirname(__FILE__).'/includes/dwd_parser.php';
 
