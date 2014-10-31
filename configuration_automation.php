@@ -76,7 +76,7 @@
                 //print("<option ".($model == "IN-6012" ? "selected" : "")." value=\"IN-6012\">IN-6012</option>");
                 //print("<option ".($model == "IN-7011" ? "selected" : "")." value=\"IN-7011\">IN-7011</option>");
             } else if($vendor == "wansview") {
-                print("<option ".($model == "NC451W-P" ? "selected" : "")." value=\"NC451W-P\">NC451W-P</option>");
+                print("<option ".($model == "NC541W-P" ? "selected" : "")." value=\"NC541W-P\">NC541W-P</option>");
             }
         print("</select>");
     }
@@ -612,7 +612,7 @@
             }
             else if(model == "wansview")
             {
-                elem.options[elem.options.length] = new Option('NC451W-P', 'INC451W-P');
+                elem.options[elem.options.length] = new Option('NC541W-P', 'INC541W-P');
             }
         }
 
