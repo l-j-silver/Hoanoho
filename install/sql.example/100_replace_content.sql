@@ -15,6 +15,9 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+SET NAMES utf8 COLLATE utf8_unicode_ci;
+SET CHARACTER SET utf8;
+
 --
 -- Dumping data for table `bindata`
 --
@@ -31,7 +34,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `configuration` WRITE;
 /*!40000 ALTER TABLE `configuration` DISABLE KEYS */;
-REPLACE INTO `configuration` VALUES (0,'dwd_region','BXX','Region f웦 Warnungen','','dwd_region','Wetter',1),(0,'position_latitude','52.519171000000000000','Ortsangabe Breitengrad','52.519171000000000000','text','Wetter',1),(0,'position_longitude','13.406091199999992000','Ortsangabe L둵gengrad','13.406091199999992000','text','Wetter',1),(6,'isStructure','on','','','text',NULL,1);
+REPLACE INTO `configuration` VALUES (0,'dwd_region','BXX','Region','','dwd_region','Wetter',1),(0,'position_latitude','52.519171000000000000','Ortsangabe Breitengrad','52.519171000000000000','text','Wetter',1),(0,'position_longitude','13.406091199999992000','Ortsangabe L둵gengrad','13.406091199999992000','text','Wetter',1),(6,'isStructure','on','','','text',NULL,1);
 /*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,7 +54,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `device_types` WRITE;
 /*!40000 ALTER TABLE `device_types` DISABLE KEYS */;
-REPLACE INTO `device_types` VALUES (1,'Leuchten',1,1,2,'70%'),(3,'Dimmer',6,14,15,'70%'),(4,'Elektronik',1,16,17,'70%'),(5,'Statusanzeige',5,NULL,NULL,'70%'),(7,'Netzwerkger채te',10,21,22,'70%');
+REPLACE INTO `device_types` VALUES (1,'Leuchten',1,1,2,'70%'),(3,'Dimmer',6,14,15,'70%'),(4,'Elektronik',1,16,17,'70%'),(5,'Statusanzeige',5,NULL,NULL,'70%'),(7,'Netzwerkger둻e',10,21,22,'70%');
 /*!40000 ALTER TABLE `device_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +64,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `devices` WRITE;
 /*!40000 ALTER TABLE `devices` DISABLE KEYS */;
-REPLACE INTO `devices` VALUES (2,'Livingroom','Deckenlicht',3,1,3,'423','275','','',NULL,NULL),(3,'Outdoor','Au횩enbeleuchtung',1,1,NULL,'273','487','','',NULL,NULL),(4,'Office','Schreibtischlampe',1,2,4,'281','416','','',NULL,NULL),(6,'AllLights','Alle Leuchten',1,1,2,'10','40','on','',NULL,NULL),(7,'TV','TV',4,1,2,'235','150','','',NULL,NULL),(8,'ReadingLight','Leselampe',3,1,2,'440','95','','',NULL,NULL),(9,'CeilingLight','Deckenlicht',3,1,2,'300','155','','',NULL,NULL),(14,'','PC',7,2,4,'265','460','','',NULL,NULL);
+REPLACE INTO `devices` VALUES (2,'Livingroom','Deckenlicht',3,1,3,'423','275','','',NULL,NULL),(3,'Outdoor','Au쬮nbeleuchtung',1,1,NULL,'273','487','','',NULL,NULL),(4,'Office','Schreibtischlampe',1,2,4,'281','416','','',NULL,NULL),(6,'AllLights','Alle Leuchten',1,1,2,'10','40','on','',NULL,NULL),(7,'TV','TV',4,1,2,'235','150','','',NULL,NULL),(8,'ReadingLight','Leselampe',3,1,2,'440','95','','',NULL,NULL),(9,'CeilingLight','Deckenlicht',3,1,2,'300','155','','',NULL,NULL),(14,'','PC',7,2,4,'265','460','','',NULL,NULL);
 /*!40000 ALTER TABLE `devices` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,7 +74,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `notes` WRITE;
 /*!40000 ALTER TABLE `notes` DISABLE KEYS */;
-REPLACE INTO `notes` VALUES (1,'Einkaufszettel','- Milch<br/>- Eier<br/>- Butter<br/>- Brot',1,'2014-10-15 15:26:25','2014-10-15 15:26:25','public',1,'yellow'),(2,'Schulauff체hrung am Dienstag!','Nicht vergessen!!!',1,'2014-10-15 15:26:38','2014-10-15 15:26:38','public',1,'red'),(3,'Petra zur체ckrufen','Papa, bitte zur체ckrufen',1,'2014-10-15 15:29:45','2014-10-15 15:29:45','public',0,'blue'),(4,'Petra zur체ckrufen','Papa, bitte zur체ckrufen unter 01234 123456',1,'2014-10-15 15:30:16','2014-10-15 15:30:16','public',1,'blue');
+REPLACE INTO `notes` VALUES (1,'Einkaufszettel','- Milch<br/>- Eier<br/>- Butter<br/>- Brot',1,'2014-10-15 15:26:25','2014-10-15 15:26:25','public',1,'yellow'),(2,'Schulauff웘rung am Dienstag!','Nicht vergessen!!!',1,'2014-10-15 15:26:38','2014-10-15 15:26:38','public',1,'red'),(3,'Petra zur웒krufen','Papa, bitte zur웒krufen',1,'2014-10-15 15:29:45','2014-10-15 15:29:45','public',0,'blue'),(4,'Petra zur웒krufen','Papa, bitte zur웒krufen unter 01234 123456',1,'2014-10-15 15:30:16','2014-10-15 15:30:16','public',1,'blue');
 /*!40000 ALTER TABLE `notes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +124,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `rooms` WRITE;
 /*!40000 ALTER TABLE `rooms` DISABLE KEYS */;
-REPLACE INTO `rooms` VALUES (1,'Schlafzimmer',1,2),(2,'Wohnzimmer',1,1),(3,'K체che',2,1),(4,'B체ro',2,2);
+REPLACE INTO `rooms` VALUES (1,'Schlafzimmer',1,2),(2,'Wohnzimmer',1,1),(3,'K웒he',2,1),(4,'B웦o',2,2);
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 UNLOCK TABLES;
 
