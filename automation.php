@@ -716,7 +716,7 @@
                             $resultArr = mysql_fetch_assoc($result2);
                             $positionslots = $resultArr['value'];
 
-                            print("<div id=\"stream".$device->dev_id."\"><img id=\"webcamstream_img".$device->dev_id."\" src='blank.png'></div>");
+                            print("<div id=\"stream".$device->dev_id."\"><img id=\"webcamstream_img".$device->dev_id."\" src='img/blank.png'></div>");
                             if ($positionslots > 0) {
                                 print("<br><div id=\"controlpad\">");
                                     print("Gehe zu: <select id=\"position".$device->dev_id."\" onchange=\"javascript:moveCameraPosition(this.value, '".$cam_ipaddress."', '".$cam_port."', '".$cam_username."', '".$cam_password."', '".$cam_vendor."', ".$device->dev_id.")\">");
@@ -796,7 +796,7 @@
                             $resultArr = mysql_fetch_assoc($result2);
                             $positionslots = $resultArr['value'];
                             
-                            print("<div id=\"stream".$device->dev_id."\"><img id=\"webcamstream_img".$device->dev_id."\" src='/img/blank.png'></div>");
+                            print("<div id=\"stream".$device->dev_id."\"><img id=\"webcamstream_img".$device->dev_id."\" src='img/blank.png'></div>");
                             if($positionslots > 0)
                             {
                                 print("<br><div id=\"controlpad\">");
