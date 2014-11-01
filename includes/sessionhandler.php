@@ -3,7 +3,7 @@ require_once dirname(__FILE__).'/dbconnection.php';
 require_once dirname(__FILE__).'/getConfiguration.php';
 
 // Add CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
-$imgsrc_exceptions = "http://www.wettergefahren.de";
+$imgsrc_exceptions = "http://www.wettergefahren.de http://*:32469";
 $scriptsrc_exceptions = "";
 $framesrc_exceptions = "";
 

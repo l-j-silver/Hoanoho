@@ -46,7 +46,6 @@ function UPnPBackend() {
 		}
 		
 		var url = this.url + '?' + (device != null ? 'device=' + device + '&' : '') + 'action=' + method + '&' + data;
-		console.log(url);
 		$.ajax({
 
 			url : url,
@@ -73,7 +72,6 @@ function UPnPBackend() {
 				}
 
 				if(null != response) {
-					console.warn(response);
 
 					if(undefined != response.error) {
 
