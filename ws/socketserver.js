@@ -27,9 +27,9 @@ var sqlquery_fhem = 'SELECT distinct ' + dbConf.get('db:fhemDB') + '.current.DEV
 						'JOIN ' + dbConf.get('db:hoanohoDB') + '.devices ON ' + dbConf.get('db:fhemDB') + '.current.DEVICE like concat(' + dbConf.get('db:hoanohoDB') + '.devices.identifier,\'%\') '+
 						'JOIN ' + dbConf.get('db:hoanohoDB') + '.device_types ON ' + dbConf.get('db:hoanohoDB') + '.device_types.dtype_id = ' + dbConf.get('db:hoanohoDB') + '.devices.dtype_id '+
 						'LEFT OUTER JOIN ' + dbConf.get('db:hoanohoDB') + '.bindata ON ' + dbConf.get('db:hoanohoDB') + '.bindata.binid = '+
-							'CASE WHEN (' + dbConf.get('db:fhemDB') + '.current.VALUE = \'on\' or ' + dbConf.get('db:fhemDB') + '.current.VALUE = \'closed\') AND ' + dbConf.get('db:hoanohoDB') + '.device_types.image_on_id is not null and ' + dbConf.get('db:fhemDB') + '.current.READING = \'state\' THEN '+
+							'CASE WHEN (' + dbConf.get('db:fhemDB') + '.current.VALUE = \'on\' or ' + dbConf.get('db:fhemDB') + '.current.VALUE = \'closed\' or replace(replace(' + dbConf.get('db:fhemDB') + '.current.VALUE, \'dim\', \'\'), \'%\', \'\') > 0) AND ' + dbConf.get('db:hoanohoDB') + '.device_types.image_on_id is not null and ' + dbConf.get('db:fhemDB') + '.current.READING = \'state\' THEN '+
 								'' + dbConf.get('db:hoanohoDB') + '.device_types.image_on_id '+
-							'WHEN (' + dbConf.get('db:fhemDB') + '.current.VALUE = \'off\' or ' + dbConf.get('db:fhemDB') + '.current.VALUE = \'open\') AND ' + dbConf.get('db:hoanohoDB') + '.device_types.image_on_id is not null and ' + dbConf.get('db:fhemDB') + '.current.READING = \'state\' THEN '+
+							'WHEN (' + dbConf.get('db:fhemDB') + '.current.VALUE = \'off\' or ' + dbConf.get('db:fhemDB') + '.current.VALUE = \'open\' or replace(replace(' + dbConf.get('db:fhemDB') + '.current.VALUE, \'dim\' ,\'\'), \'%\', \'\') = 0) AND ' + dbConf.get('db:hoanohoDB') + '.device_types.image_on_id is not null and ' + dbConf.get('db:fhemDB') + '.current.READING = \'state\' THEN '+
 								'' + dbConf.get('db:hoanohoDB') + '.device_types.image_off_id '+
 							'ELSE '+
 								'null '+

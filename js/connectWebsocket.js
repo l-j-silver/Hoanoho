@@ -140,6 +140,8 @@ function connectWebSocket(port) {
     	{
             switch (messageObj['reading']) {
                 case 'state':
+                    doUpdateIcon = true;
+                    
                     var value = messageObj['value'].replace('dim','').replace('%','');
 
                     if(value == "on")
