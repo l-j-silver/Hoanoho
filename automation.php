@@ -254,11 +254,6 @@
             return false;
         }
 
-        function updateSliderValue(value,device_id)
-        {
-            document.getElementById("slider_value"+device_id).value = value;
-        }
-
         function moveCameraStep(direction, ipaddress, port, user, password, camtype)
         {
             var step = 10;
@@ -850,7 +845,7 @@
                         print("<div id=\"closebutton\" onclick='javascript:toggleModal(" . $device->dev_id . ",\"" . $device->typename . "\");'></div>");
                         print("<h1><span>".$device->roomname." ".$device->name."</span></h1>");
                         print("<div id=\"slider\">");
-                            print("<input type=\"range\" id=\"slider".$device->dev_id."\" min=\"0\" max=\"100\" step=\"5\" onchange='javascript:toggleDevice(\"".$device->dev_id."\",\"".$device->d_identifier."\",\"".$device->typename."\",this.value);'>");
+                            print("<input type=\"range\" id=\"slider".$device->dev_id."\" min=\"0\" max=\"100\" step=\"1\" oninput='javascript:toggleDevice(\"".$device->dev_id."\",\"".$device->d_identifier."\",\"".$device->typename."\",this.value);'>");
                             print("<input type=\"text\" id=\"slider_value".$device->dev_id."\" readonly value=\"---\">&nbsp;%");
                         print("</div>");
                     print("</div>");

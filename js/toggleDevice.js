@@ -129,9 +129,10 @@ function toggleDevice(device_id, d_identifier, type, value) {
 		el_soll.value = value;
 
 		value = "dim"+value+"%";
-
-		mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+value, true);
-		mygetrequest.send(null);
+		timeout = setTimeout(function() {
+			mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+value, true);
+			mygetrequest.send(null);
+		}, 2000);
 	}
 	else if(type == "Raspberry Pi GPIO") 
 	{
