@@ -108,5 +108,40 @@
     <?php
     }
     ?>
+
+	<?php if (isset($__CONFIG['HOANOHO_VERSION']) || isset($__CONFIG['HSE_VERSION']) || isset($__CONFIG['HSE_ENV']) || isset($__CONFIG['HOANOHO_BUILDNAME'])) { ?>
+    <section class="main_configuration_settings">
+        <h1><span>Installationsdetails</span></h1>
+
+		<?php if (isset($__CONFIG['HOANOHO_VERSION'])) { ?>
+		<div id="listitem">
+		   <div id="text">Hoanoho Version:</div>
+		   <div id="value"><?php echo $__CONFIG['HOANOHO_VERSION'] ?></div>
+		</div>
+		<?php } ?>
+
+		<?php if (isset($__CONFIG['HSE_VERSION'])) { ?>
+		<div id="listitem">
+		   <div id="text">HSE Version:</div>
+		   <div id="value"><?php echo $__CONFIG['HSE_VERSION'] ?></div>
+		</div>
+		<?php } ?>
+
+		<?php if (isset($__CONFIG['HSE_ENV'])) { ?>
+		<div id="listitem">
+		   <div id="text">HSE Environment:</div>
+		   <div id="value"><?php echo $__CONFIG['HSE_ENV'] ?></div>
+		</div>
+		<?php } ?>
+
+		<?php if (isset($__CONFIG['HOANOHO_BUILDNAME'])) { ?>
+		<div id="listitem">
+		   <div id="text">Base System Build:</div>
+		   <div id="value"><?php echo $__CONFIG['HOANOHO_BUILDNAME'] ?></div>
+		</div>
+		<?php } ?>
+
+    </section>
+	<?php } ?>
 </body>
 </html>
