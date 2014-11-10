@@ -46,7 +46,6 @@ function UPnPBackend() {
 		}
 		
 		var url = this.url + '?' + (device != null ? 'device=' + device + '&' : '') + 'action=' + method + '&' + data;
-
 		$.ajax({
 
 			url : url,
@@ -76,7 +75,7 @@ function UPnPBackend() {
 
 					if(undefined != response.error) {
 
-						setError(response.error);
+						upnp.gui.setError(response.error);
 					} else {
 
 						if(undefined != callback) {

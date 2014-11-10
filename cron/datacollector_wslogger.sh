@@ -1,18 +1,15 @@
 #!/bin/bash
 # read and evaluate wslogger.pl output from ISKRA MT681 device and queries the middleware
 
-PATH_TO_WSLOGGER='/opt/homie/wslogger.pl'
+PATH_TO_WSLOGGER='${HOANOHO_DIR}/cron/wslogger.pl'
 PATH_TO_WSLOGGER_LOGFILE='/tmp/wslogger.log'
-
-
-
 
 
 # set serial device
 if [[ "$#" -eq  "0" ]]; then
 	echo "./datacollector_wslogger <url_to_middleware>"
 	echo "e.g:"
-	echo "./datacollector_wslogger http://localhost/datacollector.php?"
+	echo "./datacollector_wslogger http://localhost/helper-server/datacollector.php?"
 	exit
 fi
 

@@ -630,7 +630,7 @@
     z-index: 1; 
     width: 40px; 
     height: 40px; 
-    background-image: url('/img/close.png'); 
+    background-image: url('../img/close.png'); 
     margin: 0 auto; 
     margin-top:-32px; 
     margin-left: 495px; 
@@ -1366,7 +1366,14 @@
 
 .main_configuration_scheduler #listitem [id*=devicestate] input, select {
     width: 100px;
-    float: left;
+    font: 13px Verdana, 'Lucida Grande';
+    height: 23px;
+    border-color: #EBE6E2;
+    border-width: 1px;
+    border-style: solid;
+    margin-left: -1px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 
@@ -1478,14 +1485,18 @@
 
 .main_configuration_personal #header #linkname {
     float: left;
-    width: 220px;
+    width: 170px;
 }
 
 .main_configuration_personal #header #linkurl {
     float: left;
-    width: 220px;
+    width: 190px;
 }
-.main_configuration_personal #header #linkprivate {
+.main_configuration_personal #header #linktype {
+    float: left;
+    width: 90px;
+}
+.main_configuration_personal #header #linkglobal {
     float: left;
     width: 50px;
 }
@@ -1543,13 +1554,13 @@
 }
 
 .main_configuration_personal #listitem #linkname {
-    width: 220px;
+    width: 170px;
 
     float: left;
 }
 
 .main_configuration_personal #listitem #linkname input {
-    width: 210px;
+    width: 160px;
 
     font: 13px Verdana, 'Lucida Grande';
     height: 23px;
@@ -1561,13 +1572,13 @@
 }
 
 .main_configuration_personal #listitem #linkurl {
-    width: 220px;
+    width: 190px;
 
     float: left;
 }
 
 .main_configuration_personal #listitem #linkurl input {
-    width: 210px;
+    width: 180px;
 
     font: 13px Verdana, 'Lucida Grande';
     height: 23px;
@@ -1578,13 +1589,34 @@
     padding-right: 5px;
 }
 
-.main_configuration_personal #listitem #linkprivate {
+.main_configuration_personal #listitem #linktype {
+    width: 90px;
+
+    float: left;
+}
+
+.main_configuration_personal #listitem #linktype option {
+    width: 20px;
+
+    font: 13px Verdana, 'Lucida Grande';
+    height: 23px;
+    border-color: #EBE6E2;
+    border-width: 1px;
+    border-style: solid;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    margin-left: 10px;
+    margin-top: -1px;
+}
+
+.main_configuration_personal #listitem #linkglobal {
     width: 50px;
 
     float: left;
 }
 
-.main_configuration_personal #listitem #linkprivate input {
+.main_configuration_personal #listitem #linkglobal input {
     width: 20px;
 
     font: 13px Verdana, 'Lucida Grande';

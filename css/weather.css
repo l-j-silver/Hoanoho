@@ -69,16 +69,26 @@
 }
 
 .main_weather #warnung {
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
     text-align: justify;
     display: block;
     margin-bottom: 10px;
+    background-color: #E3EAFE;
+    padding: 5px;
 }
 
 .main_weather #warnung #aktiv {
-    color: #ff0000;
     font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.main_weather #source {
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: right;
+    display: block;
 }
 
 .main_weather #details div {
@@ -119,7 +129,9 @@
 .main_weather #text {
     margin-left: 20px;
     margin-right: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    text-align: justify;
+    display: block;
 }
 
 .main_weather #text p {

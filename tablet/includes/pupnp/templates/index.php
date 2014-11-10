@@ -19,10 +19,9 @@
 use at\mkweb\upnp\Config;
 use at\mkweb\upnp\frontend\AuthManager;
 
-require_once('src/at/mkweb/upnp/init.php');
+require_once 'src/at/mkweb/upnp/init.php';
 
-include $_SERVER['DOCUMENT_ROOT'].'/includes/dbconnection.php';
-include $_SERVER['DOCUMENT_ROOT'].'/includes/getConfiguration.php';
+require_once dirname(__FILE__).'/../../../../includes/sessionhandler.php';
 
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
@@ -69,22 +68,18 @@ $css = array(
 
     <title><? echo $__CONFIG['main_sitetitle']; ?></title>
 
-    <meta name="apple-mobile-web-app-capable" content="yes" /> 
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    <link rel="apple-touch-icon" href="/img/favicon.ico"/>
-    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
+    <?php require_once dirname(__FILE__).'/mobile-app.php'; ?>
 
     <link rel="stylesheet" href="../../css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="UTF-8">
     <link rel="stylesheet" href="../../css/bootstrap-theme.min.css" type="text/css" media="screen" title="no title" charset="UTF-8">
     <link rel="stylesheet" href="../../css/bootstrap-custom.css" type="text/css" media="screen" title="no title" charset="UTF-8">
     
-    <script src="/tablet/js/jquery.min.js"></script>
-    <script src="/tablet/js/jquery-ui.min.js"></script>
-    <script src="/tablet/js/bootstrap.min.js"></script>
-    <script src="/tablet/js/clock.js"></script>
-    <script src="/tablet/js/jquery-scrolltofixed.js"></script>
-    <script src="/tablet/js/standalone.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jquery-ui.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/clock.js"></script>
+    <script src="../../js/jquery-scrolltofixed.js"></script>
+    <script src="../../js/standalone.js"></script>
     <script>
         $(document).ready(function() {
             $('.dropdown-toggle').dropdown();
@@ -98,12 +93,12 @@ $css = array(
 
         <? foreach($javascript as $jsfile): ?>
 
-            <script type="text/javascript" src="/tablet/includes/pupnp/res/js/<?= $jsfile ?>"></script>
+            <script type="text/javascript" src="res/js/<?= $jsfile ?>"></script>
         <? endforeach ?>
 
 </head>
 <body>
-    <? include $_SERVER['DOCUMENT_ROOT']."/tablet/includes/header.php"; ?>
+    <? require_once dirname(__FILE__)."/../../header.php"; ?>
     <div id="boxarea">
         <? 
         print("<div id=\"boxitem\" class=\"librarybrowser\">");
@@ -148,7 +143,7 @@ $css = array(
         print("</div>");
         ?>
     </div>
-    <? include $_SERVER['DOCUMENT_ROOT']."/tablet/includes/footer.php"; ?>
+    <? require_once dirname(__FILE__)."/../../footer.php"; ?>
 </body>
 
 

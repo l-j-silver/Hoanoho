@@ -1,0 +1,97 @@
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px){
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+
+  nav p.infoline_clockicon,
+  nav p.infoline_clock,
+  nav p.infoline_r
+  {
+    visibility: hidden;
+  }
+
+}
+
+
+
+/* iPhone 4 ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+  nav p.infoline_clockicon,
+  nav p.infoline_clock,
+  nav p.infoline_r
+  {
+    visibility: hidden;
+  }
+}
+
+
+
+/* iPhone 6 ----------- */
+@media only screen and (min-device-width : 375px) and (max-device-width : 667px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+}
+
+@media only screen and (min-device-width : 375px) and (max-device-width : 667px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+  nav p.infoline_clockicon,
+  nav p.infoline_clock,
+  nav p.infoline_r
+  {
+    visibility: hidden;
+  }
+}
+
+
+
+/* iPhone 6 Plus ----------- */
+@media only screen and (min-device-width : 4145px) and (max-device-width : 736px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 3) {
+}
+
+@media only screen and (min-device-width : 414px) and (max-device-width : 736px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 3) {
+  nav p.infoline_clockicon,
+  nav p.infoline_clock,
+  nav p.infoline_r
+  {
+    visibility: hidden;
+  }
+}
+
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+  nav p.infoline_clockicon,
+  nav p.infoline_clock,
+  nav p.infoline_r
+  {
+    visibility: hidden;
+  }
+}
+
+/* iPad 3/4/Air/Air2 ---------------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+  nav p.infoline_clockicon,
+  nav p.infoline_clock,
+  nav p.infoline_r
+  {
+    visibility: hidden;
+  }
+}

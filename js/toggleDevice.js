@@ -1,7 +1,7 @@
 var timeout = null;
 
 function toggleDevice(device_id, d_identifier, type, value) {
-	var cmdurl = "./includes/fhem.php?cmd=set";
+	var cmdurl = "helper-client/fhem.php?cmd=set";
 
 	var mygetrequest = new ajaxRequest();
     mygetrequest.onreadystatechange=function()
@@ -122,16 +122,17 @@ function toggleDevice(device_id, d_identifier, type, value) {
 	}
 	else if(type == "Dimmer") 
 	{
+		if(timeout) window.clearTimeout(timeout);
+
 		var el_soll = document.getElementById("slider_value" + device_id);
 
 		el_soll.value = value;
 
-		if(timeout) window.clearTimeout(timeout);
-
+		value = "dim"+value+"%";
 		timeout = setTimeout(function() {
-			mygetrequest.open("GET", cmdurl+value, true);
-        	mygetrequest.send(null);
-        }, 2000);	
+			mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+value, true);
+			mygetrequest.send(null);
+		}, 2000);
 	}
 	else if(type == "Raspberry Pi GPIO") 
 	{
@@ -140,7 +141,7 @@ function toggleDevice(device_id, d_identifier, type, value) {
 		var protocol = document.getElementById("gpio_raspi_protocol" + device_id);
 
 		// TODO: check if call is localhost then do call without wrapper
-		cmdurl = "/helper/gpio_wrapper.php?cmd=set&protocol="+protocol.value+"&remote_addr="+el_raspi_address.value+"&pin="+el_outputpin.value+"&value="+value+"&identifier="+d_identifier;
+		cmdurl = "helper-client/gpio_wrapper.php?cmd=set&protocol="+protocol.value+"&remote_addr="+el_raspi_address.value+"&pin="+el_outputpin.value+"&value="+value+"&identifier="+d_identifier;
 
 		mygetrequest.open("GET", cmdurl, true);
         mygetrequest.send(null);

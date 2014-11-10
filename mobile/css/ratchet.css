@@ -221,7 +221,7 @@ a {
 /* Centered text in the .bar-title */
 .bar-title .title {
   position: absolute;
-  top: 0;
+  top: 7px;
   left: 0;
   display: block;
   width: 100%;
@@ -293,6 +293,14 @@ a {
   margin: 0 auto;
 }
 
+/* SVG icons  */
+.tab-icon.svg {
+	width: 18px;
+}
+.tab-icon.svg path {
+	fill:#ffffff !important;
+}
+
 /* Label for tab */
 .tab-label {
   margin-top: 1px;
@@ -329,7 +337,7 @@ a {
 .bar-title .button + [class*="button"]:last-child,
 .bar-title [class*="button"].pull-right {
   position: absolute;
-  top: 5px;
+  top: 22px;
   right: 5px;
 }
 
@@ -616,7 +624,7 @@ a {
 }
 
 .list .alarm {
-  background-color: #ff9292;
+  background-color: #E3EAFE;
 }
 
 /* Inset list

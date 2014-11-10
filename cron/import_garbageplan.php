@@ -1,60 +1,45 @@
-<?
+<?php
+$HOANOHO_DIR = exec('. /etc/environment; echo $HOANOHO_DIR');
+require_once $HOANOHO_DIR."/includes/dbconnection.php";
+require_once $HOANOHO_DIR."/includes/getConfiguration.php";
 
-	require("/var/www/homie/config/dbconfig.inc.php");
-		
-	$dbh = mysql_connect("localhost",$dbusername,$dbpassword) or die("There was a problem with the database connection.");
-	$dbs = mysql_select_db($dbname, $dbh) or die("There was a problem selecting the categories.");
+if(strlen($__CONFIG['garbageplan_url']) == 0)
+    exit;
 
-	$sql = "select configstring, value from configuration where dev_id = 0 order by configstring asc";
-	$result = mysql_query($sql);
+$planurl = $__CONFIG['garbageplan_url'];
+$planurl = str_replace("%YEAR", date('Y',time()), $planurl);
 
-	$__CONFIG = array();
+$filetype = "";
+$file = "";
 
-	while($row = mysql_fetch_array($result)) {
-		$__CONFIG[$row[0]] = $row[1];
-	}
+if(strpos($planurl, ".ics"))
+    $filetype = "ics";
+else {
+    // check file content to determine filetype
+    $file = file_get_contents($planurl);
 
-	if(strlen($__CONFIG['garbageplan_url']) == 0)
-		exit;
+    if(strstr(substr($file, 0, 20),"BEGIN:VCALENDAR"))
+        $filetype = "ics";
+}
 
-	$planurl = $__CONFIG['garbageplan_url'];
-	$planurl = str_replace("%YEAR", date('Y',time()), $planurl);
+if ($filetype == "ics") {
+    require_once $HOANOHO_DIR."/includes/PhpICS/ICS/index.php";
 
-	$filetype = "";
-	$file = "";
+    if($file == "")
+        $file = file_get_contents($planurl);
 
+    date_default_timezone_set('Europe/Paris');
 
-	if(strpos($planurl, ".ics"))
-		$filetype = "ics";
-	else {
-		// check file content to determine filetype
-		$file = file_get_contents($planurl);
+    //$icalc = ICS\ICS::open($file);
+    $icalc = ICS\ICS::load($file);
 
-		if(strstr(substr($file, 0, 20),"BEGIN:VCALENDAR"))
-			$filetype = "ics";
-	}
+    // truncate database table
+    if (strlen($icalc) > 0) {
+        mysql_query("TRUNCATE TABLE garbageplan");
 
-	if($filetype == "ics")
-	{
-		include '/var/www/homie/includes/PhpICS/ICS/index.php';
-
-		if($file == "")
-			$file = file_get_contents($planurl);
-
-		date_default_timezone_set('Europe/Paris');
-
-		//$icalc = ICS\ICS::open($file);
-		$icalc = ICS\ICS::load($file);
-
-		// truncate database table
-		if(strlen($icalc) > 0)
-		{
-			mysql_query("TRUNCATE TABLE garbageplan");
-
-			foreach( $icalc as $event ) {
-				mysql_query("INSERT INTO garbageplan (pickupdate, text) VALUES ('".$event->getDateStart('Y-m-d H:i:s')."','".utf8_decode($event->getSummary())."')");
-			}
-		}
-	}
-
+        foreach ($icalc as $event) {
+            mysql_query("INSERT INTO garbageplan (pickupdate, text) VALUES ('".$event->getDateStart('Y-m-d H:i:s')."','".$event->getSummary()."')");
+        }
+    }
+}
 ?>

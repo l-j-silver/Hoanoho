@@ -18,7 +18,7 @@
  */
 namespace at\mkweb\upnp\backend\xmlparser;
 
-use at\mkweb\upnp\execption\UPnPException;
+use at\mkweb\upnp\exception\UPnPException;
 
 use \DOMDocument;
 

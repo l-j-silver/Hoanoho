@@ -336,16 +336,15 @@ function UPnPGUI() {
     };
 
     this.setError = function(message) {
-
+        console.warn(message);
         upnp.gui.unsetLoader('left');
         upnp.gui.unsetLoader('right');
-        upnp.gui.showLoadingLayer();
+        upnp.gui.showLoadingLayer(message);
 
         $('#error').html(message);
         $('#error').slideDown();
 
         window.setTimeout(function() {
-
             $('#error').slideUp();
             $('#error').html('');
         }, 3000);
@@ -397,8 +396,6 @@ function UPnPGUI() {
 
         var uid = $(dropdown).val();
         var rel = $(dropdown).parent().attr('rel');
-
-        console.log(rel);
 
         var device = this.devices[uid];
 
@@ -790,8 +787,8 @@ function UPnPGUI() {
     }
 
     this.showLoadingLayer = function(msg) {
-
-        $(document.body).append('<div id="carpet"></div><div id="loading-layer">' + msg + '<br /><img src="res/images/icons/ajax-loader.gif" /><br /><input type="button" onclick="hideLoadingLayer();" value="' + this.i18n('Cancel') + '" /></div>');
+        if($('#loading-layer').length == 0)
+            $(document.body).append('<div id="carpet"></div><div id="loading-layer">' + msg + '<br /><input type="button" onclick="upnp.gui.hideLoadingLayer();" value="' + this.i18n('Cancel') + '" /></div>');
     },
 
     this.hideLoadingLayer = function() {

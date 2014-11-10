@@ -1,15 +1,54 @@
 var disableValueRefreshForDeviceID = null;
 var devicesWithLowBattery = [];
 
-function connectWebSocket(address) {
+function connectWebSocket(port) {
+
+	if (typeof connectWebSocket.connectCnt == 'undefined') {
+		connectWebSocket.connectCnt = 0;
+	}
+	if (typeof connectWebSocket.connectProt == 'undefined') {
+		connectWebSocket.connectProt = getCookie("websocketProtocol");
+
+		if (connectWebSocket.connectProt == null) {
+			if (window.location.protocol == "http:") {
+				connectWebSocket.connectProt = "ws";
+			} else if(window.location.protocol == "https:") {
+				connectWebSocket.connectProt = "wss";
+			}
+		}
+	}
+	var host = window.location.hostname;
+
+	if (port == "80" || port == "443") {
+        var address = connectWebSocket.connectProt + "://" + host + "/ws";
+    } else {
+        var address = connectWebSocket.connectProt + "://" + host +  ":" + port + "/ws";
+    }
+
 	// Connect to Socketserver
 	var socket = new WebSocket(address);
 	socket.binaryType = 'arraybuffer';
 
-	socket.onclose = function(){
+	socket.onclose = function(event){
+
+        // special handling for Safari to fall back to HTTP/WS
+        // in case self-signed certificate is used
+    		if(navigator.userAgent.indexOf('Safari') != -1 &&
+          navigator.userAgent.indexOf('Chrome') == -1 &&
+          event.wasClean == false &&
+          connectWebSocket.connectProt == "wss") {
+    			connectWebSocket.connectProt = "ws";
+    			connectWebSocket.connectCnt = 0;
+    		}
+
         //try to reconnect to socketserver in 5 seconds
-        setTimeout(function(){connectWebSocket(address)}, 5000);
+        setTimeout(function(){connectWebSocket(port)}, 5000);
     };
+
+	socket.onopen = function () {
+		// set cookie
+		setCookie("websocketProtocol", connectWebSocket.connectProt);
+	};
 
     socket.onmessage = function(message) {
     	var messageObj = JSON.parse(message['data']);
@@ -99,17 +138,26 @@ function connectWebSocket(address) {
     	}
     	else if(messageObj['typename'] == "Dimmer")
     	{
-    		var value = messageObj['value'];
+            switch (messageObj['reading']) {
+                case 'state':
+                    doUpdateIcon = true;
+                    
+                    var value = messageObj['value'].replace('dim','').replace('%','');
 
-    		if(value == "on")
-    			value = "100";
-    		else if(value == "off")
-    			value = "0";
+                    if(value == "on")
+                        value = "100";
+                    else if(value == "off")
+                        value = "0";
 
-    		var slider = document.getElementById("slider"+messageObj['dev_id']).value = value
-    		var slider_value = document.getElementById("slider_value"+messageObj['dev_id']).value = value;	
+                    var slider = document.getElementById("slider"+messageObj['dev_id']).value = value
+                    var slider_value = document.getElementById("slider_value"+messageObj['dev_id']).value = value;  
+
+                    break;
+                default:
+                    break;
+            }
     	}
-        else if(messageObj['typename'] == 'Tuer/Fenster-Kontakt')
+        else if(messageObj['typename'] == 'Tür/Fenster-Kontakt')
         {
             switch(messageObj['reading']) {
                 case 'state':
