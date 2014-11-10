@@ -288,9 +288,9 @@
                     <input type="hidden" name="cmd" value="deleteplan">
                     <input type="hidden" name="sch_id" value="<?php echo $scheduler->sch_id; ?>">
                 </form>
-                <a href="#" onclick="javascript:document.editPlanForm<?php echo $scheduler->sch_id; ?>.submit()" title="Änderungen speichern"><img src="img/save.png"></a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="javascript:document.deletePlanForm<?php echo $scheduler->sch_id; ?>.submit()" title="Zeitplan löschen" onclick="javascript:return confirm('Soll der Zeitplan wirklich gelöscht werden ?');"><img src="img/delete.png"></a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#" onclick="javascript:document.editPlanForm<?php echo $scheduler->sch_id; ?>.submit()" title="Änderungen speichern"><img src="img/save.png"></a>
             </div>
         </div>
         <?php

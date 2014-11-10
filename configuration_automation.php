@@ -913,8 +913,8 @@
                     print("<input type=\"hidden\" name=\"cmd\" value=\"deletefloor\">");
                     print("<input type=\"hidden\" name=\"floor_id\" value=\"".$floor->floor_id."\">");
                 print("</form>");
-                print("<a href=\"#\" onclick=\"javascript:document.editFloorForm".$floor->floor_id.".submit()\" title=\"Änderungen speichern\"><img src=\"./img/save.png\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
-                print("<a href=\"javascript:document.deleteFloorForm".$floor->floor_id.".submit()\" title=\"Geschoss löschen\" onclick=\"javascript:return confirm('Soll das Geschoss \'".$floor->name."\' wirklich gelöscht werden ?');\"><img src=\"./img/delete.png\"></a>");
+                print("<a href=\"javascript:document.deleteFloorForm".$floor->floor_id.".submit()\" title=\"Geschoss löschen\" onclick=\"javascript:return confirm('Soll das Geschoss \'".$floor->name."\' wirklich gelöscht werden ?');\"><img src=\"./img/delete.png\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+                print("<a href=\"#\" onclick=\"javascript:document.editFloorForm".$floor->floor_id.".submit()\" title=\"Änderungen speichern\"><img src=\"./img/save.png\"></a>");
                 print("</div>");
             print("</div>");
         }
@@ -961,8 +961,8 @@
                     print("<input type=\"hidden\" name=\"cmd\" value=\"deleteroom\">");
                     print("<input type=\"hidden\" name=\"room_id\" value=\"".$room->room_id."\">");
                 print("</form>");
-                print("<a href=\"#\" onclick=\"javascript:document.editRoomForm".$room->room_id.".submit()\" title=\"Änderungen speichern\"><img src=\"./img/save.png\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
-                print("<a href=\"javascript:document.deleteRoomForm".$room->room_id.".submit()\" title=\"Raum löschen\" onclick=\"javascript:return confirm('Soll der Raum \'".$room->name."\' wirklich gelöscht werden ?');\"><img src=\"./img/delete.png\"></a>");
+                print("<a href=\"javascript:document.deleteRoomForm".$room->room_id.".submit()\" title=\"Raum löschen\" onclick=\"javascript:return confirm('Soll der Raum \'".$room->name."\' wirklich gelöscht werden ?');\"><img src=\"./img/delete.png\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+                print("<a href=\"#\" onclick=\"javascript:document.editRoomForm".$room->room_id.".submit()\" title=\"Änderungen speichern\"><img src=\"./img/save.png\"></a>");
                 print("</div>");
             print("</div>");
         }
@@ -1011,8 +1011,8 @@
                     print("<input type=\"hidden\" name=\"cmd\" value=\"deletetype\">");
                     print("<input type=\"hidden\" name=\"dtype_id\" value=\"".$type->dtype_id."\">");
                 print("</form>");
-                print("<a href=\"#\" onclick=\"javascript:document.editTypeForm".$type->dtype_id.".submit()\" title=\"Änderungen speichern\"><img src=\"./img/save.png\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
-                print("<a href=\"javascript:document.deleteTypeForm".$type->dtype_id.".submit()\" title=\"Gerätetyp löschen\" onclick=\"javascript:return confirm('Soll der Gerätetyp \'".$type->name."\' wirklich gelöscht werden ?');\"><img src=\"./img/delete.png\"></a>");
+                print("<a href=\"javascript:document.deleteTypeForm".$type->dtype_id.".submit()\" title=\"Gerätetyp löschen\" onclick=\"javascript:return confirm('Soll der Gerätetyp \'".$type->name."\' wirklich gelöscht werden ?');\"><img src=\"./img/delete.png\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+                print("<a href=\"#\" onclick=\"javascript:document.editTypeForm".$type->dtype_id.".submit()\" title=\"Änderungen speichern\"><img src=\"./img/save.png\"></a>");
                 print("</div>");
             print("</div>");
         }
@@ -1084,8 +1084,8 @@
                             print("<input type=\"hidden\" name=\"dev_id\" value=\"".$device->dev_id."\">");
                     print("</form>");
                     print("<div id=\"action\">");
-                    print("<a href=\"#".$floor->name."\" onclick='javascript:displayFieldsForDeviceModal(".$device->dev_id.",\"".$device->basetypename."\");toggleModal(\"modal-device\",\"device\",".$device->dev_id.",null,null);' title=\"Gerät bearbeiten\"><img src=\"./img/edit.png\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
-                    print("<a href=\"javascript:document.deleteDeviceForm".$device->dev_id.".submit()\" title=\"Gerät löschen\" onclick=\"javascript:return confirm('Soll das Gerät \'".$device->name."\' mit dem FHEM Namen \'".$device->identifier."\' wirklich gelöscht werden ?');\"><img src=\"./img/delete.png\"></a>");
+                    print("<a href=\"javascript:document.deleteDeviceForm".$device->dev_id.".submit()\" title=\"Gerät löschen\" onclick=\"javascript:return confirm('Soll das Gerät \'".$device->name."\' mit dem FHEM Namen \'".$device->identifier."\' wirklich gelöscht werden ?');\"><img src=\"./img/delete.png\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+                    print("<a href=\"#".$floor->name."\" onclick='javascript:displayFieldsForDeviceModal(".$device->dev_id.",\"".$device->basetypename."\");toggleModal(\"modal-device\",\"device\",".$device->dev_id.",null,null);' title=\"Gerät bearbeiten\"><img src=\"./img/edit.png\"></a>");
                     print("</div>");
                 print("</div>");
             }

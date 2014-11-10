@@ -294,9 +294,9 @@
                         <input type="hidden" name="cmd" value="deletelink">
                         <input type="hidden" name="link_id" value="<?php echo $link->link_id; ?>">
                     </form>
-                    <a href="#" onclick="javascript:document.editlinkForm<?php echo $link->link_id; ?>.submit()" title="Änderungen speichern"><img src="img/save.png"></a>
-                    &nbsp;
                     <a href="javascript:document.deletelinkForm<?php echo $link->link_id; ?>.submit()" title="Benutzer löschen" onclick="javascript:return confirm('Soll der Link \'<?php echo $link->name; ?>\' wirklich gelöscht werden ?');"><img src="img/delete.png"></a>
+                    &nbsp;
+                    <a href="#" onclick="javascript:document.editlinkForm<?php echo $link->link_id; ?>.submit()" title="Änderungen speichern"><img src="img/save.png"></a>
                 </div>
             </div>
             <?php

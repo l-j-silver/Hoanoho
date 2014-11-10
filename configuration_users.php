@@ -156,13 +156,13 @@
         while ($user = mysql_fetch_object($result)) {
         ?>
             <div class="listitem" id="listitem-<?php echo $user->uid; ?>">
-                <div id="username"><input type="text" name="username" value="<?php echo $user->username; ?>"<?php if ($user->username == "manager") { echo " readonly"; } ?>></div>
+                <div id="username"><input type="text" name="username" value="<?php echo $user->username; ?>"></div>
                 <div id="password"><input type="password" name="password"></div>
                 <div id="group"><?php displayUserGroup($user->gid); ?></div>
                 <div id="action">
+                    <?php if ($user->uid != "1" && $user->uid != $_SESSION['uid']) { ?><a class="deleteuserbutton" id="deleteuserbutton-<?php echo $user->uid; ?>" href="#" title="Benutzer löschen"><img src="img/delete.png"></a>&nbsp;<?php } ?>
+                    <a class="saveuserbutton" id="saveuserbutton-<?php echo $user->uid; ?>" href="#" title="Änderungen speichern"><img src="img/save.png"></a>&nbsp;
                     <a href="javascript:copyToClipboard('<?php echo "?login=".$user->hash; ?>')" title="Quick Login"><img src="img/quicklogin.png"></a>
-                    <a class="saveuserbutton" id="saveuserbutton-<?php echo $user->uid; ?>" href="#" title="Änderungen speichern"><img src="img/save.png"></a>
-                    <?php if ($user->uid != $_SESSION['uid'] && $user->username != "manager") { ?>&nbsp;<a class="deleteuserbutton" id="deleteuserbutton-<?php echo $user->uid; ?>" href="#" title="Benutzer löschen"><img src="img/delete.png"></a><?php } ?>
                 </div>
             </div>
         <?php
