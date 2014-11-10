@@ -7,3 +7,15 @@
     while ($row = mysql_fetch_array($result)) {
         $__CONFIG[$row[0]] = $row[1];
     }
+
+	// Read HSE environment variables from /etc/environment if possible
+	$handle = fopen("/etc/environment", "r");
+	if ($handle) {
+	    while (($line = fgets($handle)) !== false) {
+			if (substr( $line, 0, 0 ) == "#")
+				next;
+			$array = explode("=", $line);
+			$__CONFIG[ $array[0] ] = substr($array[1], 1, -2);
+	    }
+	}
+	fclose($handle);
