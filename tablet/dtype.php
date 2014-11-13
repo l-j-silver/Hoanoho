@@ -739,13 +739,13 @@
                                     print("<div id=\"controls\">");
                                         print("<div id=\"presets\">");
                                             print("<div class=\"btn-group\" style=\"margin-top: 10px;\">");
-                                                print("<button type=\"button\" class=\"btn btn-custom\" onclick=\"javascript:toggleDevice('<?php echo $device->dev_id; ?>','<?php echo $device->identifier; ?>','<?php echo $device->basetype; ?>', 'on');\">Öffnen</button>");
-                                                print("<button type=\"button\" class=\"btn btn-custom\" onclick=\"javascript:toggleDevice('<?php echo $device->dev_id; ?>','<?php echo $device->identifier; ?>','<?php echo $device->basetype; ?>', 'off');\">Schließen</button>");
+                                                print("<button type=\"button\" class=\"btn btn-custom\" onclick=\"javascript:toggleDevice('".$device->dev_id."','".$device->identifier."','".$device->basetype."', 'on');\">Öffnen</button>");
+                                                print("<button type=\"button\" class=\"btn btn-custom\" onclick=\"javascript:toggleDevice('".$device->dev_id."','".$device->identifier."','".$device->basetype."', 'off');\">Schließen</button>");
                                             print("</div><br>");
                                             print("<div class=\"btn-group\" style=\"margin-top: 10px;\">");
-                                                print("<button type=\"button\" class=\"btn btn-custom\" onclick=\"javascript:toggleDevice('<?php echo $device->dev_id; ?>','<?php echo $device->identifier; ?>','<?php echo $device->basetype; ?>', '68');\">1/4</button>");
-                                                print("<button type=\"button\" class=\"btn btn-custom\" onclick=\"javascript:toggleDevice('<?php echo $device->dev_id; ?>','<?php echo $device->identifier; ?>','<?php echo $device->basetype; ?>', '68');\">1/2</button>");
-                                                print("<button type=\"button\" class=\"btn btn-custom\" onclick=\"javascript:toggleDevice('<?php echo $device->dev_id; ?>','<?php echo $device->identifier; ?>','<?php echo $device->basetype; ?>', '68');\">3/4</button>");
+                                                print("<button type=\"button\" class=\"btn btn-custom\" onclick=\"javascript:toggleDevice('".$device->dev_id."','".$device->identifier."','".$device->basetype."', '84');\">1/4</button>");
+                                                print("<button type=\"button\" class=\"btn btn-custom\" onclick=\"javascript:toggleDevice('".$device->dev_id."','".$device->identifier."','".$device->basetype."', '68');\">1/2</button>");
+                                                print("<button type=\"button\" class=\"btn btn-custom\" onclick=\"javascript:toggleDevice('".$device->dev_id."','".$device->identifier."','".$device->basetype."', '52');\">3/4</button>");
                                             print("</div>");
                                         print("</div>");
                                     print("</div>");
