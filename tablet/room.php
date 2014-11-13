@@ -530,7 +530,7 @@
             $sql = "SELECT rooms.name roomname, devices.dev_id, devices.name, devices.identifier, devices.isStructure, devices.isHidden, devices.nd_id, device_types.name typename, types.name basetype FROM devices join device_types on devices.dtype_id = device_types.dtype_id join types on device_types.type_id = types.type_id left outer join rooms on rooms.room_id = devices.room_id where rooms.room_id = " . $_GET['room'] . " and devices.isHidden != 'on' order by types.name asc";
             $result = mysql_query($sql);
             while ($device = mysql_fetch_object($result)) {
-                $basetype = str_replace(array(" ", "_", "-", "/"), "", strtolower($device->basetype));
+                $basetype = str_replace("ü", "ue", str_replace(array(" ", "_", "-", "/"), "", strtolower($device->basetype)));
                 $class = $basetype;
 
                 if ($class == "einausschalter") {

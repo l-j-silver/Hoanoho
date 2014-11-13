@@ -530,7 +530,7 @@
             $result = mysql_query($sql);
             while ($device = mysql_fetch_object($result)) {
 
-                $basetype = str_replace(array(" ", "_", "-", "/"), "", strtolower($device->basetype));
+                $basetype = str_replace("ü", "ue", str_replace(array(" ", "_", "-", "/"), "", strtolower($device->basetype)));
                 $class = $basetype;
 
                 if ($class == "einausschalter") {
