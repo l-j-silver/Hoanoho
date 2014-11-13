@@ -52,11 +52,11 @@ if ($title == "Musik") {
             <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown">Räume</button>
             <ul class="dropdown-menu scrollable-menu" role="menu">
                 <?php
-                $sql = "select room_id, name from rooms order by name asc";
+                $sql = "select rooms.room_id, rooms.name roomname, device_floors.name floorname from rooms join device_floors on device_floors.floor_id = rooms.floor_id order by rooms.name asc";
                 $result = mysql_query($sql);
                 while ($room = mysql_fetch_object($result)) {
                     //echo "<li><a href=\"#\" onclick=\"navigate('room',".$floor_id.",".$room->room_id.")\">".$room->name."</a></li>";
-                    echo "<li><a href=\"".$relativePath."room.php?room=".$room->room_id."\">".$room->name."</a></li>";
+                    echo "<li><a href=\"".$relativePath."room.php?room=".$room->room_id."\">".$room->roomname."</a></li>";
                 }
                 ?>
             </ul>

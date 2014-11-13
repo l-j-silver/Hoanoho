@@ -135,8 +135,6 @@
 
                     var messageObj = JSON.parse(message['data']);
 
-                    console.log(messageObj);
-
                     // disable refresh when some value is being changed
                     if(disableValueRefreshForDeviceID != null && disableValueRefreshForDeviceID == messageObj['dev_id'])
 
@@ -233,7 +231,6 @@
                                     break;
                             }
                         } else if(messageObj['typename'] == "Dimmer") {
-                            console.log(messageObj);
                             switch (messageObj['reading']) {
                                 case 'state':
                                     var value = messageObj['value'].replace('dim','');
@@ -295,8 +292,6 @@
                             }
 
                             $('#boxitem.alarm.weather #rows #message','#griditem').html(message);
-
-                            console.log('refresh');
                         } else if ($('#boxitem.alarm.weather','#griditem').length > 0 && message.length == 0) {
                             // delete warning box
                             $('#boxitem.alarm.weather','#griditem').parent().parent().parent().parent().remove();

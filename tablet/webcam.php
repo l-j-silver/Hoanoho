@@ -60,7 +60,6 @@
             var step = 10;
 
             if (camtype == "instar") {
-                console.log("move" + direction);
                 var command;
 
                 switch (direction) {
@@ -121,7 +120,6 @@
         function moveCamera(direction, ipaddress, port, user, password, camtype)
         {
             if (camtype == "instar") {
-                console.log("move" + direction);
                 var command;
 
                 switch (direction) {
@@ -157,7 +155,6 @@
         function stopCamera(direction, ipaddress, port, user, password, camtype)
         {
             if (camtype == "instar") {
-                console.log("stop" + direction);
                 var command;
 
                 switch (direction) {

@@ -117,7 +117,6 @@
                         $('#titlebar #left #status').switchClass("disconnected", "connected", 500, "easeInOutQuad");
 
                     var messageObj = JSON.parse(message['data']);
-                    console.log(messageObj);
 
                     var el_value = document.getElementById("value_" + messageObj['dev_id']);
 
@@ -279,8 +278,6 @@
                             }
 
                             $('#boxitem.alarm.weather #rows #message','#griditem').html(message);
-
-                            console.log('refresh');
                         } else if ($('#boxitem.alarm.weather','#griditem').length > 0 && message.length == 0) {
                             // delete warning box
                             $('#boxitem.alarm.weather','#griditem').parent().parent().parent().parent().remove();
