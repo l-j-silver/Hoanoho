@@ -88,6 +88,14 @@ function connectWebSocket(port) {
                         // unlock controls
                         $('#modal-device'+messageObj['dev_id']).find(':button').prop('disabled', false);
                     }
+                    else if(messageObj['value'].indexOf('err:') > -1)
+                    {
+                        // lock controls excluding stop button
+                        $('#modal-device'+messageObj['dev_id']).find(':button').prop('disabled', true);
+                        $('#modal-device'+messageObj['dev_id']).find('button[name=stopbutton]').prop('disabled', false);
+
+                        $('div[name=tooltip-value1'+messageObj['dev_id']+']').html('Fehler: '+messageObj['value']);   
+                    }
                     else
                     {
                         // lock controls excluding stop button
