@@ -63,7 +63,7 @@ REPLACE INTO `configuration` (`dev_id`, `configstring`, `value`, `title`, `hint`
 VALUES
 	(0,'dwd_region','BXX','Region','','dwd_region','Wetter',1),
 	(0,'position_latitude','52.519171000000000000','Ortsangabe Breitengrad','52.519171000000000000','text','Wetter',1),
-	(0,'position_longitude','13.406091199999992000','Ortsangabe L','13.406091199999992000','text','Wetter',1),
+	(0,'position_longitude','13.406091199999992000','Ortsangabe Längengrad','13.406091199999992000','text','Wetter',1),
 	(6,'isStructure','on','','','text',NULL,1);
 
 /*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
