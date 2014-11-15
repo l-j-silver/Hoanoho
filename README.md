@@ -41,12 +41,7 @@ Give write access to folders named **pupnp**.
 
 Cronjobs you should be activating can be found in `install/cron.d`. Ideally you just copy the file to `/etc/cron.d`.
 
-<<<<<<< HEAD
-DLNA Device Scan:
-*/5 * * * * root curl -s http://yourhostname/tablet/includes/pupnp/cronjob.php &> /dev/null
-=======
 Depending on your actual installation directory, you should add **HOANOHO_DIR="/var/www/hoanoho"** to `/etc/environment` to ensure all scripts can reliably find their home directory.
->>>>>>> develop
 
 FHEM needs to have DbLog module activated and configured properly.
 Hoanoho and FHEM require to use the same MySQL server. The MySQL user for Hoanoho needs to have at least read-only access to the FHEM database as well as read+write access to it's own database.
@@ -77,15 +72,3 @@ Currently the following devices are supported:
 
 ### Lawn Sprinkler
 * Gardena selfbuild via Raspberry PI GPIO
-<<<<<<< HEAD
-
-## About the Developer Team
-
-#### Daniel Schaefer
-
-Father of Hoanoho, Core Developer
-
-* [Daniel Schaefer aka @gotteshand](http://twitter.com/gotteshand)
-* [schaefer2.de](http://schaefer2.de)
-=======
->>>>>>> develop
