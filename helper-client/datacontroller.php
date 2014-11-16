@@ -135,7 +135,7 @@
             echo $result->meta;
         }
     }
-    if (isset($_POST['cmd']) && $_POST['cmd'] == "pinboard_updateposition") {
+    if (isset($_POST['cmd']) && $_POST['cmd'] == "pinboard_updateposition" && $_SESSION['isAdmin'] == "1") {
         if (isset($_POST['block'])) {
             $pos = 0;
             foreach ($_POST['block'] as $id) {
@@ -154,7 +154,7 @@
             }
         }
     }
-    if (isset($_POST['cmd']) && $_POST['cmd'] == "pinboard_update") {
+    if (isset($_POST['cmd']) && $_POST['cmd'] == "pinboard_update" && $_SESSION['isAdmin'] == "1") {
         if (isset($_POST['updateid']) && isset($_POST['updatekey']) && isset($_POST['updatevalue'])) {
             $sql = "select meta from pinboard_configuration where id = ".$_POST['updateid'];
             $obj = mysql_fetch_object(mysql_query($sql));
@@ -187,7 +187,7 @@
     }
 
     if (isset($_POST['cmd']) && $_POST['cmd'] == "pinboard_block_new") {
-        if (isset($_POST['owner'])) {
+        if (isset($_POST['owner']) && $_SESSION['isAdmin'] == "1") {
             $meta = array(
                 'title' =>htmlentities('{Titel}'),
                 'iconid' => -1,
@@ -211,7 +211,7 @@
         }
     }
     if (isset($_POST['cmd']) && $_POST['cmd'] == "pinboard_block_delete") {
-        if (isset($_POST['id'])) {
+        if (isset($_POST['id']) && $_SESSION['isAdmin'] == "1") {
             // delete rows as well
             $sql = "delete from pinboard_configuration where parentid = ".$_POST['id'];
             mysql_query($sql);
@@ -230,7 +230,7 @@
             mysql_query($sql);
         }
     }
-    if (isset($_POST['cmd']) && $_POST['cmd'] == "pinboard_block_saveimage" && isset($_POST['assignid'])) {
+    if (isset($_POST['cmd']) && $_POST['cmd'] == "pinboard_block_saveimage" && isset($_POST['assignid']) && $_SESSION['isAdmin'] == "1") {
         $imageid = saveImage($_POST['data']);
 
         // assign imageid to block icon
@@ -250,7 +250,7 @@
         }
     }
 
-    if (isset($_POST['cmd']) && $_POST['cmd'] == "pinboard_row_new") {
+    if (isset($_POST['cmd']) && $_POST['cmd'] == "pinboard_row_new" && $_SESSION['isAdmin'] == "1") {
         if (isset($_POST['owner']) && isset($_POST['parentid'])) {
             $meta = array(
                 'title' => htmlentities('{Bezeichner}'),
@@ -270,7 +270,7 @@
             }
         }
     }
-    if (isset($_POST['cmd']) && $_POST['cmd'] == "pinboard_row_delete") {
+    if (isset($_POST['cmd']) && $_POST['cmd'] == "pinboard_row_delete" && $_SESSION['isAdmin'] == "1") {
         if (isset($_POST['id'])) {
             $sql = "delete from pinboard_configuration where id = ".$_POST['id'];
             mysql_query($sql);
@@ -292,7 +292,7 @@
         echo "</select>";
     }
 
-    if (isset($_POST['cmd']) && $_POST['cmd'] == "addnewuser") {
+    if (isset($_POST['cmd']) && $_POST['cmd'] == "addnewuser" && $_SESSION['isAdmin'] == "1") {
         $sql = "INSERT INTO users (username,password) values ('Neuer Benutzer','')";
         mysql_query($sql);
 
@@ -317,7 +317,7 @@
             print("</div>");
         print("</div>");
     }
-    if (isset($_POST['cmd']) && $_POST['cmd'] == "saveuser") {
+    if (isset($_POST['cmd']) && $_POST['cmd'] == "saveuser" && $_SESSION['isAdmin'] == "1") {
             $password = password_hash($_POST['password'], constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true));
             $hash = md5($_POST['username'] + $password + time());
 
@@ -327,7 +327,7 @@
             $sql = "update usergroups set gid = " . $_POST['usergroup'] . " where uid = ".$_POST['uid'];
             mysql_query($sql);
     }
-    if (isset($_POST['cmd']) && $_POST['cmd'] == "deleteuser") {
+    if (isset($_POST['cmd']) && $_POST['cmd'] == "deleteuser" && $_SESSION['isAdmin'] == "1") {
         if ($_SESSION['uid'] != $_POST['uid']) {
             $sql = "delete from users where uid = ".$_POST['uid'];
             mysql_query($sql);
