@@ -26,7 +26,7 @@ node.js needs the following modules to be installed:
 * nconf
 * forever
 
-However, a copy of those 3 modules currently comes with the Hoanoho repository directly so there is no need to install them within your system environment.
+However, a copy of those modules currently comes with the Hoanoho repository directly so there is no need to install them within your system environment.
 
 ## Installation
 Just put these files into your webserver root directory and go through the installer located under **http://yourhostname/install**.
@@ -39,14 +39,14 @@ The socketserver runs on port 8000, ensure this is accessible from external (e.g
 
 Give write access to folders named **pupnp**.
 
-Cronjobs you should be activating can be found in `install/cron.d`. Ideally you just copy the file to `/etc/cron.d`.
+Cronjobs you should be activating can be found in `install/cron.d`. Ideally you just symlink the files to `/etc/cron.d` so they can be updated if you update Hoanoho using git pull command.
 
 Depending on your actual installation directory, you should add **HOANOHO_DIR="/var/www/hoanoho"** to `/etc/environment` to ensure all scripts can reliably find their home directory.
 
 FHEM needs to have DbLog module activated and configured properly.
 Hoanoho and FHEM require to use the same MySQL server. The MySQL user for Hoanoho needs to have at least read-only access to the FHEM database as well as read+write access to it's own database.
 
-If you are using a reverse proxy in your setup, you might want to ensure the URI **/helper-server** can only be accessed via localhost.
+If you are using a reverse proxy in your setup, you might want to ensure the URI **/helper-server** can only be accessed via localhost. URI **/api** may be restricted for local network access only.
 
 ## Compatibility List
 
