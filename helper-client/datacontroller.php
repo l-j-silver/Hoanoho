@@ -203,7 +203,7 @@
             $retVal = mysql_query($sql);
             if ($retVal) {
                 print("<div id=\"block-".mysql_insert_id()."\">");
-                    print("<div class=\"icon\" id=\"headline_icon\"></div><div id=\"headline\">".$meta['title']."</div><div id=\"headline_type\">".displayBlockTypes($meta['type'])."</div><div id=\"headline_action\"><a href=\"#\" class=\"newRowButton\" title=\"Gerät hinzufügen\"><img src=\"./img/add.png\"></a>&nbsp;&nbsp;<a href=\"#\" class=\"deleteBlockButton\" title=\"Bereich löschen\"><img src=\"./img/delete.png\"></a></div>");
+                    print("<div class=\"icon\" id=\"headline_icon\"></div><div id=\"headline\">".$meta['title']."</div><div id=\"headline_type\">".displayBlockTypes($meta['type'])."</div><div id=\"headline_action\"><a href=\"#\" class=\"deleteBlockButton\" title=\"Bereich löschen\"><img src=\"./img/delete.png\"></a>&nbsp;&nbsp;<a href=\"#\" class=\"newRowButton\" title=\"Gerät hinzufügen\"><img src=\"./img/add.png\"></a></div>");
                     print("<div id=\"appendRows-".mysql_insert_id()."\" class=\"sortable\">");
                     print("</div>");
                 print("</div>");
@@ -311,14 +311,13 @@
             displayUserGroup('1');
             print("</div>");
             print("<div id=\"action\">");
-                print("<a href=\"javascript:copyToClipboard('')\" title=\"Quick Login\"><img src=\"./img/quicklogin.png\"></a>&nbsp;");
-                print("<a class=\"saveuserbutton\" id=\"saveuserbutton-".$uid."\" href=\"#\" title=\"Änderungen speichern\"><img src=\"./img/save.png\"></a>&nbsp;&nbsp;");
-                print("<a class=\"deleteuserbutton\" id=\"deleteuserbutton-".$uid."\" href=\"#\" title=\"Benutzer löschen\"><img src=\"./img/delete.png\"></a>");
+				print("<a class=\"deleteuserbutton\" id=\"deleteuserbutton-".$uid."\" href=\"#\" title=\"Benutzer löschen\"><img src=\"./img/delete.png\"></a>&nbsp;");
+                print("<a class=\"saveuserbutton\" id=\"saveuserbutton-".$uid."\" href=\"#\" title=\"Änderungen speichern\"><img src=\"./img/save.png\"></a>&nbsp;");
+                print("<a href=\"javascript:copyToClipboard('')\" title=\"Quick Login\"><img src=\"./img/quicklogin.png\"></a>");
             print("</div>");
         print("</div>");
     }
     if (isset($_POST['cmd']) && $_POST['cmd'] == "saveuser") {
-        if ($_SESSION['uid'] != $_POST['uid']) {
             $password = password_hash($_POST['password'], constant($__CONFIG['hash_algorithm']), json_decode($__CONFIG['hash_options'], true));
             $hash = md5($_POST['username'] + $password + time());
 
@@ -327,7 +326,6 @@
 
             $sql = "update usergroups set gid = " . $_POST['usergroup'] . " where uid = ".$_POST['uid'];
             mysql_query($sql);
-        }
     }
     if (isset($_POST['cmd']) && $_POST['cmd'] == "deleteuser") {
         if ($_SESSION['uid'] != $_POST['uid']) {
