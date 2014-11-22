@@ -3,6 +3,13 @@ require_once dirname(__FILE__).'/includes/dbconnection.php';
 require_once dirname(__FILE__).'/includes/getConfiguration.php';
 require_once dirname(__FILE__).'/includes/password.php';
 
+if ($__CONFIG['php_debugbar'] == "1") {
+	require_once dirname(__FILE__).'/vendor/autoload.php';
+	use DebugBar\StandardDebugBar;
+	$debugbar = new StandardDebugBar();
+	$debugbarRenderer = $debugbar->getJavascriptRenderer();
+}
+
 // Add strict CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
 foreach (array("Content-Security-Policy", "X-Content-Security-Policy", "X-WebKit-CSP") as $headername) {
   header($headername.": default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
@@ -157,5 +164,6 @@ elseif (isset($_GET['login']) && $_GET['login'] != "") {
       </p>
     </section>
     <?php } ?>
+<?php if (defined($debugbar) && is_object($debugbar)) { echo $debugbarRenderer->render(); } ?>
 </body>
 </html>

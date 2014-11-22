@@ -481,5 +481,6 @@ function displayDeviceData($dev_id, $dev_value)
 
     </section>
     <input type="file" style="visibility:hidden;"/>
+<?php if (defined($debugbar) && is_object($debugbar)) { echo $debugbarRenderer->render(); } ?>
 </body>
 </html>

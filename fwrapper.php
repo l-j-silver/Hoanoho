@@ -67,5 +67,6 @@
     <section class="board">
       <div id="fhem"><iframe id="fhem" src="<?php echo $url ?>" onload='javascript:resizeIframe(this);'></iframe></div>
     </section>
+<?php if (defined($debugbar) && is_object($debugbar)) { echo $debugbarRenderer->render(); } ?>
 </body>
 </html>

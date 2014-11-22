@@ -247,5 +247,6 @@
             <?php } ?>
         </section>
     <?php } ?>
+<?php if (defined($debugbar) && is_object($debugbar)) { echo $debugbarRenderer->render(); } ?>
 </body>
 </html>

@@ -2,6 +2,13 @@
 require_once dirname(__FILE__).'/dbconnection.php';
 require_once dirname(__FILE__).'/getConfiguration.php';
 
+if ($__CONFIG['php_debugbar'] == "1") {
+	require_once dirname(__FILE__).'/../vendor/autoload.php';
+	use DebugBar\StandardDebugBar;
+	$debugbar = new StandardDebugBar();
+	$debugbarRenderer = $debugbar->getJavascriptRenderer();
+}
+
 // Add CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
 $imgsrc_exceptions = "http://www.wettergefahren.de http://*:32469";
 $scriptsrc_exceptions = "";

@@ -1,5 +1,4 @@
 <?php
-
 	// Look if DB Configuration is available. If not, redirect to install
 	if(!file_exists(__DIR__ . "/config/dbconfig.inc.php")) {
 		header("Location: ./install/");
@@ -580,5 +579,7 @@
         </div>
 
     </section>
+
+<?php if (defined($debugbar) && is_object($debugbar)) { echo $debugbarRenderer->render(); } ?>
 </body>
 </html>

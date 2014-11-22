@@ -1,3 +1,9 @@
+<?php
+if (defined($debugbar) && is_object($debugbar)) {
+	echo $debugbarRenderer->renderHead();
+}
+?>
+
 <!-- Favicons -->
 <link rel="shortcut icon" type="image/x-icon" href="img/favicons/favicon.ico">
 <link rel="icon" type="image/png" href="img/favicons/favicon-16x16.png" sizes="16x16">
