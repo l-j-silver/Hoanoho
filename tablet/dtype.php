@@ -232,16 +232,16 @@
                             }
                         } else if(messageObj['typename'] == "Dimmer") {
                             switch (messageObj['reading']) {
-                                case 'state':
-                                    var value = messageObj['value'].replace('dim','');
+                                case 'pct':
+                                    var value = messageObj['value'];
 
                                     if(value == "on")
-                                        value = "100%";
+                                        value = "100";
                                     else if(value == "off")
-                                        value = "0%";
+                                        value = "0";
 
-                                    $('#value_'+messageObj['dev_id']).val(value);
-                                    $('#value_cur_'+messageObj['dev_id']).val(value);
+                                    $('#value_'+messageObj['dev_id']).val(value+'%');
+                                    $('#value_cur_'+messageObj['dev_id']).val(value+'%');
 
                                     break;
                                 default:
@@ -457,6 +457,7 @@
                     if(timeout) window.clearTimeout(timeout);
 
                     var direction = value;
+                    var reading = "pct";
 
                     var stepsize = 5; // TBD: configure & take out of database
 
@@ -490,10 +491,8 @@
                         else
                             setvalue = el_soll.value;
 
-                        setvalue = "dim"+setvalue+"%";
-
                         timeout = setTimeout(function () {
-                            mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+setvalue, true);
+                            mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+setvalue+"&reading="+reading, true);
                             mygetrequest.send(null);
                         }, 2000);
                     }
