@@ -147,10 +147,10 @@ function connectWebSocket(port) {
     	else if(messageObj['typename'] == "Dimmer")
     	{
             switch (messageObj['reading']) {
-                case 'state':
+                case 'pct':
                     doUpdateIcon = true;
                     
-                    var value = messageObj['value'].replace('dim','').replace('%','');
+                    var value = messageObj['value'];
 
                     if(value == "on")
                         value = "100";
