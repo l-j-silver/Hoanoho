@@ -130,7 +130,7 @@ function toggleDevice(device_id, d_identifier, type, value) {
 		el_soll.value = value;
 
 		timeout = setTimeout(function() {
-			mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+setvalue+"&reading="+reading, true);
+			mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+value+"&reading="+reading, true);
 			mygetrequest.send(null);
 		}, 2000);
 	}
