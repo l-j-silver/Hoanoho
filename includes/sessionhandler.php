@@ -1,10 +1,10 @@
 <?php
 require_once dirname(__FILE__).'/dbconnection.php';
 require_once dirname(__FILE__).'/getConfiguration.php';
+require_once dirname(__FILE__).'/../vendor/autoload.php';
+use DebugBar\StandardDebugBar;
 
 if ($__CONFIG['php_debugbar'] == "1") {
-	require_once dirname(__FILE__).'/../vendor/autoload.php';
-	use DebugBar\StandardDebugBar;
 	$debugbar = new StandardDebugBar();
 	$debugbarRenderer = $debugbar->getJavascriptRenderer();
 }
