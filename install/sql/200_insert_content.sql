@@ -40,4 +40,4 @@ INSERT IGNORE INTO `configuration` (`dev_id`, `configstring`, `value`, `title`, 
 
 INSERT IGNORE INTO `groups` (`gid`, `isAdmin`, `grpname`) VALUES (1, 0, 'Benutzer'), (2, 1, 'Administrator');
 
-INSERT IGNORE INTO pinboard_links (link_id, name, url, uid, type) VALUES (0, 'zur Desktop Ansicht wechseln', '../', 0, 2);
+INSERT IGNORE INTO pinboard_links (link_id, name, url, uid, type) VALUES (1, 'zur Desktop Ansicht wechseln', '../', 0, 2);
