@@ -940,6 +940,6 @@
         print("</section>");
     }
     ?>
-<?php if (defined($debugbar) && is_object($debugbar)) { echo $debugbarRenderer->render(); } ?>
+<?php if ($__CONFIG['php_debugbar'] == "1" && is_object($debugbar)) { echo $debugbarRenderer->render(); } ?>
 </body>
 </html>

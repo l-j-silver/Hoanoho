@@ -1119,6 +1119,6 @@
         <?php if (isset($jsdragdevices_def) && $jsdragdevices_def != "") { print(",".$jsdragdevices_def.";"); } else { print ";"; } ?>
         <?php if (isset($jsdragdevices_act) && $jsdragdevices_act != "") { print($jsdragdevices_act); } ?>
     </script>
-<?php if (defined($debugbar) && is_object($debugbar)) { echo $debugbarRenderer->render(); } ?>
+<?php if ($__CONFIG['php_debugbar'] == "1" && is_object($debugbar)) { echo $debugbarRenderer->render(); } ?>
 </body>
 </html>
