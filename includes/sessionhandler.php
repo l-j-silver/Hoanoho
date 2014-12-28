@@ -9,6 +9,10 @@ if ($__CONFIG['php_debugbar'] == "1") {
 	$debugbarRenderer = $debugbar->getJavascriptRenderer();
 }
 
+$session_timeout = 900;
+if($__CONFIG['php_session_timeout'])
+  $session_timeout = $__CONFIG['php_session_timeout'];
+
 // Add CSP - see http://content-security-policy.com - Generator: http://cspisawesome.com
 $imgsrc_exceptions = "http://www.wettergefahren.de http://*:32469";
 $scriptsrc_exceptions = "";
@@ -79,7 +83,7 @@ if (
   while ($row = mysql_fetch_object($result)) {
     if (
           (isset($_SESSION['quicklogin']) && $_SESSION['quicklogin'] == $row->hash && $_SESSION['lastactivity'] + (60 * 60 * 24 * 7 * 6) > time()) ||
-          $_SESSION['lastactivity'] + 900 > time()
+          $_SESSION['lastactivity'] + $session_timeout > time()
       ) {
       $loggedin = true;
       if (isset($_SESSION['quicklogin_newsession']))
@@ -87,9 +91,9 @@ if (
       $_SESSION['isAdmin'] = $row->isAdmin;
       $_SESSION['uid'] = $row->uid;
       $_SESSION['lastactivity'] = time();
-	  if ($row->isAdmin == 1)
-		  header('X-FHEM-AllowAdmin: ' . session_id());
-	  header('X-FHEM-AllowUser: ' . session_id());
+  	  if ($row->isAdmin == 1)
+  		  header('X-FHEM-AllowAdmin: ' . session_id());
+  	  header('X-FHEM-AllowUser: ' . session_id());
     }
   }
 }
