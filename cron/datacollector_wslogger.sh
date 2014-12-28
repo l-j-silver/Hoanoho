@@ -75,4 +75,4 @@ JSON=$JSON"] }"
 
 echo $JSON
 
-curl -i -X POST -d "json=$JSON" $MIDURL &> /dev/null
+curl -i -k -X POST -d "json=$JSON" $MIDURL &> /dev/null
