@@ -146,7 +146,7 @@ function UPnPGUI() {
                 var albumArtURI = data.albumArtURI;
                 if(albumArtURI.indexOf('file.tbn') > -1) {
                     // item has no cover
-                    albumArtURI = '/tablet/includes/pupnp/res/images/icons/mime/object.container.album.musicAlbum.png'
+                    albumArtURI = '/panel/includes/pupnp/res/images/icons/mime/object.container.album.musicAlbum.png'
                 }
                 else {
                     // item has cover

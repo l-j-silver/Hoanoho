@@ -114,7 +114,7 @@ if(!$loggedin) {
 
   if ($uri == "pupnp") {
     header('Location: ../../../login.php'.$querystring);
-  } elseif ($uri == "tablet" || $uri == "helper-client") {
+  } elseif ($uri == "panel" || $uri == "helper-client") {
       header('Location: ../login.php'.$querystring);
   } else {
     header('Location: ./login.php'.$querystring);

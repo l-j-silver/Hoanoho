@@ -43,7 +43,7 @@ if (
     (
       !isset($path) ||
         (
-         ($path == "mobile" || $path == "tablet") ||
+         ($path == "mobile" || $path == "panel") ||
          ($path == "" && $uri != "index.php" && $uri != "")
         )
     )
