@@ -264,7 +264,7 @@ switch ($day) {
 
       <section class="main_weather">
           <h1><span><?php echo $dwdregion->region_name ?></span></h1>
-          <div id="dwdimage"><a href="http://www.wettergefahren.de/wetter/region/<?php echo strtolower($dwdregion->karten_region) ?>/aktuell.html" target="_blank"><img src="http://www.wettergefahren.de/wundk/wetter/de/<?php echo $dwdregion->karten_region ?>.jpg"></a></div>
+          <div id="dwdimage"><a href="http://www.wettergefahren.de/wetter/region/<?php echo strtolower($dwdregion->karten_region) ?>/aktuell.html" target="_blank"><img src="http://www.wettergefahren.de/DWD/wetter/wv_allg/deutschland/bilder/<?php echo $dwdregion->karten_region ?>.jpg"></a></div>
       </section>
 
     <?php
@@ -274,7 +274,7 @@ switch ($day) {
 
     <section class="main_weather">
         <h1><span>Deutschland</span></h1>
-        <div id="dwdimage"><a href="http://www.wettergefahren.de/wetter/deutschland/aktuell.html" target="_blank"><img src="http://www.wettergefahren.de/wundk/wetter/de/Deutschland.jpg"></a></div>
+        <div id="dwdimage"><a href="http://www.wettergefahren.de/wetter/deutschland/aktuell.html" target="_blank"><img src="http://www.wettergefahren.de/DWD/wetter/wv_allg/deutschland/bilder/Deutschland.jpg"></a></div>
     </section>
 
     <?php
