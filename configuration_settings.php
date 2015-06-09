@@ -27,26 +27,33 @@
     			case"password":
     				echo "<input type=\"password\" name=\"".$object->configstring."\" value=\"".$object->value."\">";
     			break;
-          		case"dwd_region":
-    				echo "<select name=\"".$object->configstring."\" style='width:200px'>";
-    				echo "<option ".($object->value == "" ? "selected" : "")." value=\"\">-</option>";
-            		$dwd = "SELECT warngebiet_kurz,warngebiet_dwd_kennung FROM dwd_warngebiet WHERE typ_id != '3' ORDER BY warngebiet_kreis_stadt_name ASC, warngebiet_dwd_kennung DESC;";
-            		$dwdresult = mysql_query($dwd);
-            		while ($dwd_regions = mysql_fetch_object($dwdresult)) {
-    					echo "<option ".($object->value == $dwd_regions->warngebiet_dwd_kennung ? "selected" : "")." value=\"".$dwd_regions->warngebiet_dwd_kennung."\">".$dwd_regions->warngebiet_kurz." (".$dwd_regions->warngebiet_dwd_kennung.")</option>";
-            		}
-    				echo "</select>";
-    			break;
-          		case"geo_city":
-          			echo "<select name=\"".$object->configstring."\" style='width:200px'>";
-    				echo "<option ".($object->value == "" ? "selected" : "")." value=\"\">-</option>";
-    				$geo = "SELECT name,lat,lng FROM geo_city WHERE lat != '0' ORDER BY name  ASC;";
-            		$georesult = mysql_query($geo);
-            		while ($geo_city = mysql_fetch_object($georesult)) {
-    					echo "<option ".($object->value == $geo_city->name ? "selected" : "")." value=\"".$geo_city->name."|".$geo_city->lng."|".$geo_city->lat."\">".$geo_city->name."</option>";
-            		}
-    				echo "</select>";
-    			break;
+                        case"dwd_region":
+                                echo "<select onchange=\"this.form.submit()\" name=\"".$object->configstring."\" style='width:200px'>";
+                                echo "<option ".($object->value == "" ? "selected" : "")." value=\"\">-</option>";
+                        $dwd = "SELECT warngebiet_kurz,warngebiet_dwd_kennung FROM dwd_warngebiet WHERE typ_id != '3' ORDER BY warngebiet_kreis_stadt_name ASC, warngebiet_dwd_kennung DESC;";
+                        $dwdresult = mysql_query($dwd);
+                        while ($dwd_regions = mysql_fetch_object($dwdresult)) {
+                                        echo "<option ".($object->value == $dwd_regions->warngebiet_dwd_kennung ? "selected" : "")." value=\"".$dwd_regions->warngebiet_dwd_kennung."\">".$dwd_regions->warngebiet_kurz." (".$dwd_regions->warngebiet_dwd_kennung.")</option>";
+                                                }
+                                           echo "</select>";
+
+                        break;
+                        case"geo_city":
+                                echo "<select name=\"".$object->configstring."\" style='width:200px' onchange='this.form.submit()'>";
+                                echo "<option ".($object->value == "" ? "selected" : "")." value=\"\">-</option>";
+                                $geo_regio = mysql_fetch_object(mysql_query("SELECT value FROM configuration WHERE configstring = 'dwd_region';"));
+                                $land_id = mysql_fetch_object(mysql_query("SELECT land_id FROM dwd_warngebiet WHERE warngebiet_kfz ='".($geo_regio->value)."';"));
+                                $landidA = array("BY","BW","RP","MV","SA","BB","NS","SA","NRW","TH","HE","SN","BL","SL","HB","HH");
+                                $stateidA = array("1", "2", "3", "4", "5","6","7","8","9","10","11","12","13","14","15","16");
+
+                                $geo = "SELECT name,lat,lng FROM geo_city WHERE state_id = '".str_replace($landidA, $stateidA, ($land_id->land_id))."' ORDER BY name  ASC;";
+                        $georesult = mysql_query($geo);
+                        while ($geo_city = mysql_fetch_object($georesult)) {
+                                        echo "<option ".($object->value == $geo_city->name ? "selected" : "")." value=\"".$geo_city->name."|".$geo_city->lng."|".$geo_city->lat."\">".$geo_city->name."</option>";
+                        }
+                                echo "</select>";
+                        break;
+
     		}
     }
 
@@ -70,7 +77,6 @@
                 $sql = "update configuration set value = '".$value."' where configstring = '".$key."'; ";
             }
             mysql_query($sql);
-//		print $sql;
         }
     }
 ?>
