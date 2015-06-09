@@ -137,7 +137,7 @@
             }
             ?>
             <input type="hidden" name="cmd" value="savesettings">
-            <div id="submit"><input type="reset" id="greybutton" name="resetbtn" value="Zurücksetzen">&nbsp;&nbsp;&nbsp;<input type="submit" id="greenbutton" name="submit" value="Speichern"></div>
+            <div id="submit"><input type="reset" id="greybutton" name="resetbtn" value="Zurücksetzen">&nbsp;&nbsp;&nbsp;<input type="submit" id="greenbutton" name="submitbtn" value="Speichern"></div>
             </form>
         </section>
     <?php
