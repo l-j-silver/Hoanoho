@@ -14,7 +14,7 @@
 */1 * * * * www-data php -f ${HOANOHO_DIR}/cron/scheduler.php &> /dev/null
 
 # DLNA Device Scan
-*/5 * * * * www-data curl -s -k -L http://localhost/tablet/includes/pupnp/cronjob.php &> /dev/null
+*/5 * * * * www-data curl -s -k -L http://localhost/panel/includes/pupnp/cronjob.php &> /dev/null
 
 # Check Batteries
 0 8,20 * * * www-data php -f ${HOANOHO_DIR}/cron/check_batteries.php &> /dev/null

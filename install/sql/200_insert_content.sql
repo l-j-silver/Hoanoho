@@ -24,7 +24,8 @@ INSERT IGNORE INTO `configuration` (`dev_id`, `configstring`, `value`, `title`, 
 (0, 'fbox_password', '', 'Passwort', '', 'password', 'Fritzbox', '1'),
 (0, 'main_socketport', '8000', 'Websocket Port', '8000', 'text', 'Allgemein', '1'),
 (0, 'dwd_region', '', 'Region', '', 'dwd_region', 'Wetter', '1'),
-(0, 'fhem_url_bk', 'http://localhost:8083/fhem', 'Backend URL', 'http://localhost:8083/fhem', 'text', 'FHEM', '1'),
+(0, 'geo_city', '', 'Ort', '', 'geo_city', 'Wetter', '1'),
+(0, 'fhem_url_bk', 'http://localhost:8082/admin', 'Backend URL', 'http://localhost:8082/admin', 'text', 'FHEM', '1'),
 (0, 'fhem_url_admin', '', 'Frontend URL Admin', 'http://localhost:8082/admin', 'text', 'FHEM', '1'),
 (0, 'fhem_url_web', '', 'Frontend URL', 'http://localhost:8083/fhem', 'text', 'FHEM', '1'),
 (0, 'fhem_url_mobile', '', 'Frontend URL Mobil', 'http://localhost:8084/phone', 'text', 'FHEM', '1'),
@@ -35,8 +36,10 @@ INSERT IGNORE INTO `configuration` (`dev_id`, `configstring`, `value`, `title`, 
 (0, 'garbageplan_url', '', 'URL zum iCal Abfallkalender', '', 'text', 'Kalender', '1'),
 (0, 'sharefile_remoteaddress', '', 'Hostname/IP für Dateibereitstellung', 'z.B. cloud.dyndns.org', 'text', 'Allgemein', '1'),
 (0, 'hash_algorithm', 'PASSWORD_DEFAULT', 'Password hashing algorithm', '', 'text', 'Extended Settings', '0'),
-(0, 'hash_options', '{"cost":"10"}', 'Password hashing options', '', 'text', 'Extended Settings', '0');
+(0, 'hash_options', '{"cost":"10"}', 'Password hashing options', '', 'text', 'Extended Settings', '0'),
+(0, 'php_debugbar', '0', 'PHP Debugbar', '0', 'text', 'Extended Settings', '0'),
+(0, 'php_session_timeout', '900', 'Session Timeout', '', 'text', 'Extended Settings', '0');
 
 INSERT IGNORE INTO `groups` (`gid`, `isAdmin`, `grpname`) VALUES (1, 0, 'Benutzer'), (2, 1, 'Administrator');
 
-INSERT IGNORE INTO pinboard_links (link_id, name, url, uid, type) VALUES (0, 'zur Desktop Ansicht wechseln', '../', 0, 2);
+INSERT IGNORE INTO pinboard_links (link_id, name, url, uid, type) VALUES (1, 'zur Desktop Ansicht wechseln', '../', 0, 2);

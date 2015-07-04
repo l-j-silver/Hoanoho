@@ -195,8 +195,8 @@
                             }
                         } else if(messageObj['typename'] == "Dimmer") {
                             switch (messageObj['reading']) {
-                                case 'state':
-                                    var value = messageObj['value'].replace('dim','');
+                                case 'pct':
+                                    var value = messageObj['value'];
 
                                     if(value == "on")
                                         value = "100%";
@@ -376,6 +376,7 @@
                     if(timeout) window.clearTimeout(timeout);
 
                     var direction = value;
+                    var reading = "pct";
 
                     var stepsize = 5; // TBD: configure & take out of database
 
@@ -408,10 +409,8 @@
                         else
                             setvalue = el_soll.innerHTML;
 
-                        setvalue = "dim"+setvalue+"%";
-
                         timeout = setTimeout(function () {
-                            mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+setvalue, true);
+                            mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+setvalue+"&reading="+reading, true);
                             mygetrequest.send(null);
                         }, 2000);
                     }

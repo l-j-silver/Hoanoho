@@ -584,5 +584,6 @@
             ?>
             <div id="spacer">&nbsp;</div>
     </section>
+<?php if ($__CONFIG['php_debugbar'] == "1" && is_object($debugbar)) { echo $debugbarRenderer->render(); } ?>
 </body>
 </html>

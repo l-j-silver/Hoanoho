@@ -124,13 +124,13 @@ function toggleDevice(device_id, d_identifier, type, value) {
 	{
 		if(timeout) window.clearTimeout(timeout);
 
+		var reading = "pct";
 		var el_soll = document.getElementById("slider_value" + device_id);
 
 		el_soll.value = value;
 
-		value = "dim"+value+"%";
 		timeout = setTimeout(function() {
-			mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+value, true);
+			mygetrequest.open("GET", cmdurl+"&device="+d_identifier+"&value="+value+"&reading="+reading, true);
 			mygetrequest.send(null);
 		}, 2000);
 	}

@@ -186,7 +186,7 @@
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/4.0");
+        curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0");
         curl_exec($curl);
         curl_close($curl);
 
@@ -260,7 +260,7 @@
         $sql = "DELETE FROM rooms where room_id = " . $_POST['room_id'];
         mysql_query($sql);
     } elseif (isset($_POST['cmd']) && $_POST['cmd'] == "addfloor") {
-        $sql = "INSERT INTO device_floors (name,position) values ('Neues Geschoss',0)";
+        $sql = "INSERT INTO device_floors (name,position) values ('Neuer Bereich',0)";
         mysql_query($sql);
     } elseif (isset($_POST['cmd']) && $_POST['cmd'] == "editfloor") {
         $sql = "update device_floors set name = '" . $_POST['name'] . "', position = '" . $_POST['position'] . "'";
@@ -880,17 +880,17 @@
 
     // Floors
     print("<section class=\"main_configuration_automation\">");
-    print("<h1><span>Geschosse</span></h1>");
+    print("<h1><span>Bereiche</span></h1>");
 
     print("<div id=\"toolbar\">");
         print("<form method=\"POST\" enctype=\"multipart/form-data\" name=\"addFloorForm\" id=\"addFloorForm\">");
             print("<input type=\"hidden\" name=\"cmd\" value=\"addfloor\">");
-            print("<div id=\"left\"><a onclick=\"javascript:document.addFloorForm.submit();\" href=\"#\"><img src=\"./img/add.png\">&nbsp;&nbsp;Geschoss hinzufügen</a></div>");
+            print("<div id=\"left\"><a onclick=\"javascript:document.addFloorForm.submit();\" href=\"#\"><img src=\"./img/add.png\">&nbsp;&nbsp;Bereich hinzufügen</a></div>");
         print("</form>");
     print("</div>");
 
     print("<div id=\"headline\">");
-        print("<div id=\"name\">Geschoss Name</div>");
+        print("<div id=\"name\">Bereich Name</div>");
         print("<div id=\"floor_image_button\">Grundriss</div>");
         print("<div id=\"floor_position\">Position</div>");
         print("<div id=\"action\">&nbsp;</div>");
@@ -913,13 +913,13 @@
                     print("<input type=\"hidden\" name=\"cmd\" value=\"deletefloor\">");
                     print("<input type=\"hidden\" name=\"floor_id\" value=\"".$floor->floor_id."\">");
                 print("</form>");
-                print("<a href=\"javascript:document.deleteFloorForm".$floor->floor_id.".submit()\" title=\"Geschoss löschen\" onclick=\"javascript:return confirm('Soll das Geschoss \'".$floor->name."\' wirklich gelöscht werden ?');\"><img src=\"./img/delete.png\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+                print("<a href=\"javascript:document.deleteFloorForm".$floor->floor_id.".submit()\" title=\"Bereich löschen\" onclick=\"javascript:return confirm('Soll das Bereich \'".$floor->name."\' wirklich gelöscht werden ?');\"><img src=\"./img/delete.png\"></a>&nbsp;&nbsp;&nbsp;&nbsp;");
                 print("<a href=\"#\" onclick=\"javascript:document.editFloorForm".$floor->floor_id.".submit()\" title=\"Änderungen speichern\"><img src=\"./img/save.png\"></a>");
                 print("</div>");
             print("</div>");
         }
     } else
-        print("<div id=\"noentry\">Es wurden noch keine Geschosse definiert!</div>");
+        print("<div id=\"noentry\">Es wurden noch keine Bereiche definiert</div>");
     print("</section>");
     ?>
 
@@ -937,7 +937,7 @@
 
     print("<div id=\"headline\">");
         print("<div id=\"room_name\">Raumname</div>");
-        print("<div id=\"room_floor\">Geschoss</div>");
+        print("<div id=\"room_floor\">Bereich</div>");
         print("<div id=\"room_position\">Position</div>");
         print("<div id=\"action\">&nbsp;</div>");
     print("</div>");
@@ -1119,5 +1119,6 @@
         <?php if (isset($jsdragdevices_def) && $jsdragdevices_def != "") { print(",".$jsdragdevices_def.";"); } else { print ";"; } ?>
         <?php if (isset($jsdragdevices_act) && $jsdragdevices_act != "") { print($jsdragdevices_act); } ?>
     </script>
+<?php if ($__CONFIG['php_debugbar'] == "1" && is_object($debugbar)) { echo $debugbarRenderer->render(); } ?>
 </body>
 </html>

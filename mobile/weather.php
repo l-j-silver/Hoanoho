@@ -239,14 +239,14 @@ function getCurrentWeatherDataFromLocalStation($in_arr)
             if (isset($dwdregion->karten_region)) {
           ?>
                 <li class="list-divider"><a id="region"><?php echo $dwdregion->region_name ?></a></li>
-                <li class="weather"><img src="http://www.wettergefahren.de/wundk/wetter/de/<?php echo $dwdregion->karten_region; ?>.jpg"></li>
+                <li class="weather"><img src="http://www.wettergefahren.de/DWD/wetter/wv_allg/deutschland/bilder/<?php echo $dwdregion->karten_region; ?>.jpg"></li>
           <?php
             }
           }
           ?>
 
           <li class="list-divider"><a id="deutschland">Deutschland</a></li>
-          <li class="weather"><img src="http://www.wettergefahren.de/wundk/wetter/de/Deutschland.jpg"></li>
+          <li class="weather"><img src="http://www.wettergefahren.de/DWD/wetter/wv_allg/deutschland/bilder/Deutschland.jpg"></li>
 
           <?php
           if ($__CONFIG['dwd_region'] != "") {

@@ -365,5 +365,6 @@
                 <div id="submit"><input id="greybutton" type="submit" value="Kennwort ändern"></div>
             </form>
         </section>
+	<?php if ($__CONFIG['php_debugbar'] == "1" && is_object($debugbar)) { echo $debugbarRenderer->render(); } ?>
     </body>
 </html>

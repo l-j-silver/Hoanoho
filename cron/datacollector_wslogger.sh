@@ -9,7 +9,7 @@ PATH_TO_WSLOGGER_LOGFILE='/tmp/wslogger.log'
 if [[ "$#" -eq  "0" ]]; then
 	echo "./datacollector_wslogger <url_to_middleware>"
 	echo "e.g:"
-	echo "./datacollector_wslogger http://localhost/helper-server/datacollector.php?"
+	echo "./datacollector_wslogger http://localhost/api/datacollector.php?"
 	exit
 fi
 
@@ -75,4 +75,4 @@ JSON=$JSON"] }"
 
 echo $JSON
 
-curl -i -X POST -d "json=$JSON" $MIDURL &> /dev/null
+curl -i -k -X POST -d "json=$JSON" $MIDURL &> /dev/null
