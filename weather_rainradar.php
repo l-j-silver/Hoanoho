@@ -40,7 +40,7 @@
 
       <section class="main_weather">
           <h1><span><?php echo $dwdregion->region_name ?></span></h1>
-          <div id="radar"><a href="http://www.wettergefahren.de/wetter/region/<?php echo strtolower($dwdregion->karten_region) ?>/aktuell/radarbild.html" target="_blank"><img src="http://www.wettergefahren.de/DWD/wetter/radar/Radarfilm_<?php echo $dwdregion->karten_region ?>.jpg"></a></div>
+          <div id="radar"><a href="http://www.wettergefahren.de/wetter/region/<?php echo strtolower($dwdregion->karten_region) ?>/aktuell/radarbild.html" target="_blank"><img src="http://www.wettergefahren.de/DWD/wetter/radar/Webradar_<?php echo $dwdregion->karten_region ?>.jpg"></a></div>
           <div id="legend"><img src="img/weather_radar_legend.png"></div>
       </section>
 
