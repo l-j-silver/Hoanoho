@@ -209,6 +209,7 @@ switch ($day) {
     if (count($weather) > 1) {
         $sunrise = date('H:i',$weather['sys.sunrise']);
         $sunset = date('H:i',$weather['sys.sunset']);
+        $time = date('H:i',$weather['dt']);
     ?>
 
     <section class="main_weather">
@@ -217,9 +218,9 @@ switch ($day) {
             <div id="details">
                 <div><?php echo $weather['weather.0.description']."; ".(isset($dwd_region_report0) ? $dwd_region_report0 : ""); ?></div>
                 <div>&nbsp;</div>
+                <div><b>Stadt:</b> <?php echo $weather['name']; ?></div>
+                <div><b>Uhrzeit:</b> <?php echo $time ." Uhr";  ?></div>
                 <div><b>Temperatur:</b> <?php echo ($weather['ws_available'] == true ? $weather['ws_OT']."°C  (".$weather['ws_WC']." °C gefühlt)" : $weather['main.temp']." °C"); ?></div>
-                <div><b>Tages Temperatur Min.:</b> <?php echo $weather['main.temp_min']." °C"; ?></div>
-                <div><b>Tages Temperatur Max.:</b> <?php echo $weather['main.temp_max']." °C"; ?></div>
                 <div>&nbsp;</div>
 
                 <?php if ($weather['ws_available'] == true) {?>
